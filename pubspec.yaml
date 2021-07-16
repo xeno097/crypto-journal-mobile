@@ -17,6 +17,7 @@ dependencies:
   shared_preferences: ^2.0.6
   graphql: ^5.0.0
   equatable: ^2.0.3
+  dartz: ^0.10.0-nullsafety.2
 
   cupertino_icons: ^1.0.2
 
