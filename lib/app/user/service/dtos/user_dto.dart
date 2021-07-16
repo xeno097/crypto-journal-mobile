@@ -6,7 +6,7 @@ class UserDto extends Equatable {
   final String profilePicture;
   final String email;
 
-  UserDto({
+  const UserDto({
     required this.id,
     required this.userName,
     required this.profilePicture,
