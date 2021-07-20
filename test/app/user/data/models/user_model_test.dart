@@ -11,14 +11,21 @@ void main() {
     userName: "test",
   );
 
+  final userModelWithMissingEmail = UserModel(
+    email: "",
+    id: "1234567890",
+    profilePicture: "http//:google.com",
+    userName: "test",
+  );
+
   test('it should be a subclass of UserDto', () {
     expect(userModel, isA<UserDto>());
   });
 
   group('fromJson', () {
-    // TODO: test when one of the fields is missing
     test('it should return a valid UserModel when a valid json is provided',
         () {
+      // arrange
       final Map<String, dynamic> jsonMap = {
         "id": "1234567890",
         "userName": "test",
@@ -26,9 +33,29 @@ void main() {
         "email": "test@email.com",
       };
 
+      // act
       final res = UserModel.fromJson(jsonMap);
 
+      // assert
       expect(res, userModel);
+    });
+
+    test(
+        "it should return a valid user model when a valid json is provided with one a missing email ",
+        () {
+      // arrange
+
+      final Map<String, dynamic> jsonMap = {
+        "id": "1234567890",
+        "userName": "test",
+        "profilePicture": "http//:google.com",
+      };
+
+      // act
+      final res = UserModel.fromJson(jsonMap);
+
+      // assert
+      expect(res, userModelWithMissingEmail);
     });
   });
 }

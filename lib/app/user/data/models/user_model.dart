@@ -20,10 +20,10 @@ class UserModel extends UserDto {
 
   factory UserModel.fromJson(Map<String, dynamic> jsonMap) {
     return UserModel(
-      id: jsonMap["id"],
-      userName: jsonMap["userName"],
-      profilePicture: jsonMap["profilePicture"],
-      email: jsonMap["email"],
+      id: jsonMap["id"] ?? "",
+      userName: jsonMap["userName"] ?? "",
+      profilePicture: jsonMap["profilePicture"] ?? "",
+      email: jsonMap["email"] ?? "",
     );
   }
 }
