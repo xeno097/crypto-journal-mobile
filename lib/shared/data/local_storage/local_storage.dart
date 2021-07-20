@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalStorage {
@@ -5,7 +6,7 @@ abstract class LocalStorage {
   Future<String> getData(GetDataDto getDataDto);
 }
 
-class SetDataDto {
+class SetDataDto extends Equatable {
   final String key;
   final String value;
 
@@ -13,14 +14,25 @@ class SetDataDto {
     required this.key,
     required this.value,
   });
+
+  @override
+  List<Object?> get props => [
+        this.key,
+        this.value,
+      ];
 }
 
-class GetDataDto {
+class GetDataDto extends Equatable {
   final String key;
 
   GetDataDto({
     required this.key,
   });
+
+  @override
+  List<Object?> get props => [
+        this.key,
+      ];
 }
 
 class LocalStorageImpl implements LocalStorage {
