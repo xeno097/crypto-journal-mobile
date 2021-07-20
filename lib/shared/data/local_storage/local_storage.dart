@@ -32,9 +32,10 @@ class LocalStorageImpl implements LocalStorage {
 
   @override
   Future<String> getData(GetDataDto getDataDto) {
-    final res = this._sharedPreferences.getString(
-          getDataDto.key,
-        );
+    final String res = this._sharedPreferences.getString(
+              getDataDto.key,
+            ) ??
+        "";
 
     return Future.value(res);
   }
