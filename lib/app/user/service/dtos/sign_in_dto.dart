@@ -1,14 +1,18 @@
 import 'package:equatable/equatable.dart';
 
 class SignInDto extends Equatable {
-  final String token;
+  final SIGN_IN_PROVIDER provider;
 
   SignInDto({
-    required this.token,
+    required this.provider,
   });
 
   @override
   List<Object?> get props => [
-        this.token,
+        this.provider,
       ];
+}
+
+enum SIGN_IN_PROVIDER {
+  GOOGLE,
 }
