@@ -15,11 +15,11 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-/// A class which mocks [LocalStorage].
+/// A class which mocks [ILocalStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalStorage extends _i1.Mock implements _i2.ILocalStorage {
-  MockLocalStorage() {
+class MockILocalStorage extends _i1.Mock implements _i2.ILocalStorage {
+  MockILocalStorage() {
     _i1.throwOnMissingStub(this);
   }
 

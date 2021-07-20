@@ -11,11 +11,11 @@ import 'graphql_auth_client_test.mocks.dart';
 
 @GenerateMocks([ILocalStorage])
 void main() {
-  late MockLocalStorage localStorageMock;
+  late MockILocalStorage localStorageMock;
   final fakeAccessToken = "1234567890";
 
   setUp(() {
-    localStorageMock = MockLocalStorage();
+    localStorageMock = MockILocalStorage();
   });
 
   setUpMock() => when(
