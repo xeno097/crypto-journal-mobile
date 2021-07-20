@@ -4,9 +4,9 @@ import 'package:graphql/client.dart';
 
 import 'graphql_client.dart';
 
-class GraphqlAuthClient implements GraphqlClient {
+class GraphqlAuthClient implements IGraphqlClient {
   late final GraphQLClient client;
-  final LocalStorage localStorage;
+  final ILocalStorage localStorage;
 
   GraphqlAuthClient({
     required this.localStorage,

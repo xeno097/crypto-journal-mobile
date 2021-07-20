@@ -1,5 +1,5 @@
 import 'package:graphql/client.dart';
 
-abstract class GraphqlClient {
+abstract class IGraphqlClient {
   GraphQLClient get instance;
 }

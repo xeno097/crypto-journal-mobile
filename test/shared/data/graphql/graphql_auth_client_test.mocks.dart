@@ -18,7 +18,7 @@ import 'package:mockito/mockito.dart' as _i1;
 /// A class which mocks [LocalStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalStorage extends _i1.Mock implements _i2.LocalStorage {
+class MockLocalStorage extends _i1.Mock implements _i2.ILocalStorage {
   MockLocalStorage() {
     _i1.throwOnMissingStub(this);
   }

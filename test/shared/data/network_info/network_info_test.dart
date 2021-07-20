@@ -7,13 +7,12 @@ import 'network_info_test.mocks.dart';
 
 @GenerateMocks([InternetConnectionChecker])
 void main() {
-  late NetworkInfoImpl networkInfoImpl;
+  late NetworkInfo networkInfoImpl;
   late MockInternetConnectionChecker mockDataConnectionChecker;
 
   setUp(() {
     mockDataConnectionChecker = MockInternetConnectionChecker();
-    networkInfoImpl =
-        NetworkInfoImpl(connectionChecker: mockDataConnectionChecker);
+    networkInfoImpl = NetworkInfo(connectionChecker: mockDataConnectionChecker);
   });
 
   group('isConnected', () {

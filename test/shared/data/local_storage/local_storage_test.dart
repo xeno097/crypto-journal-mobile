@@ -8,7 +8,7 @@ import 'local_storage_test.mocks.dart';
 @GenerateMocks([SharedPreferences])
 void main() {
   late MockSharedPreferences sharedPreferencesMock;
-  late LocalStorage localStorage;
+  late ILocalStorage localStorage;
   final String testKey = "TEST_KEY";
   final String testValue = "TEST_VALUE";
   final SetDataDto setDataDto = SetDataDto(
@@ -22,7 +22,7 @@ void main() {
 
   setUp(() {
     sharedPreferencesMock = MockSharedPreferences();
-    localStorage = LocalStorageImpl(
+    localStorage = LocalStorage(
       sharedPreferences: sharedPreferencesMock,
     );
   });
@@ -33,7 +33,7 @@ void main() {
     // act
 
     // assert
-    expect(localStorage, isA<LocalStorage>());
+    expect(localStorage, isA<ILocalStorage>());
   });
 
   group("getData", () {

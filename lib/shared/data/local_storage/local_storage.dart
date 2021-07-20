@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class LocalStorage {
+abstract class ILocalStorage {
   Future<bool> setData(SetDataDto setDataDto);
   Future<String> getData(GetDataDto getDataDto);
 }
@@ -35,10 +35,10 @@ class GetDataDto extends Equatable {
       ];
 }
 
-class LocalStorageImpl implements LocalStorage {
+class LocalStorage implements ILocalStorage {
   final SharedPreferences _sharedPreferences;
 
-  LocalStorageImpl({
+  LocalStorage({
     required SharedPreferences sharedPreferences,
   }) : this._sharedPreferences = sharedPreferences;
 

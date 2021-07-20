@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 
 import 'graphql_auth_client_test.mocks.dart';
 
-@GenerateMocks([LocalStorage])
+@GenerateMocks([ILocalStorage])
 void main() {
   late MockLocalStorage localStorageMock;
   final fakeAccessToken = "1234567890";
@@ -39,7 +39,7 @@ void main() {
       );
 
       // assert
-      expect(graphqlClient, isA<GraphqlClient>());
+      expect(graphqlClient, isA<IGraphqlClient>());
     });
 
     test("should call the getData method of the localStorage", () async {

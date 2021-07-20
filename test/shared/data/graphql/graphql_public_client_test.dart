@@ -12,7 +12,7 @@ void main() {
       // act
 
       // assert
-      expect(graphqlClient, isA<GraphqlClient>());
+      expect(graphqlClient, isA<IGraphqlClient>());
     });
   });
 

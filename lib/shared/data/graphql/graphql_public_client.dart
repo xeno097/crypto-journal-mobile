@@ -2,7 +2,7 @@ import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:graphql/client.dart';
 import 'graphql_client.dart';
 
-class GraphqlPublicClient implements GraphqlClient {
+class GraphqlPublicClient implements IGraphqlClient {
   late final GraphQLClient _client;
 
   GraphqlPublicClient() {
