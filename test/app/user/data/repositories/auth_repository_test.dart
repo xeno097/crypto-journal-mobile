@@ -55,15 +55,15 @@ void main() {
     expect(authRepository, isA<IAuthRepository>());
   });
 
+  setFailureMock() {
+    when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(false));
+  }
+
   group('SignIn', () {
     setSuccessMock() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
       when(authRemoteDataSourceMock.signIn(any))
           .thenAnswer((_) async => Future.value(authPayloadDto));
-    }
-
-    setFailureMock() {
-      when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(false));
     }
 
     test('should call the isConnected method of the INetworkInfo class',
@@ -123,6 +123,61 @@ void main() {
 
       // act
       final res = await authRepository.signIn(signInDto);
+
+      // assert
+      expect(res, equals(Left(UnexpectedError())));
+    });
+  });
+
+  group("SignOut", () {
+    setSuccessMock() {
+      when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
+      when(authRemoteDataSourceMock.signOut())
+          .thenAnswer((_) async => Future.value(true));
+    }
+
+    test('should call the isConnected method of the INetworkInfo class',
+        () async {
+      // arrange
+      setSuccessMock();
+
+      // act
+      await authRepository.signOut();
+
+      // assert
+      verify(networkInfoMock.isConnected);
+    });
+    test('should call the signOut method of the AuthRemoteDataSource',
+        () async {
+      // arrange
+      setSuccessMock();
+
+      // act
+      await authRepository.signOut();
+
+      // assert
+      verify(authRemoteDataSourceMock.signOut());
+    });
+
+    test('should return NetworkConnectionError if the connection is not ok ',
+        () async {
+      // arrange
+      setFailureMock();
+
+      // act
+      final res = await authRepository.signOut();
+
+      // assert
+      expect(res, equals(Left(NetworkConnectionError())));
+    });
+
+    test('should return an UnexpectedError if an uncaught exption occurs',
+        () async {
+      // arrange
+      when(networkInfoMock.isConnected).thenThrow(Exception());
+
+      // act
+      final res = await authRepository.signOut();
 
       // assert
       expect(res, equals(Left(UnexpectedError())));

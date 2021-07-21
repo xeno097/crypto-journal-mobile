@@ -39,8 +39,21 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<BaseError, bool>> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<Either<BaseError, bool>> signOut() async {
+    try {
+      final bool connectionStatus = await this.networkInfo.isConnected;
+
+      if (!connectionStatus) {
+        throw NetworkConnectionException();
+      }
+
+      final signOutRes = await this.authRemoteDataSource.signOut();
+
+      return Right(signOutRes);
+    } on NetworkConnectionException {
+      return Left(NetworkConnectionError());
+    } catch (e) {
+      return Left(UnexpectedError());
+    }
   }
 }
