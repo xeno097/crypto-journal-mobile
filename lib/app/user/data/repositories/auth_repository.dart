@@ -3,6 +3,9 @@ import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/auth_payload_dto.dart';
 import 'package:crypto_journal_mobile/app/user/service/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
+import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
+import 'package:crypto_journal_mobile/shared/errors/network/network_connection_exception.dart';
+import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
 
@@ -16,9 +19,23 @@ class AuthRepository implements IAuthRepository {
   });
 
   @override
-  Future<Either<BaseError, AuthPayloadDto>> signIn(SignInDto signInDto) {
-    // TODO: implement signIn
-    throw UnimplementedError();
+  Future<Either<BaseError, AuthPayloadDto>> signIn(SignInDto signInDto) async {
+    try {
+      final bool connectionStatus = await this.networkInfo.isConnected;
+
+      if (!connectionStatus) {
+        throw NetworkConnectionException();
+      }
+
+      final AuthPayloadDto authPayloadDto =
+          await this.authRemoteDataSource.signIn(signInDto.provider);
+
+      return Right(authPayloadDto);
+    } on NetworkConnectionException {
+      return Left(NetworkConnectionError());
+    } catch (e) {
+      return Left(UnexpectedError());
+    }
   }
 
   @override
