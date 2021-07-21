@@ -56,12 +56,20 @@ void main() {
   });
 
   group('SignIn', () {
-    test('should call the isConnected method of the INetworkInfo class',
-        () async {
-      // arrange
+    setSuccessMock() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
       when(authRemoteDataSourceMock.signIn(any))
           .thenAnswer((_) async => Future.value(authPayloadDto));
+    }
+
+    setFailureMock() {
+      when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(false));
+    }
+
+    test('should call the isConnected method of the INetworkInfo class',
+        () async {
+      // arrange
+      setSuccessMock();
 
       // act
       await authRepository.signIn(signInDto);
@@ -74,9 +82,7 @@ void main() {
         'should call the signIn method of the remote data source if the connection is ok',
         () async {
       // arrange
-      when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
-      when(authRemoteDataSourceMock.signIn(any))
-          .thenAnswer((_) async => Future.value(authPayloadDto));
+      setSuccessMock();
 
       // act
       await authRepository.signIn(signInDto);
@@ -89,7 +95,7 @@ void main() {
         'should not call the signIn method of the remote data source if the connection is not ok ',
         () async {
       // arrange
-      when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(false));
+      setFailureMock();
 
       // act
       await authRepository.signIn(signInDto);
@@ -101,7 +107,7 @@ void main() {
     test('should return NetworkConnectionError if the connection is not ok ',
         () async {
       // arrange
-      when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(false));
+      setFailureMock();
 
       // act
       final res = await authRepository.signIn(signInDto);
