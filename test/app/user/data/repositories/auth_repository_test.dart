@@ -46,20 +46,22 @@ void main() {
     );
   });
 
-  test("should be an instance of IAuthRepository", () {
-    // arrange
+  group('AuthRepository', () {
+    test("should be an instance of IAuthRepository", () {
+      // arrange
 
-    // act
+      // act
 
-    // assert
-    expect(authRepository, isA<IAuthRepository>());
+      // assert
+      expect(authRepository, isA<IAuthRepository>());
+    });
   });
 
   setFailureMock() {
     when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(false));
   }
 
-  group('SignIn', () {
+  group('AuthRepository.signIn', () {
     setSuccessMock() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
       when(authRemoteDataSourceMock.signIn(any))
@@ -79,20 +81,21 @@ void main() {
     });
 
     test(
-        'should call the signIn method of the remote data source if the connection is ok',
+        'should call the signIn method of the IAuthRemoteDataSource class if the connection is ok',
         () async {
       // arrange
       setSuccessMock();
 
       // act
-      await authRepository.signIn(signInDto);
+      final res = await authRepository.signIn(signInDto);
 
       // assert
       verify(authRemoteDataSourceMock.signIn(signInDto.provider));
+      expect(res, Right(authPayloadDto));
     });
 
     test(
-        'should not call the signIn method of the remote data source if the connection is not ok ',
+        'should not call the signIn method of the IAuthRemoteDataSource class if the connection is not ok ',
         () async {
       // arrange
       setFailureMock();
@@ -129,7 +132,7 @@ void main() {
     });
   });
 
-  group("SignOut", () {
+  group("AuthRepository.signOut", () {
     setSuccessMock() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
       when(authRemoteDataSourceMock.signOut())
@@ -147,16 +150,32 @@ void main() {
       // assert
       verify(networkInfoMock.isConnected);
     });
-    test('should call the signOut method of the AuthRemoteDataSource',
+
+    test(
+        'should call the signOut method of the IAuthRemoteDataSource class if the connection is ok',
         () async {
       // arrange
       setSuccessMock();
 
       // act
-      await authRepository.signOut();
+      final res = await authRepository.signOut();
 
       // assert
       verify(authRemoteDataSourceMock.signOut());
+      expect(res, equals(Right(true)));
+    });
+
+    test(
+        'should not call the signOut method of the IAuthRemoteDataSource class if the connection is not ok ',
+        () async {
+      // arrange
+      setFailureMock();
+
+      // act
+      await authRepository.signOut();
+
+      // assert
+      verifyZeroInteractions(authRemoteDataSourceMock);
     });
 
     test('should return NetworkConnectionError if the connection is not ok ',
