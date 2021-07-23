@@ -1,5 +1,13 @@
-import 'package:graphql/client.dart';
-
 abstract class IGraphqlClient {
-  GraphQLClient get instance;
+  Future<Map<String, dynamic>> query({
+    required String query,
+    required String dataKey,
+    Map<String, dynamic>? variables,
+  });
+
+  Future<Map<String, dynamic>> mutate({
+    required String mutation,
+    required String dataKey,
+    Map<String, dynamic>? variables,
+  });
 }
