@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class ILocalStorage {
   Future<bool> setData(SetDataDto setDataDto);
   Future<String> getData(GetDataDto getDataDto);
+  Future<bool> removeData(GetDataDto deleteDataDto);
 }
 
 class SetDataDto extends Equatable {
@@ -57,6 +58,15 @@ class LocalStorage implements ILocalStorage {
     final res = await this._sharedPreferences.setString(
           setDataDto.key,
           setDataDto.value,
+        );
+
+    return res;
+  }
+
+  @override
+  Future<bool> removeData(GetDataDto deleteDataDto) async {
+    final res = await this._sharedPreferences.remove(
+          deleteDataDto.key,
         );
 
     return res;

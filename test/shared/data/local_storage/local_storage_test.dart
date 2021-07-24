@@ -27,17 +27,19 @@ void main() {
     );
   });
 
-  test("should be an instance of LocalStorage", () {
-    // arrange
+  group("LocalStorage", () {
+    test("should be an instance of ILocalStorage", () {
+      // arrange
 
-    // act
+      // act
 
-    // assert
-    expect(localStorage, isA<ILocalStorage>());
+      // assert
+      expect(localStorage, isA<ILocalStorage>());
+    });
   });
 
-  group("getData", () {
-    test('should call the getString method of the shared preferences class',
+  group("LocalStorage.getData", () {
+    test('should call the getString method of the SharedPreferences class',
         () async {
       // arrange
       when(sharedPreferencesMock.getString(any)).thenReturn(setDataDto.value);
@@ -62,8 +64,8 @@ void main() {
     });
   });
 
-  group("SetData", () {
-    test('should call the setString method of the shared preferences class',
+  group("LocalStorage.setData", () {
+    test('should call the setString method of the SharedPreferences class',
         () async {
       // arrange
       when(sharedPreferencesMock.setString(any, any))
@@ -87,6 +89,35 @@ void main() {
 
       // assert
       verify(sharedPreferencesMock.setString(setDataDto.key, setDataDto.value));
+      expect(res, true);
+    });
+  });
+
+  group("LocalStorage.deleteData", () {
+    test('should call the remove method of the SharedPreferences class',
+        () async {
+      // arrange
+      when(sharedPreferencesMock.remove(any))
+          .thenAnswer((_) => Future.value(true));
+
+      // act
+      await localStorage.removeData(getDataDto);
+
+      // assert
+      verify(sharedPreferencesMock.remove(getDataDto.key));
+    });
+
+    test('should return true if the data has been successfully deleted',
+        () async {
+      // arrange
+      when(sharedPreferencesMock.remove(any))
+          .thenAnswer((_) => Future.value(true));
+
+      // act
+      final res = await localStorage.removeData(getDataDto);
+
+      // assert
+      verify(sharedPreferencesMock.remove(getDataDto.key));
       expect(res, true);
     });
   });
