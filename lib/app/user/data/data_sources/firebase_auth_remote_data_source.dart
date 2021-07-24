@@ -2,8 +2,9 @@ import 'package:crypto_journal_mobile/shared/errors/api_error/api_exception.dart
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class IFirebaseAuthRemoteDataSource {
-  FirebaseAuth get instace;
+  FirebaseAuth get instance;
   Future<String> getUserToken(AuthCredential credential);
+  Future<void> signOut();
 }
 
 class FirebaseAuthRemoteDataSource implements IFirebaseAuthRemoteDataSource {
@@ -23,5 +24,10 @@ class FirebaseAuthRemoteDataSource implements IFirebaseAuthRemoteDataSource {
   }
 
   @override
-  FirebaseAuth get instace => FirebaseAuth.instance;
+  FirebaseAuth get instance => FirebaseAuth.instance;
+
+  @override
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }
