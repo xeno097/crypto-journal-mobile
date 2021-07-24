@@ -3,6 +3,7 @@ import 'package:crypto_journal_mobile/app/user/data/data_sources/firebase_auth_r
 import 'package:crypto_journal_mobile/app/user/data/data_sources/google_auth_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
+import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/auth/mutations.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
@@ -51,8 +52,6 @@ void main() {
 
   final AuthPayloadModel authPayloadModel =
       AuthPayloadModel.fromJson(authPayloadJson);
-
-  // final User firebaseUser = User.;
 
   setUp(() {
     localStorageMock = MockILocalStorage();
@@ -149,6 +148,64 @@ void main() {
       ));
 
       expect(res, equals(authPayloadModel));
+    });
+  });
+
+  group("AuthRemoteDataSource.signOut", () {
+    setSuccessMock() {
+      when(firebaseAuthMock.signOut()).thenAnswer((_) => Future.value());
+      when(localStorageMock.removeData(any))
+          .thenAnswer((_) => Future.value(true));
+    }
+
+    test(
+        'should call the signOut method of the IFirebaseAuthRemoteDataSource class',
+        () async {
+      // arrange
+      setSuccessMock();
+
+      // act
+      await authRemoteDataSource.signOut();
+
+      // assert
+      verify(firebaseAuthMock.signOut());
+    });
+
+    test(
+        'should call the removeData method of the ILocalStorage class class to remove ACCESS_TOKEN_KEY',
+        () async {
+      // arrange
+      setSuccessMock();
+
+      // act
+      await authRemoteDataSource.signOut();
+
+      // assert
+      verify(localStorageMock.removeData(GetDataDto(key: ACCESS_TOKEN_KEY)));
+    });
+
+    test(
+        'should call the removeData method of the ILocalStorage class to remove REFRESH_TOKEN_KEY',
+        () async {
+      // arrange
+      setSuccessMock();
+
+      // act
+      await authRemoteDataSource.signOut();
+
+      // assert
+      verify(localStorageMock.removeData(GetDataDto(key: REFRESH_TOKEN_KEY)));
+    });
+
+    test('should return true if successfully signs the user out', () async {
+      // arrange
+      setSuccessMock();
+
+      // act
+      final res = await authRemoteDataSource.signOut();
+
+      // assert
+      expect(res, true);
     });
   });
 }

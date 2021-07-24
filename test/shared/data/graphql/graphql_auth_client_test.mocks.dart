@@ -31,4 +31,8 @@ class MockILocalStorage extends _i1.Mock implements _i2.ILocalStorage {
   _i3.Future<String> getData(_i2.GetDataDto? getDataDto) =>
       (super.noSuchMethod(Invocation.method(#getData, [getDataDto]),
           returnValue: Future<String>.value('')) as _i3.Future<String>);
+  @override
+  _i3.Future<bool> removeData(_i2.GetDataDto? deleteDataDto) =>
+      (super.noSuchMethod(Invocation.method(#removeData, [deleteDataDto]),
+          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
 }

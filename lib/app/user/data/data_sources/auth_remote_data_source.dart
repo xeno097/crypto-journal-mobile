@@ -1,6 +1,7 @@
 import 'package:crypto_journal_mobile/app/user/data/data_sources/google_auth_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
+import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/auth/mutations.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
@@ -50,8 +51,15 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   }
 
   @override
-  Future<bool> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<bool> signOut() async {
+    await this.firebaseAuthRemoteDataSource.signOut();
+    final deletedAccessToken = await this.localStorage.removeData(
+          GetDataDto(key: ACCESS_TOKEN_KEY),
+        );
+    final deletedRefreshToken = await this.localStorage.removeData(
+          GetDataDto(key: REFRESH_TOKEN_KEY),
+        );
+
+    return deletedAccessToken && deletedRefreshToken;
   }
 }

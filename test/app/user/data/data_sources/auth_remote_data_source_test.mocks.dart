@@ -50,6 +50,10 @@ class MockILocalStorage extends _i1.Mock implements _i4.ILocalStorage {
   _i5.Future<String> getData(_i4.GetDataDto? getDataDto) =>
       (super.noSuchMethod(Invocation.method(#getData, [getDataDto]),
           returnValue: Future<String>.value('')) as _i5.Future<String>);
+  @override
+  _i5.Future<bool> removeData(_i4.GetDataDto? deleteDataDto) =>
+      (super.noSuchMethod(Invocation.method(#removeData, [deleteDataDto]),
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
 }
 
 /// A class which mocks [IGraphqlClient].
@@ -95,13 +99,18 @@ class MockIFirebaseAuthRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i2.FirebaseAuth get instace =>
-      (super.noSuchMethod(Invocation.getter(#instace),
+  _i2.FirebaseAuth get instance =>
+      (super.noSuchMethod(Invocation.getter(#instance),
           returnValue: _FakeFirebaseAuth()) as _i2.FirebaseAuth);
   @override
   _i5.Future<String> getUserToken(_i3.AuthCredential? credential) =>
       (super.noSuchMethod(Invocation.method(#getUserToken, [credential]),
           returnValue: Future<String>.value('')) as _i5.Future<String>);
+  @override
+  _i5.Future<void> signOut() =>
+      (super.noSuchMethod(Invocation.method(#signOut, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }
 
 /// A class which mocks [IGoogleAuthDataSource].
