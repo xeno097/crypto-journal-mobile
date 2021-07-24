@@ -1,6 +1,7 @@
 import 'package:crypto_journal_mobile/app/user/data/inputs/update_user_input.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
+import 'package:crypto_journal_mobile/shared/data/graphql/user/queries.dart';
 
 abstract class IUserRemoteDataSource {
   Future<UserModel> getUser();
@@ -15,9 +16,13 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   });
 
   @override
-  Future<UserModel> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<UserModel> getUser() async {
+    final res = await this.graphqlAuthClient.query(
+          query: GET_LOGGED_USER_QUERY,
+          dataKey: GET_LOGGED_USER_QUERY_DATA_KEY,
+        );
+
+    return UserModel.fromJson(res);
   }
 
   @override
