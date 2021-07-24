@@ -17,7 +17,7 @@ void main() {
   late MockIGraphqlClient graphqlClient;
   late UserRemoteDataSource userRemoteDataSource;
 
-  final userJson = json.decode(fixtureReader("user.json"));
+  final userJson = json.decode(fixtureReader("user_fixture.json"));
   final userModel = UserModel.fromJson(userJson);
 
   final updateUserInput = UpdateUserInput();

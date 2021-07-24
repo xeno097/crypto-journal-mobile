@@ -4,7 +4,7 @@
     "user": {
         "email": "test@test.com",
         "id": "1234567890",
-        "profilePicture": "google.com",
+        "profilePicture": "http//:google.com",
         "userName": "test user"
     }
 }

@@ -48,10 +48,6 @@ void main() {
 
   group('AuthRepository', () {
     test("should be an instance of IAuthRepository", () {
-      // arrange
-
-      // act
-
       // assert
       expect(authRepository, isA<IAuthRepository>());
     });
