@@ -1,3 +1,4 @@
+const SIGN_IN_MUTATION_DATA_KEY = "signIn";
 const SIGN_IN_MUTATION = ''' 
 mutation signIn(\$input: String!) {
   signIn(
