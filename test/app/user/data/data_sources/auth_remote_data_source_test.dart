@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:crypto_journal_mobile/app/user/data/data_sources/auth_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/data_sources/firebase_auth_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/data_sources/google_auth_data_source.dart';
@@ -12,6 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../shared/fixtures/fixture_reader.dart';
 import 'auth_remote_data_source_test.mocks.dart';
 
 @GenerateMocks([
@@ -33,18 +36,10 @@ void main() {
     signInMethod: "emailLink",
   );
 
-  final authPayloadJson = {
-    "accessToken": "fake-access-token",
-    "refreshToken": "fake-refresh-token",
-    "user": {
-      "email": "test@test.com",
-      "id": "1234567890",
-      "profilePicture": "google.com",
-      "userName": "test user"
-    }
-  };
+  final authPayloadJson =
+      json.decode(fixtureReader("auth_payload_fixture.json"));
 
-  final fakeToken = "fake-token";
+  final fakeToken = "fake-firebase-token";
 
   final signInvariables = {
     "input": fakeToken,
@@ -52,6 +47,9 @@ void main() {
 
   final AuthPayloadModel authPayloadModel =
       AuthPayloadModel.fromJson(authPayloadJson);
+
+  final deleteAccessTokenDto = GetDataDto(key: ACCESS_TOKEN_KEY);
+  final deleteRefreshTokenDto = GetDataDto(key: REFRESH_TOKEN_KEY);
 
   setUp(() {
     localStorageMock = MockILocalStorage();
@@ -131,7 +129,7 @@ void main() {
       ));
     });
 
-    test('should call return the logged in user authPayload', () async {
+    test('should return the logged in user authPayload', () async {
       // arrange
       setSuccessMocks();
 
@@ -172,7 +170,7 @@ void main() {
     });
 
     test(
-        'should call the removeData method of the ILocalStorage class class to remove ACCESS_TOKEN_KEY',
+        'should call the removeData method of the ILocalStorage class to remove ACCESS_TOKEN_KEY',
         () async {
       // arrange
       setSuccessMock();
@@ -181,7 +179,8 @@ void main() {
       await authRemoteDataSource.signOut();
 
       // assert
-      verify(localStorageMock.removeData(GetDataDto(key: ACCESS_TOKEN_KEY)));
+      verify(firebaseAuthMock.signOut());
+      verify(localStorageMock.removeData(deleteAccessTokenDto));
     });
 
     test(
@@ -194,7 +193,9 @@ void main() {
       await authRemoteDataSource.signOut();
 
       // assert
-      verify(localStorageMock.removeData(GetDataDto(key: REFRESH_TOKEN_KEY)));
+      verify(firebaseAuthMock.signOut());
+      verify(localStorageMock.removeData(deleteAccessTokenDto));
+      verify(localStorageMock.removeData(deleteRefreshTokenDto));
     });
 
     test('should return true if successfully signs the user out', () async {
@@ -205,6 +206,10 @@ void main() {
       final res = await authRemoteDataSource.signOut();
 
       // assert
+      verify(firebaseAuthMock.signOut());
+      verify(localStorageMock.removeData(deleteAccessTokenDto));
+      verify(localStorageMock.removeData(deleteRefreshTokenDto));
+
       expect(res, true);
     });
   });
