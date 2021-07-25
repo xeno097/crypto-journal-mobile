@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/app/user/service/repositories/auth_repository.dart';
@@ -8,7 +7,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import '../../../../shared/fixtures/fixture_reader.dart';
 import 'auth_service_test.mocks.dart';
 
@@ -38,10 +36,11 @@ void main() {
       final SignInDto signInDto = SignInDto(provider: SIGN_IN_PROVIDER.GOOGLE);
 
       // act
-      await authService.signIn(signInDto);
+      final res = await authService.signIn(signInDto);
 
       // assert
       verify(authRepositoryMock.signIn(signInDto));
+      expect(res, equals(Right(authPayloadDto)));
     });
   });
 
@@ -53,10 +52,11 @@ void main() {
           .thenAnswer((_) => Future.value(Right(true)));
 
       // act
-      await authService.signOut();
+      final res = await authService.signOut();
 
       // assert
       verify(authRepositoryMock.signOut());
+      expect(res, equals(Right(true)));
     });
   });
 }
