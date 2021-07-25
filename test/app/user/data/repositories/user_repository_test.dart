@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:crypto_journal_mobile/app/user/data/data_sources/user_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/inputs/update_user_input.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
@@ -11,20 +12,20 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import '../../../../shared/fixtures/fixture_reader.dart';
 import 'user_repository_test.mocks.dart';
 
-@GenerateMocks([IUserRemoteDataSource, INetworkInfo])
+@GenerateMocks([
+  IUserRemoteDataSource,
+  INetworkInfo,
+])
 void main() {
   late MockIUserRemoteDataSource userRemoteDataSourceMock;
   late MockINetworkInfo networkInfoMock;
   late UserRepository userRepository;
 
-  final userModel = UserModel(
-    id: "1234567890",
-    userName: "test",
-    profilePicture: "google.com",
-    email: "test@email.com",
-  );
+  final userJson = json.decode(fixtureReader("user_fixture.json"));
+  final userModel = UserModel.fromJson(userJson);
 
   setUp(() {
     userRemoteDataSourceMock = MockIUserRemoteDataSource();
@@ -37,10 +38,6 @@ void main() {
 
   group('UserRepository', () {
     test('should be an instance of IUserRepository', () {
-      // arrange
-
-      // act
-
       // assert
       expect(userRepository, isA<IUserRepository>());
     });

@@ -1,13 +1,21 @@
 import 'dart:convert';
 import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
+import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/auth_payload_dto.dart';
 import "package:flutter_test/flutter_test.dart";
 import '../../../../shared/fixtures/fixture_reader.dart';
 
 void main() {
-  final authPayloadJson =
-      json.decode(fixtureReader("auth_payload_fixture.json"));
-  final authPayloadModel = AuthPayloadModel.fromJson(authPayloadJson);
+  final authPayloadModel = AuthPayloadModel(
+    accessToken: "fake-access-token",
+    refreshToken: "fake-refresh-token",
+    user: UserModel(
+      email: "test@test.com",
+      id: "1234567890",
+      profilePicture: "http//:google.com",
+      userName: "test user",
+    ),
+  );
 
   group('AuthPayloadModel', () {
     test('it should be an instance of AuthPayloadDto', () {
@@ -20,7 +28,8 @@ void main() {
         'it should return a valid AuthPayloadModel when a valid json is provided',
         () {
       // arrange
-      final Map<String, dynamic> jsonMap = authPayloadJson;
+      final Map<String, dynamic> jsonMap =
+          json.decode(fixtureReader("auth_payload_fixture.json"));
 
       // act
       final res = AuthPayloadModel.fromJson(jsonMap);

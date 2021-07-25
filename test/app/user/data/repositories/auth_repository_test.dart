@@ -1,6 +1,6 @@
+import 'dart:convert';
 import 'package:crypto_journal_mobile/app/user/data/data_sources/auth_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
-import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
 import 'package:crypto_journal_mobile/app/user/data/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/app/user/service/repositories/auth_repository.dart';
@@ -11,7 +11,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
+import '../../../../shared/fixtures/fixture_reader.dart';
 import 'auth_repository_test.mocks.dart';
 
 @GenerateMocks([
@@ -26,16 +26,10 @@ void main() {
     provider: SIGN_IN_PROVIDER.GOOGLE,
   );
 
-  final AuthPayloadModel authPayloadDto = AuthPayloadModel(
-    accessToken: "1234567890",
-    refreshToken: "1234567890",
-    user: UserModel(
-      email: "test@email.com",
-      id: "1234567890",
-      profilePicture: "",
-      userName: "test",
-    ),
-  );
+  final authPayloadJson =
+      json.decode(fixtureReader("auth_payload_fixture.json"));
+  final AuthPayloadModel authPayloadDto =
+      AuthPayloadModel.fromJson(authPayloadJson);
 
   setUp(() {
     networkInfoMock = MockINetworkInfo();

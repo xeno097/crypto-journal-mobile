@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:crypto_journal_mobile/app/user/data/data_sources/user_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/inputs/update_user_input.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';

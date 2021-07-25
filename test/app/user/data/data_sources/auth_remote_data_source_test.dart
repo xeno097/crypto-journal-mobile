@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:crypto_journal_mobile/app/user/data/data_sources/auth_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/data_sources/firebase_auth_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/user/data/data_sources/google_auth_data_source.dart';
@@ -13,7 +12,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import '../../../../shared/fixtures/fixture_reader.dart';
 import 'auth_remote_data_source_test.mocks.dart';
 
