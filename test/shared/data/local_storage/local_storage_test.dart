@@ -31,10 +31,6 @@ void main() {
 
   group("LocalStorage", () {
     test("should be an instance of ILocalStorage", () {
-      // arrange
-
-      // act
-
       // assert
       expect(localStorage, isA<ILocalStorage>());
     });

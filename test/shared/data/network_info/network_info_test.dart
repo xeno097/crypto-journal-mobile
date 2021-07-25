@@ -15,17 +15,20 @@ void main() {
     networkInfoImpl = NetworkInfo(connectionChecker: mockDataConnectionChecker);
   });
 
-  group('isConnected', () {
+  group('NetworkInfo.isConnected', () {
     test(
         'should call the hasConnection method of the InternetConnectionChecker class',
         () async {
+      // arrange
       final tHasConnectionFuture = Future.value(true);
 
       when(mockDataConnectionChecker.hasConnection)
           .thenAnswer((_) => tHasConnectionFuture);
 
+      // act
       final res = networkInfoImpl.isConnected;
 
+      // assert
       verify(mockDataConnectionChecker.hasConnection);
       expect(res, tHasConnectionFuture);
     });
