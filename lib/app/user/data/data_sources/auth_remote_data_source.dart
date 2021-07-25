@@ -5,6 +5,7 @@ import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/auth/mutations.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_auth_remote_data_source.dart';
@@ -39,7 +40,19 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
       variables: {"input": userToken},
     );
 
-    return AuthPayloadModel.fromJson(res);
+    final authPayload = AuthPayloadModel.fromJson(res);
+
+    await this.localStorage.setData(SetDataDto(
+          key: ACCESS_TOKEN_KEY,
+          value: authPayload.accessToken,
+        ));
+
+    await this.localStorage.setData(SetDataDto(
+          key: REFRESH_TOKEN_KEY,
+          value: authPayload.refreshToken,
+        ));
+
+    return authPayload;
   }
 
   Future<String> _signInWithGoogle() async {
