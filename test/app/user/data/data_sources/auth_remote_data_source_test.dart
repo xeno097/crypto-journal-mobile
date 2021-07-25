@@ -8,6 +8,7 @@ import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/auth/mutations.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -83,6 +84,9 @@ void main() {
               mutation: anyNamed('mutation'),
               variables: anyNamed('variables')))
           .thenAnswer((_) => Future.value(authPayloadJson));
+      when(localStorageMock.setData(any)).thenAnswer(
+        (_) => Future.value(true),
+      );
     }
 
     test('should call the signIn method of the IGoogleAuthDataSource class',
@@ -128,6 +132,56 @@ void main() {
       ));
     });
 
+    test(
+        'should call the setData method of the ILocalStorage class to set ACCESS_TOKEN_KEY',
+        () async {
+      // arrange
+      setSuccessMocks();
+
+      // act
+      await authRemoteDataSource.signIn(SIGN_IN_PROVIDER.GOOGLE);
+
+      // assert
+      verify(googleAuthDataSourceMock.signIn());
+      verify(firebaseAuthMock.getUserToken(credential));
+      verify(graphqlPublicClientMock.mutate(
+        mutation: SIGN_IN_MUTATION,
+        dataKey: SIGN_IN_MUTATION_DATA_KEY,
+        variables: signInvariables,
+      ));
+      verify(localStorageMock.setData(SetDataDto(
+        key: ACCESS_TOKEN_KEY,
+        value: authPayloadModel.accessToken,
+      )));
+    });
+
+    test(
+        'should call the setData method of the ILocalStorage class to set REFRESH_TOKEN_KEY',
+        () async {
+      // arrange
+      setSuccessMocks();
+
+      // act
+      await authRemoteDataSource.signIn(SIGN_IN_PROVIDER.GOOGLE);
+
+      // assert
+      verify(googleAuthDataSourceMock.signIn());
+      verify(firebaseAuthMock.getUserToken(credential));
+      verify(graphqlPublicClientMock.mutate(
+        mutation: SIGN_IN_MUTATION,
+        dataKey: SIGN_IN_MUTATION_DATA_KEY,
+        variables: signInvariables,
+      ));
+      verify(localStorageMock.setData(SetDataDto(
+        key: ACCESS_TOKEN_KEY,
+        value: authPayloadModel.accessToken,
+      )));
+      verify(localStorageMock.setData(SetDataDto(
+        key: REFRESH_TOKEN_KEY,
+        value: authPayloadModel.refreshToken,
+      )));
+    });
+
     test('should return the logged in user authPayload', () async {
       // arrange
       setSuccessMocks();
@@ -143,6 +197,14 @@ void main() {
         dataKey: SIGN_IN_MUTATION_DATA_KEY,
         variables: signInvariables,
       ));
+      verify(localStorageMock.setData(SetDataDto(
+        key: ACCESS_TOKEN_KEY,
+        value: authPayloadModel.accessToken,
+      )));
+      verify(localStorageMock.setData(SetDataDto(
+        key: REFRESH_TOKEN_KEY,
+        value: authPayloadModel.refreshToken,
+      )));
 
       expect(res, equals(authPayloadModel));
     });
