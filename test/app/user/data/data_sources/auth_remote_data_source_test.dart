@@ -7,6 +7,7 @@ import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/auth/mutations.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';

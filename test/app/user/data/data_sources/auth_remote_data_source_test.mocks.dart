@@ -5,10 +5,14 @@
 import 'dart:async' as _i5;
 
 import 'package:crypto_journal_mobile/app/user/data/data_sources/firebase_auth_remote_data_source.dart'
-    as _i7;
+    as _i9;
 import 'package:crypto_journal_mobile/app/user/data/data_sources/google_auth_data_source.dart'
-    as _i8;
+    as _i10;
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart'
+    as _i8;
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart'
+    as _i7;
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart'
     as _i6;
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart'
     as _i4;
@@ -43,15 +47,15 @@ class MockILocalStorage extends _i1.Mock implements _i4.ILocalStorage {
   }
 
   @override
-  _i5.Future<bool> setData(_i4.SetDataDto? setDataDto) =>
+  _i5.Future<bool> setData(_i6.SetDataDto? setDataDto) =>
       (super.noSuchMethod(Invocation.method(#setData, [setDataDto]),
           returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
   @override
-  _i5.Future<String> getData(_i4.GetDataDto? getDataDto) =>
+  _i5.Future<String> getData(_i7.GetDataDto? getDataDto) =>
       (super.noSuchMethod(Invocation.method(#getData, [getDataDto]),
           returnValue: Future<String>.value('')) as _i5.Future<String>);
   @override
-  _i5.Future<bool> removeData(_i4.GetDataDto? deleteDataDto) =>
+  _i5.Future<bool> removeData(_i7.GetDataDto? deleteDataDto) =>
       (super.noSuchMethod(Invocation.method(#removeData, [deleteDataDto]),
           returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
 }
@@ -59,7 +63,7 @@ class MockILocalStorage extends _i1.Mock implements _i4.ILocalStorage {
 /// A class which mocks [IGraphqlClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIGraphqlClient extends _i1.Mock implements _i6.IGraphqlClient {
+class MockIGraphqlClient extends _i1.Mock implements _i8.IGraphqlClient {
   MockIGraphqlClient() {
     _i1.throwOnMissingStub(this);
   }
@@ -93,7 +97,7 @@ class MockIGraphqlClient extends _i1.Mock implements _i6.IGraphqlClient {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockIFirebaseAuthRemoteDataSource extends _i1.Mock
-    implements _i7.IFirebaseAuthRemoteDataSource {
+    implements _i9.IFirebaseAuthRemoteDataSource {
   MockIFirebaseAuthRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -117,7 +121,7 @@ class MockIFirebaseAuthRemoteDataSource extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockIGoogleAuthDataSource extends _i1.Mock
-    implements _i8.IGoogleAuthDataSource {
+    implements _i10.IGoogleAuthDataSource {
   MockIGoogleAuthDataSource() {
     _i1.throwOnMissingStub(this);
   }

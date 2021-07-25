@@ -4,6 +4,10 @@
 
 import 'dart:async' as _i3;
 
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart'
+    as _i5;
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart'
+    as _i4;
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -24,15 +28,15 @@ class MockILocalStorage extends _i1.Mock implements _i2.ILocalStorage {
   }
 
   @override
-  _i3.Future<bool> setData(_i2.SetDataDto? setDataDto) =>
+  _i3.Future<bool> setData(_i4.SetDataDto? setDataDto) =>
       (super.noSuchMethod(Invocation.method(#setData, [setDataDto]),
           returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
   @override
-  _i3.Future<String> getData(_i2.GetDataDto? getDataDto) =>
+  _i3.Future<String> getData(_i5.GetDataDto? getDataDto) =>
       (super.noSuchMethod(Invocation.method(#getData, [getDataDto]),
           returnValue: Future<String>.value('')) as _i3.Future<String>);
   @override
-  _i3.Future<bool> removeData(_i2.GetDataDto? deleteDataDto) =>
+  _i3.Future<bool> removeData(_i5.GetDataDto? deleteDataDto) =>
       (super.noSuchMethod(Invocation.method(#removeData, [deleteDataDto]),
           returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
 }

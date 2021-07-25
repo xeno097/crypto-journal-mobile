@@ -1,39 +1,11 @@
-import 'package:equatable/equatable.dart';
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ILocalStorage {
   Future<bool> setData(SetDataDto setDataDto);
   Future<String> getData(GetDataDto getDataDto);
   Future<bool> removeData(GetDataDto deleteDataDto);
-}
-
-class SetDataDto extends Equatable {
-  final String key;
-  final String value;
-
-  SetDataDto({
-    required this.key,
-    required this.value,
-  });
-
-  @override
-  List<Object?> get props => [
-        this.key,
-        this.value,
-      ];
-}
-
-class GetDataDto extends Equatable {
-  final String key;
-
-  GetDataDto({
-    required this.key,
-  });
-
-  @override
-  List<Object?> get props => [
-        this.key,
-      ];
 }
 
 class LocalStorage implements ILocalStorage {

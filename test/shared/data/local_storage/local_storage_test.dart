@@ -1,3 +1,5 @@
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

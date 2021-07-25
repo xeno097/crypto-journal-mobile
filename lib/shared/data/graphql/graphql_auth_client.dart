@@ -1,6 +1,8 @@
 import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/auth/mutations.dart';
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
+import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
 import 'package:crypto_journal_mobile/shared/errors/api_error/api_exception.dart';
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
