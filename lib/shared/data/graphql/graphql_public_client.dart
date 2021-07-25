@@ -1,8 +1,12 @@
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:crypto_journal_mobile/shared/functions/handle_gql_api_error.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql/client.dart';
 import 'graphql_client.dart';
+
+final graphqlPublicClientProvider =
+    Provider((ProviderReference ref) => GraphqlPublicClient());
 
 class GraphqlPublicClient implements IGraphqlClient {
   late final GraphQLClient _client;

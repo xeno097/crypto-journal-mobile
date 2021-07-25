@@ -7,8 +7,17 @@ import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.da
 import 'package:crypto_journal_mobile/shared/errors/api_error/api_exception.dart';
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:crypto_journal_mobile/shared/functions/handle_gql_api_error.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql/client.dart';
 import 'graphql_client.dart';
+
+final graphqlAuthClientProvider =
+    FutureProvider<GraphqlAuthClient>((ProviderReference ref) async {
+  final localStorage = await ref.read(localStorageProvider.future);
+  final graphqlAuthClient = GraphqlAuthClient(localStorage: localStorage);
+
+  return graphqlAuthClient;
+});
 
 class GraphqlAuthClient implements IGraphqlClient {
   final ILocalStorage localStorage;

@@ -9,6 +9,19 @@ import 'package:crypto_journal_mobile/shared/errors/network/network_connection_e
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_exception.dart';
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final userRepositoryProvider =
+    FutureProvider<UserRepository>((ProviderReference ref) async {
+  final userRemoteDataSource =
+      await ref.read(userRemoteDataSourceProvider.future);
+  final networkInfo = ref.read(networkInfoProvider);
+
+  final userRepository = UserRepository(
+      userRemoteDataSource: userRemoteDataSource, networkInfo: networkInfo);
+
+  return userRepository;
+});
 
 class UserRepository implements IUserRepository {
   final IUserRemoteDataSource userRemoteDataSource;
