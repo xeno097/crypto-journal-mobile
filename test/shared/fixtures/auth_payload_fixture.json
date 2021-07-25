@@ -1,0 +1,10 @@
+{
+    "accessToken": "fake-access-token",
+    "refreshToken": "fake-refresh-token",
+    "user": {
+        "email": "test@test.com",
+        "id": "1234567890",
+        "profilePicture": "http//:google.com",
+        "userName": "test user"
+    }
+}

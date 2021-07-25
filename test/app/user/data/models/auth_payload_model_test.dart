@@ -1,38 +1,35 @@
+import 'dart:convert';
 import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/auth_payload_dto.dart';
 import "package:flutter_test/flutter_test.dart";
+import '../../../../shared/fixtures/fixture_reader.dart';
 
 void main() {
   final authPayloadModel = AuthPayloadModel(
-    accessToken: "1234567890",
-    refreshToken: "1234567890",
+    accessToken: "fake-access-token",
+    refreshToken: "fake-refresh-token",
     user: UserModel(
-      email: "test@email.com",
+      email: "test@test.com",
       id: "1234567890",
       profilePicture: "http//:google.com",
-      userName: "test",
+      userName: "test user",
     ),
   );
 
-  test('it should be a subclass of UserDto', () {
-    expect(authPayloadModel, isA<AuthPayloadDto>());
+  group('AuthPayloadModel', () {
+    test('it should be an instance of AuthPayloadDto', () {
+      expect(authPayloadModel, isA<AuthPayloadDto>());
+    });
   });
 
-  group('fromJson', () {
-    test('it should return a valid UserModel when a valid json is provided',
+  group('AuthPayloadModel.fromJson', () {
+    test(
+        'it should return a valid AuthPayloadModel when a valid json is provided',
         () {
       // arrange
-      final Map<String, dynamic> jsonMap = {
-        "accessToken": "1234567890",
-        "refreshToken": "1234567890",
-        "user": {
-          "id": "1234567890",
-          "userName": "test",
-          "profilePicture": "http//:google.com",
-          "email": "test@email.com",
-        }
-      };
+      final Map<String, dynamic> jsonMap =
+          json.decode(fixtureReader("auth_payload_fixture.json"));
 
       // act
       final res = AuthPayloadModel.fromJson(jsonMap);

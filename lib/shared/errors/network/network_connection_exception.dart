@@ -1,0 +1,1 @@
+class NetworkConnectionException implements Exception {}

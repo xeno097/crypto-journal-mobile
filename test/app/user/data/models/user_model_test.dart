@@ -1,37 +1,36 @@
+import 'dart:convert';
 import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/user_dto.dart';
-import 'package:mockito/mockito.dart';
 import "package:flutter_test/flutter_test.dart";
+import '../../../../shared/fixtures/fixture_reader.dart';
 
 void main() {
   final userModel = UserModel(
-    email: "test@email.com",
     id: "1234567890",
+    userName: "test user",
     profilePicture: "http//:google.com",
-    userName: "test",
+    email: "test@email.com",
   );
 
   final userModelWithMissingEmail = UserModel(
-    email: "",
     id: "1234567890",
     profilePicture: "http//:google.com",
-    userName: "test",
+    userName: "test user",
+    email: "",
   );
 
-  test('it should be a subclass of UserDto', () {
-    expect(userModel, isA<UserDto>());
+  group('UserModel', () {
+    test('it should be an instance of UserDto', () {
+      expect(userModel, isA<UserDto>());
+    });
   });
 
   group('fromJson', () {
     test('it should return a valid UserModel when a valid json is provided',
         () {
       // arrange
-      final Map<String, dynamic> jsonMap = {
-        "id": "1234567890",
-        "userName": "test",
-        "profilePicture": "http//:google.com",
-        "email": "test@email.com",
-      };
+      final Map<String, dynamic> jsonMap =
+          json.decode(fixtureReader("user_fixture.json"));
 
       // act
       final res = UserModel.fromJson(jsonMap);
@@ -45,11 +44,8 @@ void main() {
         () {
       // arrange
 
-      final Map<String, dynamic> jsonMap = {
-        "id": "1234567890",
-        "userName": "test",
-        "profilePicture": "http//:google.com",
-      };
+      final Map<String, dynamic> jsonMap =
+          json.decode(fixtureReader("user_with_missing_email_fixture.json"));
 
       // act
       final res = UserModel.fromJson(jsonMap);
