@@ -1,4 +1,4 @@
-import 'package:crypto_journal_mobile/app/user/presentation/pages/login_page.dart';
+import 'package:crypto_journal_mobile/app/user/presentation/pages/login/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
