@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/login/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "/login": (context) => LoginPage(),
-        // "/": (context) => LoginPage(),
+        LoginPage.route: (context) => LoginPage(),
+        HomePage.route: (context) => HomePage(),
       },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
