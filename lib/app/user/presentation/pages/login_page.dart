@@ -1,5 +1,7 @@
+import 'package:crypto_journal_mobile/shared/theme/colors.dart';
+import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
+import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -8,7 +10,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        color: Color(0xFF2B2D42),
+        color: backGroundColorPrimary,
         alignment: Alignment.center,
         padding: EdgeInsets.all(
           21.0,
@@ -26,11 +28,7 @@ class LoginPage extends StatelessWidget {
                   Text(
                     " Start your hodling journey",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.montserrat(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: mainTitleTextStyle,
                   ),
                   Container(
                     child: LayoutBuilder(
@@ -38,12 +36,9 @@ class LoginPage extends StatelessWidget {
                         return Container(
                           width: constraints.maxWidth / 2,
                           child: Text(
-                            "Manage your crypto investements",
+                            "Track your crypto investements",
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                            ),
+                            style: subTitleTextStyle,
                           ),
                         );
                       },
@@ -60,14 +55,11 @@ class LoginPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: BaseButton(
-                        backGroundColor: Color(0xFFC75749),
+                        backGroundColor: googleButtonBackGroundColor,
                         child: Center(
                           child: Text(
                             "Sign in with google",
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 15.0,
-                            ),
+                            style: defaultTextStyle,
                           ),
                         ),
                       ),
@@ -77,27 +69,21 @@ class LoginPage extends StatelessWidget {
                         vertical: 10.0,
                       ),
                       child: BaseButton(
-                        backGroundColor: Color(0xFF375299),
+                        backGroundColor: facebookButtonBackGroundColor,
                         child: Center(
                           child: Text(
                             "Sign in with Facebook",
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 15.0,
-                            ),
+                            style: defaultTextStyle,
                           ),
                         ),
                       ),
                     ),
-                    BaseButton(
-                      backGroundColor: Colors.transparent,
+                    Container(
+                      height: 40.0,
                       child: Center(
                         child: Text(
                           "About the app",
-                          style: GoogleFonts.montserrat(
-                            color: Colors.white,
-                            fontSize: 12.0,
-                          ),
+                          style: secondaryTextStyle,
                         ),
                       ),
                     ),
@@ -108,47 +94,6 @@ class LoginPage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class BaseButton extends StatelessWidget {
-  final Widget child;
-  final Color backGroundColor;
-
-  const BaseButton({
-    Key? key,
-    required this.child,
-    required this.backGroundColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Container(
-          height: 40.0,
-          width: constraints.maxWidth / 2,
-          child: this.child,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black38,
-                spreadRadius: 2.0,
-                blurRadius: 4.0,
-                offset: Offset(
-                  4.0,
-                  4.0,
-                ),
-              ),
-            ],
-            color: this.backGroundColor,
-            borderRadius: BorderRadius.circular(
-              10.0,
-            ),
-          ),
-        );
-      },
     );
   }
 }
