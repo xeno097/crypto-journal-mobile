@@ -15,6 +15,10 @@ final subTitleTextStyle = defaultTextStyle.copyWith(
   fontSize: 18.0,
 );
 
+final pageTitleTextStyle = defaultTextStyle.copyWith(
+  fontSize: 21.0,
+);
+
 final mainTitleTextStyle = defaultTextStyle.copyWith(
   fontSize: 30.0,
 );

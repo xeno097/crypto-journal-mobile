@@ -7,5 +7,6 @@ const Color textColorNotStonks = Color(0xFFC75749);
 
 // Background colors
 const Color backGroundColorPrimary = Color(0xFF2B2D42);
+const Color backGroundColorSecondary = Color(0xFF212232);
 const Color googleButtonBackGroundColor = Color(0xFFC75749);
 const Color facebookButtonBackGroundColor = Color(0xFF375299);
