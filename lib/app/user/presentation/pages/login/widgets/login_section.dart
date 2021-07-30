@@ -1,13 +1,24 @@
+import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
+import 'package:crypto_journal_mobile/app/user/presentation/providers/sign_in_provider.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/layout_container.dart';
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
 class LoginSection extends StatelessWidget {
   const LoginSection({
     Key? key,
   }) : super(key: key);
+
+  void _signIn(BuildContext context) async {
+    final res = await context.read(signInProvider.future);
+
+    if (res != null) {
+      Navigator.pushNamed(context, HomePage.route);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +36,7 @@ class LoginSection extends StatelessWidget {
                   style: defaultTextStyle,
                 ),
               ),
+              onTap: () async => this._signIn(context),
             ),
           ),
           Padding(
@@ -39,6 +51,7 @@ class LoginSection extends StatelessWidget {
                   style: defaultTextStyle,
                 ),
               ),
+              onTap: () async => this._signIn(context),
             ),
           ),
           LayoutContainer(
