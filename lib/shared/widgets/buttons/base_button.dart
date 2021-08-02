@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/shared/theme/shadows.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/layout_container.dart';
 import "package:flutter/material.dart";
 
@@ -24,17 +25,7 @@ class BaseButton extends StatelessWidget {
         width: this.width,
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black38,
-                spreadRadius: 2.0,
-                blurRadius: 4.0,
-                offset: Offset(
-                  4.0,
-                  4.0,
-                ),
-              ),
-            ],
+            boxShadow: defaultElementShadow,
             color: this.backGroundColor,
             borderRadius: BorderRadius.circular(
               10.0,

@@ -1,4 +1,5 @@
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
+import 'package:crypto_journal_mobile/shared/theme/shadows.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/layout_container.dart';
 import 'package:flutter/material.dart';
@@ -53,17 +54,7 @@ class SettingTab extends StatelessWidget {
                 children: this._sectionBuilder(),
               ),
               decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black38,
-                    spreadRadius: 2.0,
-                    blurRadius: 4.0,
-                    offset: Offset(
-                      4.0,
-                      4.0,
-                    ),
-                  ),
-                ],
+                boxShadow: defaultElementShadow,
                 color: backGroundColorSecondary,
                 borderRadius: BorderRadius.circular(
                   10.0,
