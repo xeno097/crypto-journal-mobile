@@ -84,7 +84,6 @@ class GraphqlAuthClient implements IGraphqlClient {
 
       return res;
     } on ExpiredSessionException {
-      print("here");
       await this._refreshAccessToken();
 
       final res = await this._mutate(
