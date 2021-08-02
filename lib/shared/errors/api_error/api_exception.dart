@@ -1,12 +1,12 @@
 abstract class ApiErrorCodes {
   static const String INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR";
-  static const String INVALID_USER_INPUT = "  INVALID_USER_INPUT";
-  static const String INVALID_SIGN_IN_TOKEN = "  INVALID_SIGN_IN_TOKEN";
-  static const String INVALID_JWT_FORMAT = "  INVALID_JWT_FORMAT";
-  static const String EXPIRED_JWT = "  EXPIRED_JWT";
-  static const String UNAUTHORIZED_USER = "  UNAUTHORIZED_USER";
-  static const String BLOCKED_USER = "  BLOCKED_USER";
-  static const String ENTITY_NOT_FOUND = "  ENTITY_NOT_FOUND";
+  static const String INVALID_USER_INPUT = "INVALID_USER_INPUT";
+  static const String INVALID_SIGN_IN_TOKEN = "INVALID_SIGN_IN_TOKEN";
+  static const String INVALID_JWT_FORMAT = "INVALID_JWT_FORMAT";
+  static const String EXPIRED_JWT = "EXPIRED_JWT";
+  static const String UNAUTHORIZED_USER = "UNAUTHORIZED_USER";
+  static const String BLOCKED_USER = "BLOCKED_USER";
+  static const String ENTITY_NOT_FOUND = "ENTITY_NOT_FOUND";
 }
 
 abstract class ApiException {

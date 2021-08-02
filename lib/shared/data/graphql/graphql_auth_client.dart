@@ -84,6 +84,7 @@ class GraphqlAuthClient implements IGraphqlClient {
 
       return res;
     } on ExpiredSessionException {
+      print("here");
       await this._refreshAccessToken();
 
       final res = await this._mutate(
@@ -97,7 +98,7 @@ class GraphqlAuthClient implements IGraphqlClient {
   }
 
   Future<void> _refreshAccessToken() async {
-    final refreshToken = this.localStorage.getData(GetDataDto(
+    final refreshToken = await this.localStorage.getData(GetDataDto(
           key: REFRESH_TOKEN_KEY,
         ));
 
