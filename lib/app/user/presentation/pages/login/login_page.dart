@@ -10,28 +10,30 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: backGroundColorPrimary,
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(
-          21.0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(),
-            ),
-            Expanded(
-              flex: 2,
-              child: WelcomeSection(),
-            ),
-            Expanded(
-              flex: 2,
-              child: LoginSection(),
-            )
-          ],
+    return Scaffold(
+      backgroundColor: backGroundColorPrimary,
+      body: SafeArea(
+        child: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(
+            21.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(),
+              ),
+              Expanded(
+                flex: 2,
+                child: WelcomeSection(),
+              ),
+              Expanded(
+                flex: 2,
+                child: LoginSection(),
+              )
+            ],
+          ),
         ),
       ),
     );

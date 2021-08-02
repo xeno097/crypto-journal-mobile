@@ -16,7 +16,8 @@ class LoginSection extends StatelessWidget {
     final res = await context.read(signInProvider.future);
 
     if (res != null) {
-      Navigator.pushNamed(context, HomePage.route);
+      Navigator.pushNamedAndRemoveUntil(
+          context, HomePage.route, (route) => false);
     }
   }
 
