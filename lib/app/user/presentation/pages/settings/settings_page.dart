@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/app/user/presentation/pages/home/widgets/tab_container.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/login/login_page.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/settings/widgets/app_info_section.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/settings/widgets/user_info_section.dart';
@@ -31,62 +32,50 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     print("SettingsPage");
 
-    return SafeArea(
-      child: Container(
-        padding: EdgeInsets.only(
-          left: 21.0,
-          right: 21.0,
-          top: 10.0,
+    return TabContainer(
+      header: Container(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Settings",
+          style: pageTitleTextStyle,
         ),
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Settings",
-                style: pageTitleTextStyle,
-              ),
-            ),
-            Expanded(
-              child: Consumer(builder: (context, watch, child) {
-                final userDto = watch(getLoggedUserProvider);
+      ),
+      body: Consumer(
+        builder: (context, watch, child) {
+          final userDto = watch(getLoggedUserProvider);
 
-                return userDto.map(
-                  data: (userDto) => Column(
-                    children: [
-                      UserInfoSection(
-                        userDto: userDto.value,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      AppInfoSection(),
-                      SizedBox(
-                        height: 25.0,
-                      ),
-                      BaseButton(
-                        backGroundColor: googleButtonBackGroundColor,
-                        width: ContainerWidth.Small,
-                        onTap: () async => this._signOut(context),
-                        child: Center(
-                          child: Text(
-                            "Log out",
-                            style: secondaryTextStyle,
-                          ),
-                        ),
-                      ),
-                    ],
+          return userDto.map(
+            data: (userDto) => Column(
+              children: [
+                UserInfoSection(
+                  userDto: userDto.value,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                AppInfoSection(),
+                SizedBox(
+                  height: 25.0,
+                ),
+                BaseButton(
+                  backGroundColor: googleButtonBackGroundColor,
+                  width: ContainerWidth.Small,
+                  onTap: () async => this._signOut(context),
+                  child: Center(
+                    child: Text(
+                      "Log out",
+                      style: secondaryTextStyle,
+                    ),
                   ),
-                  loading: (_) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  error: (err) => Text("Error? "),
-                );
-              }),
-            )
-          ],
-        ),
+                ),
+              ],
+            ),
+            loading: (_) => Center(
+              child: CircularProgressIndicator(),
+            ),
+            error: (err) => Text("Error? "),
+          );
+        },
       ),
     );
   }
