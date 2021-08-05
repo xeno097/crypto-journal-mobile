@@ -3,17 +3,37 @@ import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.da
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/auth/mutations.dart';
+import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
+import 'package:crypto_journal_mobile/shared/data/graphql/graphql_public_client.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_auth_remote_data_source.dart';
 
 abstract class IAuthRemoteDataSource {
   Future<AuthPayloadModel> signIn(SIGN_IN_PROVIDER provider);
   Future<bool> signOut();
 }
+
+final authRemoteDataSourceProvider =
+    FutureProvider<AuthRemoteDataSource>((ProviderReference ref) async {
+  final localStorage = await ref.read(localStorageProvider.future);
+  final graphqlPublicClient = ref.read(graphqlPublicClientProvider);
+  final graphqlAuthClient = await ref.read(graphqlAuthClientProvider.future);
+
+  final authRemoteDataSource = AuthRemoteDataSource(
+    localStorage: localStorage,
+    firebaseAuthRemoteDataSource: FirebaseAuthRemoteDataSource(),
+    googleAuthDataSource: GoogleAuthDataSource(),
+    graphqlAuthClient: graphqlAuthClient,
+    graphqlPublicClient: graphqlPublicClient,
+  );
+
+  return authRemoteDataSource;
+});
 
 class AuthRemoteDataSource implements IAuthRemoteDataSource {
   final ILocalStorage localStorage;
