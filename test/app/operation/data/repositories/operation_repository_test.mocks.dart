@@ -8,6 +8,8 @@ import 'package:crypto_journal_mobile/app/operation/data/data_sources/operation_
     as _i3;
 import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart'
     as _i2;
+import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -33,4 +35,18 @@ class MockIOperationRemoteDataSource extends _i1.Mock
           Invocation.method(#getOperations, []),
           returnValue: Future<_i2.OperationModel>.value(_FakeOperationModel()))
       as _i4.Future<_i2.OperationModel>);
+}
+
+/// A class which mocks [INetworkInfo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockINetworkInfo extends _i1.Mock implements _i5.INetworkInfo {
+  MockINetworkInfo() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<bool> get isConnected =>
+      (super.noSuchMethod(Invocation.getter(#isConnected),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
 }
