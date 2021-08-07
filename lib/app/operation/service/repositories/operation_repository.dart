@@ -3,5 +3,5 @@ import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class IOperationRepository {
-  Future<Either<BaseError, OperationDto>> getOperations();
+  Future<Either<BaseError, List<OperationDto>>> getOperations();
 }

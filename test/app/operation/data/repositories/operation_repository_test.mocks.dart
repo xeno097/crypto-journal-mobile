@@ -2,12 +2,12 @@
 // in crypto_journal_mobile/test/app/operation/data/repositories/operation_repository_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i3;
 
 import 'package:crypto_journal_mobile/app/operation/data/data_sources/operation_remote_data_source.dart'
-    as _i3;
-import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart'
     as _i2;
+import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart'
+    as _i4;
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart'
     as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -19,22 +19,21 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-class _FakeOperationModel extends _i1.Fake implements _i2.OperationModel {}
-
 /// A class which mocks [IOperationRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockIOperationRemoteDataSource extends _i1.Mock
-    implements _i3.IOperationRemoteDataSource {
+    implements _i2.IOperationRemoteDataSource {
   MockIOperationRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.OperationModel> getOperations() => (super.noSuchMethod(
+  _i3.Future<List<_i4.OperationModel>> getOperations() => (super.noSuchMethod(
           Invocation.method(#getOperations, []),
-          returnValue: Future<_i2.OperationModel>.value(_FakeOperationModel()))
-      as _i4.Future<_i2.OperationModel>);
+          returnValue:
+              Future<List<_i4.OperationModel>>.value(<_i4.OperationModel>[]))
+      as _i3.Future<List<_i4.OperationModel>>);
 }
 
 /// A class which mocks [INetworkInfo].
@@ -46,7 +45,7 @@ class MockINetworkInfo extends _i1.Mock implements _i5.INetworkInfo {
   }
 
   @override
-  _i4.Future<bool> get isConnected =>
+  _i3.Future<bool> get isConnected =>
       (super.noSuchMethod(Invocation.getter(#isConnected),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
 }
