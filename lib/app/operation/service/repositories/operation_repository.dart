@@ -2,6 +2,6 @@ import 'package:crypto_journal_mobile/app/operation/service/dtos/operation_dto.d
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
 import 'package:dartz/dartz.dart';
 
-abstract class OperationRepository {
+abstract class IOperationRepository {
   Future<Either<BaseError, OperationDto>> getOperations();
 }
