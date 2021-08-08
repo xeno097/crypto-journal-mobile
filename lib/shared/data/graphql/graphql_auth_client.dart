@@ -43,7 +43,7 @@ class GraphqlAuthClient implements IGraphqlClient {
   }
 
   @override
-  Future<Map<String, dynamic>> query({
+  Future<dynamic> query({
     required String query,
     required String dataKey,
     Map<String, dynamic>? variables,
@@ -70,7 +70,7 @@ class GraphqlAuthClient implements IGraphqlClient {
   }
 
   @override
-  Future<Map<String, dynamic>> mutate({
+  Future<dynamic> mutate({
     required String mutation,
     required String dataKey,
     Map<String, dynamic>? variables,
@@ -123,7 +123,7 @@ class GraphqlAuthClient implements IGraphqlClient {
     return;
   }
 
-  Future<Map<String, dynamic>> _query({
+  Future<dynamic> _query({
     required String query,
     required String dataKey,
     Map<String, dynamic>? variables,
@@ -148,7 +148,7 @@ class GraphqlAuthClient implements IGraphqlClient {
     return data;
   }
 
-  Future<Map<String, dynamic>> _mutate({
+  Future<dynamic> _mutate({
     required String mutation,
     required String dataKey,
     Map<String, dynamic>? variables,

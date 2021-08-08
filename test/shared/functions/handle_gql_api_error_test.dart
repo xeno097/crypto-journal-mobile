@@ -140,5 +140,43 @@ void main() {
         throwsA(isInstanceOf<UnauthorizedUserException>()),
       );
     });
+
+    test('should not throw an error when the result is an empty list', () {
+      // arrange
+      final input = [];
+
+      // act
+      handleGqlApiError(input);
+    });
+
+    test(
+        'should not throw an error when the result is a list and the __typename property key is not ApiError',
+        () {
+      // arrange
+      final input = [
+        {
+          "__typename": "SomethingElse",
+          "code": "no error",
+        },
+      ];
+
+      // act
+      handleGqlApiError(input);
+    });
+
+    test(
+        'should throw InternalServerErrorException when the result is a list and the __typename property is ApiError',
+        () {
+      // arrange
+      final input = [
+        getTestCaseInput("Anything"),
+      ];
+
+      // act & assert
+      expect(
+        () => handleGqlApiError(input),
+        throwsA(isInstanceOf<InternalServerErrorException>()),
+      );
+    });
   });
 }
