@@ -19,7 +19,7 @@ class GraphqlPublicClient implements IGraphqlClient {
   }
 
   @override
-  Future<Map<String, dynamic>> mutate({
+  Future<dynamic> mutate({
     required String mutation,
     required String dataKey,
     Map<String, dynamic>? variables,
@@ -43,7 +43,7 @@ class GraphqlPublicClient implements IGraphqlClient {
   }
 
   @override
-  Future<Map<String, dynamic>> query({
+  Future<dynamic> query({
     required String query,
     required String dataKey,
     Map<String, dynamic>? variables,
