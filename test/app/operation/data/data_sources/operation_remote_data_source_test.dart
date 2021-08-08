@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto_journal_mobile/app/operation/data/data_sources/operation_remote_data_source.dart';
+import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/operation/queries.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -54,6 +55,25 @@ void main() {
         query: GET_OPERATIONS_QUERY,
         dataKey: GET_OPERATIONS_DATA_KEY,
       ));
+    });
+
+    test('should return a list of OperationModels', () async {
+      // arrange
+      setSuccessMocks();
+      final expectedResult = [
+        OperationModel.fromJson(operationJson),
+        OperationModel.fromJson(operationJson),
+      ];
+
+      // act
+      final res = await operationRemoteDataSource.getOperations();
+
+      // assert
+      verify(graphqlAuthClient.query(
+        query: GET_OPERATIONS_QUERY,
+        dataKey: GET_OPERATIONS_DATA_KEY,
+      ));
+      expect(res, expectedResult);
     });
   });
 }
