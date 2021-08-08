@@ -69,28 +69,21 @@ class MockIGraphqlClient extends _i1.Mock implements _i8.IGraphqlClient {
   }
 
   @override
-  _i5.Future<Map<String, dynamic>> query(
+  _i5.Future<dynamic> query(
           {String? query, String? dataKey, Map<String, dynamic>? variables}) =>
       (super.noSuchMethod(
-              Invocation.method(#query, [],
-                  {#query: query, #dataKey: dataKey, #variables: variables}),
-              returnValue:
-                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
-          as _i5.Future<Map<String, dynamic>>);
+          Invocation.method(#query, [],
+              {#query: query, #dataKey: dataKey, #variables: variables}),
+          returnValue: Future<dynamic>.value()) as _i5.Future<dynamic>);
   @override
-  _i5.Future<Map<String, dynamic>> mutate(
+  _i5.Future<dynamic> mutate(
           {String? mutation,
           String? dataKey,
           Map<String, dynamic>? variables}) =>
       (super.noSuchMethod(
-              Invocation.method(#mutate, [], {
-                #mutation: mutation,
-                #dataKey: dataKey,
-                #variables: variables
-              }),
-              returnValue:
-                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
-          as _i5.Future<Map<String, dynamic>>);
+          Invocation.method(#mutate, [],
+              {#mutation: mutation, #dataKey: dataKey, #variables: variables}),
+          returnValue: Future<dynamic>.value()) as _i5.Future<dynamic>);
 }
 
 /// A class which mocks [IFirebaseAuthRemoteDataSource].
