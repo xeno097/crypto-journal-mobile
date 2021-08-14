@@ -9,6 +9,21 @@ import 'package:crypto_journal_mobile/shared/errors/network/network_connection_e
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final transactionRepositoryProvider =
+    FutureProvider<TransactionRepository>((ProviderReference ref) async {
+  final networkInfo = ref.read(networkInfoProvider);
+  final transactionRemoteDataSource =
+      await ref.read(transactionRemoteDataSourceProvider.future);
+
+  final transactionRepository = TransactionRepository(
+    networkInfo: networkInfo,
+    transactionRemoteDataSource: transactionRemoteDataSource,
+  );
+
+  return transactionRepository;
+});
 
 class TransactionRepository implements ITransactionRepository {
   late final INetworkInfo _networkInfo;
