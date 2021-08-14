@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -5,6 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 final defaultTextStyle = GoogleFonts.montserrat(
   color: Colors.white,
   fontSize: 15.0,
+);
+
+final defaultTextStyleStonks = defaultTextStyle.copyWith(
+  color: textColorStonks,
+);
+
+final defaultTextStyleNotStonks = defaultTextStyle.copyWith(
+  color: textColorNotStonks,
 );
 
 final secondaryTextStyle = defaultTextStyle.copyWith(
