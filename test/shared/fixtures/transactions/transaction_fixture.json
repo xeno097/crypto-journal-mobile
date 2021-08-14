@@ -1,0 +1,14 @@
+{
+  "id": "1",
+  "coinSymbol": "ETH",
+  "coins": 1000,
+  "cost": 10,
+  "date": "12/02/2020",
+  "fee": 0,
+  "operation": {
+    "id": "1",
+    "name": "Sell",
+    "slug": "sell",
+    "type": "SELL"
+  }
+}
