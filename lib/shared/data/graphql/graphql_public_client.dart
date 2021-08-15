@@ -35,7 +35,7 @@ class GraphqlPublicClient implements IGraphqlClient {
       throw UnexpectedError();
     }
 
-    Map<String, dynamic> data = mutationResult.data?[dataKey];
+    final dynamic data = mutationResult.data?[dataKey];
 
     handleGqlApiError(data);
 
@@ -59,7 +59,7 @@ class GraphqlPublicClient implements IGraphqlClient {
       throw UnexpectedError();
     }
 
-    Map<String, dynamic> data = queryResult.data?[dataKey];
+    final dynamic data = queryResult.data?[dataKey];
 
     handleGqlApiError(data);
 
