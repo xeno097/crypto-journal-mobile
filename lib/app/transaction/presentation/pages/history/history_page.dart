@@ -1,7 +1,9 @@
+import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history/widgets/transaction_history_list_tab.dart';
+import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history/widgets/transaction_history_page_header.dart';
+import 'package:crypto_journal_mobile/app/transaction/presentation/providers/get_transactions_provider.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/home/widgets/tab_container.dart';
-import 'package:crypto_journal_mobile/shared/theme/colors.dart';
-import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -11,32 +13,32 @@ class HistoryPage extends StatelessWidget {
     print("HistoryPage");
 
     return TabContainer(
-      header: Row(
-        children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Transaction History",
-                style: pageTitleTextStyle,
+      header: TransactionHistoryPageHeader(),
+      body: Consumer(
+        builder: (context, watch, child) {
+          final userDto = watch(getTransactionsProvider);
+
+          return userDto.map(
+            data: (data) => Container(
+              child: Center(
+                child: ListView.builder(
+                  itemCount: data.value.length,
+                  itemBuilder: (
+                    context,
+                    index,
+                  ) =>
+                      TransactionHistoryListTab(
+                    transaction: data.value[index],
+                  ),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              print("ADD TRANSACTION");
-            },
-            child: Icon(
-              Icons.add_circle_outline_rounded,
-              color: textColorPrimary,
+            loading: (_) => Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-        ],
-      ),
-      body: Container(
-        child: Center(
-          child: Text("History Page"),
-        ),
+            error: (err) => Text("Error? "),
+          );
+        },
       ),
     );
   }
