@@ -8,6 +8,11 @@ final defaultTextStyle = GoogleFonts.montserrat(
   fontSize: 15.0,
 );
 
+final defaultTextStyleSecondary = GoogleFonts.montserrat(
+  color: textColorSecondary,
+  fontSize: 15.0,
+);
+
 final defaultTextStyleStonks = defaultTextStyle.copyWith(
   color: textColorStonks,
 );
