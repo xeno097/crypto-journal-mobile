@@ -1,10 +1,22 @@
 import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart';
+import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/operation/queries.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class IOperationRemoteDataSource {
   Future<List<OperationModel>> getOperations();
 }
+
+final operationRemoteDataSourceProvider =
+    FutureProvider<OperationRemoteDataSource>((ProviderReference ref) async {
+  final graphqlAuthClient = await ref.read(graphqlAuthClientProvider.future);
+
+  final operationRemoteDataSource =
+      OperationRemoteDataSource(graphqlAuthClient: graphqlAuthClient);
+
+  return operationRemoteDataSource;
+});
 
 class OperationRemoteDataSource implements IOperationRemoteDataSource {
   final IGraphqlClient graphqlAuthClient;

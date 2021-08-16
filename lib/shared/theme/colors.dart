@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Text colors
 const Color textColorPrimary = Color(0xFFFFFFFF);
+const Color textColorSecondary = Color(0xFF6A7EAC);
 const Color textColorStonks = Color(0xFF37C6BB);
 const Color textColorNotStonks = Color(0xFFC75749);
 
