@@ -7,6 +7,20 @@ import 'package:crypto_journal_mobile/shared/errors/network/network_connection_e
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final operationRepositoryProvider =
+    FutureProvider<OperationRepository>((ProviderReference ref) async {
+  final networkInfo = ref.read(networkInfoProvider);
+  final operationRemoteDataSource =
+      await ref.read(operationRemoteDataSourceProvider.future);
+
+  final operationRepository = OperationRepository(
+      operationRemoteDataSource: operationRemoteDataSource,
+      networkInfo: networkInfo);
+
+  return operationRepository;
+});
 
 class OperationRepository implements IOperationRepository {
   final IOperationRemoteDataSource operationRemoteDataSource;
