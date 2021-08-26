@@ -32,12 +32,12 @@ class HoldingRepository implements IHoldingRepository {
         throw NetworkConnectionException();
       }
 
-      final List<HoldingModel> operations =
+      final List<HoldingModel> holdings =
           await this._holdingRemoteDataSource.getHoldings(
                 getHoldingInput: GetHoldingInput(),
               );
 
-      return Right(operations);
+      return Right(holdings);
     } on NetworkConnectionException {
       return Left(NetworkConnectionError());
     } catch (e) {
