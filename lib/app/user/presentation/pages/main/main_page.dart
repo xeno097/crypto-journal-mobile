@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/app/user/presentation/pages/main/widgets/header/main_page_header.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/theme/shadows.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
@@ -16,7 +17,9 @@ class MainPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              MainPageHeader(),
+              PageHeader(
+                title: "Home",
+              ),
               BalanceInfoCard(),
               HoldingInfoList(),
             ],
@@ -129,26 +132,6 @@ class HoldingInfoListTile extends StatelessWidget {
             );
           },
         ));
-  }
-}
-
-class MainPageHeader extends StatelessWidget {
-  const MainPageHeader({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 369 / 51,
-      child: Container(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Home",
-          style: boldPageTitleTextStyle,
-        ),
-      ),
-    );
   }
 }
 
