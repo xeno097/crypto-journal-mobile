@@ -60,7 +60,7 @@ class LoginSection extends StatelessWidget {
             child: Center(
               child: Text(
                 "About the app",
-                style: secondaryTextStyle,
+                style: defaultSecondaryTextStyle,
               ),
             ),
           ),

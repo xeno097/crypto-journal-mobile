@@ -21,8 +21,13 @@ final defaultTextStyleNotStonks = defaultTextStyle.copyWith(
   color: textColorNotStonks,
 );
 
+final defaultSecondaryTextStyle = defaultTextStyle.copyWith(
+  fontSize: 12.0,
+);
+
 final secondaryTextStyle = defaultTextStyle.copyWith(
   fontSize: 12.0,
+  color: textColorSecondary,
 );
 
 final subTitleTextStyle = defaultTextStyle.copyWith(
@@ -33,6 +38,15 @@ final pageTitleTextStyle = defaultTextStyle.copyWith(
   fontSize: 21.0,
 );
 
+final boldPageTitleTextStyle = defaultTextStyle.copyWith(
+  fontSize: 21.0,
+  fontWeight: FontWeight.bold,
+);
+
 final mainTitleTextStyle = defaultTextStyle.copyWith(
   fontSize: 30.0,
+);
+
+final boldMainTitleTextStyle = mainTitleTextStyle.copyWith(
+  fontWeight: FontWeight.bold,
 );
