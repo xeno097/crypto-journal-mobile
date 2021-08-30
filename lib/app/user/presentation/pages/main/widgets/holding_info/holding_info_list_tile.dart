@@ -1,23 +1,28 @@
+import 'package:crypto_journal_mobile/app/holding/service/dtos/holding_dto.dart';
+import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/theme/container_decoration.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import "package:flutter/material.dart";
 
 class HoldingInfoListTile extends StatelessWidget {
+  final HoldingDto holdingDto;
+
   const HoldingInfoListTile({
     Key? key,
+    required this.holdingDto,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 369 / 51,
+      aspectRatio: defaultWidth / defaultHeight,
       child: LayoutBuilder(
         builder: (context, constratins) {
           final currHeight = constratins.maxHeight;
-          final padding = currHeight * (9.0 / 51.0);
+          final padding = currHeight * (defaultPadding / defaultHeight);
           final iconSize = currHeight - 2 * padding;
           // final currencyTextSize =
-          final c = currHeight * (12 / 51);
+          final c = currHeight * (secondaryTextStyleSize / defaultHeight);
 
           return Container(
             padding: EdgeInsets.symmetric(
@@ -34,9 +39,10 @@ class HoldingInfoListTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6.0),
                   child: Text(
-                    "BTC",
+                    this.holdingDto.symbol,
                     style: subTitleTextStyle.copyWith(
-                      fontSize: currHeight * (18 / 51),
+                      fontSize:
+                          currHeight * (subTitleTextStyleSize / defaultHeight),
                     ),
                   ),
                 ),
@@ -48,13 +54,14 @@ class HoldingInfoListTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "\$356.08914",
+                      "\$ ${this.holdingDto.value}",
                       style: defaultTextStyle.copyWith(
-                        fontSize: currHeight / (51 / 15),
+                        fontSize:
+                            currHeight * (primaryTextStyleSize / defaultHeight),
                       ),
                     ),
                     Text(
-                      "1.55670",
+                      "${this.holdingDto.holding}",
                       style: secondaryTextStyle.copyWith(
                         fontSize: c,
                       ),
