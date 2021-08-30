@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,11 @@ class PageHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 9.0),
+      padding: const EdgeInsets.symmetric(
+        vertical: defaultPadding,
+      ),
       child: AspectRatio(
-        aspectRatio: 369 / 51,
+        aspectRatio: defaultWidth / defaultHeight,
         child: Container(
           alignment: Alignment.centerLeft,
           child: Text(
