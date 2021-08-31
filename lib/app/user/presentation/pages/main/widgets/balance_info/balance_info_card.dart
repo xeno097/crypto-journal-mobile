@@ -1,8 +1,10 @@
-import 'package:crypto_journal_mobile/app/balance/service/dtos/balance_dto.dart';
+import 'package:crypto_journal_mobile/app/balance/presentation/providers/get_balance_provider.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/main/widgets/balance_info/balance_info.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/theme/container_decoration.dart';
+import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BalanceInfoCard extends StatelessWidget {
   const BalanceInfoCard({
@@ -16,13 +18,18 @@ class BalanceInfoCard extends StatelessWidget {
       child: Container(
         child: Padding(
           padding: const EdgeInsets.all(defaultPadding),
-          child: BalanceInfo(
-            balanceDto: BalanceDto(
-              balance: 4790.67,
-              id: "BTC",
-              cryptoCurrency: "BTC",
-              cryptoValue: 0.1257,
-            ),
+          child: Consumer(
+            builder: (BuildContext context, watch, child) {
+              final data = watch(getBalanceProvider);
+
+              return data.map(
+                data: (data) => BalanceInfo(
+                  balanceDto: data.value,
+                ),
+                loading: (_) => DefaultCircularProgressIndicator(),
+                error: (err) => Text("An error occured"),
+              );
+            },
           ),
         ),
         decoration: defaultContainerDecoration,
