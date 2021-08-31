@@ -20,16 +20,16 @@ class SectionHeader extends StatelessWidget {
   TextStyle _titleStyleBuilder(double containerHeigth) {
     switch (this.titleStyle) {
       case TitleStyle.Primary:
-        return boldPageTitleTextStyle.copyWith(
+        return boldDefaultTextStyle.copyWith(
           fontSize: (containerHeigth * pageTitleTextStyleSize / defaultHeight),
         );
       case TitleStyle.Secondary:
-        return pageTitleTextStyle.copyWith(
+        return defaultTextStyle.copyWith(
           fontSize: (containerHeigth * pageTitleTextStyleSize / defaultHeight),
         );
 
       default:
-        return pageTitleTextStyle.copyWith(
+        return defaultTextStyle.copyWith(
           fontSize: (containerHeigth * pageTitleTextStyleSize / defaultHeight),
         );
     }
