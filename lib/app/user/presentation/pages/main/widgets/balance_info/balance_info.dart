@@ -22,7 +22,7 @@ class BalanceInfo extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.symmetric(
-                vertical: defaultPadding,
+                vertical: defaultContainerPadding,
               ),
               alignment: Alignment.centerLeft,
               child: Text(
@@ -35,7 +35,7 @@ class BalanceInfo extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.symmetric(
-                vertical: defaultPadding,
+                vertical: defaultContainerPadding,
               ),
               child: Text(
                 "\$ ${this.balanceDto.balance.toStringAsFixed(

@@ -17,7 +17,7 @@ class BalanceInfoCard extends StatelessWidget {
       aspectRatio: defaultWidth / balanceCardHeight,
       child: Container(
         child: Padding(
-          padding: const EdgeInsets.all(defaultPadding),
+          padding: const EdgeInsets.all(defaultContainerPadding),
           child: Consumer(
             builder: (BuildContext context, watch, child) {
               final request = watch(getBalanceProvider);

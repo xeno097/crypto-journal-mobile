@@ -19,7 +19,8 @@ class HoldingInfoListTile extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constratins) {
           final currHeight = constratins.maxHeight;
-          final padding = currHeight * (defaultPadding / defaultHeight);
+          final padding =
+              currHeight * (defaultContainerPadding / defaultHeight);
           final iconSize = currHeight - 2 * padding;
 
           return Container(

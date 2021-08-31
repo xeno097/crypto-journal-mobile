@@ -14,7 +14,7 @@ class PageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: defaultPadding,
+        vertical: defaultContainerPadding,
       ),
       child: AspectRatio(
         aspectRatio: defaultWidth / defaultHeight,
