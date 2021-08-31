@@ -24,13 +24,14 @@ class HoldingInfoList extends StatelessWidget {
         PageHeader(
           title: "Holding",
         ),
-        HoldingInfoListTile(
-          holdingDto: holdingDto,
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(
-            vertical: 12.0,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: HoldingInfoListTile(
+            holdingDto: holdingDto,
           ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
           child: HoldingInfoListTile(
             holdingDto: holdingDto,
           ),

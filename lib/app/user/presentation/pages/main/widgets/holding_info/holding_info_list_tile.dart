@@ -21,8 +21,6 @@ class HoldingInfoListTile extends StatelessWidget {
           final currHeight = constratins.maxHeight;
           final padding = currHeight * (defaultPadding / defaultHeight);
           final iconSize = currHeight - 2 * padding;
-          // final currencyTextSize =
-          final c = currHeight * (secondaryTextStyleSize / defaultHeight);
 
           return Container(
             padding: EdgeInsets.symmetric(
@@ -63,7 +61,8 @@ class HoldingInfoListTile extends StatelessWidget {
                     Text(
                       "${this.holdingDto.holding}",
                       style: secondaryTextStyle.copyWith(
-                        fontSize: c,
+                        fontSize: currHeight *
+                            (secondaryTextStyleSize / defaultHeight),
                       ),
                     )
                   ],
