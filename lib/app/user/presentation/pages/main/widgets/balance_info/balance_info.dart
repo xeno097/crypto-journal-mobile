@@ -14,7 +14,10 @@ class BalanceInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (
+        BuildContext context,
+        BoxConstraints constraints,
+      ) {
         final currHeight = constraints.maxHeight;
 
         return Column(
