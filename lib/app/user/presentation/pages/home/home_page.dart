@@ -2,6 +2,7 @@ import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history
 import 'package:crypto_journal_mobile/app/user/presentation/pages/main/main_page.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/settings/settings_page.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
+import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 
@@ -31,11 +32,14 @@ class HomePage extends StatelessWidget {
               ),
               Container(
                 alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.only(bottom: 21.0),
+                padding: const EdgeInsets.only(
+                  bottom: defaultPagePadding,
+                ),
                 child: BaseButton(
                   backGroundColor: backGroundColorSecondary,
                   child: TabBar(
                     indicatorColor: Colors.transparent,
+                    unselectedLabelColor: textColorSecondary,
                     tabs: [
                       Icon(Icons.home),
                       Icon(Icons.sync),
