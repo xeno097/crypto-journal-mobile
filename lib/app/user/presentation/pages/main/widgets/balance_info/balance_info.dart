@@ -38,7 +38,9 @@ class BalanceInfo extends StatelessWidget {
                 vertical: defaultPadding,
               ),
               child: Text(
-                "\$ ${this.balanceDto.balance}",
+                "\$ ${this.balanceDto.balance.toStringAsFixed(
+                      decimalDigits,
+                    )}",
                 style: boldMainTitleTextStyle.copyWith(
                   fontSize:
                       currHeight * mainTitleTextStyleSize / balanceCardHeight,
@@ -46,7 +48,9 @@ class BalanceInfo extends StatelessWidget {
               ),
             ),
             Text(
-              "${this.balanceDto.cryptoValue} ${this.balanceDto.cryptoCurrency}",
+              "${this.balanceDto.cryptoValue.toStringAsFixed(
+                    decimalDigits,
+                  )} ${this.balanceDto.cryptoCurrency}",
               style: defaultTextStyleSecondary.copyWith(
                 fontSize:
                     currHeight * subTitleTextStyleSize / balanceCardHeight,

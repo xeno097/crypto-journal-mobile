@@ -20,14 +20,14 @@ class BalanceInfoCard extends StatelessWidget {
           padding: const EdgeInsets.all(defaultPadding),
           child: Consumer(
             builder: (BuildContext context, watch, child) {
-              final data = watch(getBalanceProvider);
+              final request = watch(getBalanceProvider);
 
-              return data.map(
-                data: (data) => BalanceInfo(
-                  balanceDto: data.value,
+              return request.when(
+                data: (balance) => BalanceInfo(
+                  balanceDto: balance,
                 ),
-                loading: (_) => DefaultCircularProgressIndicator(),
-                error: (err) => Text("An error occured"),
+                loading: () => DefaultCircularProgressIndicator(),
+                error: (err, _) => Text("An error occured"),
               );
             },
           ),

@@ -9,3 +9,5 @@ const double primaryTextStyleSize = 15.0;
 const double subTitleTextStyleSize = 18.0;
 const double pageTitleTextStyleSize = 21.0;
 const double mainTitleTextStyleSize = 30.0;
+
+const int decimalDigits = 5;

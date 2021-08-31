@@ -52,14 +52,18 @@ class HoldingInfoListTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "\$ ${this.holdingDto.value}",
+                      "\$ ${this.holdingDto.value.toStringAsFixed(
+                            decimalDigits,
+                          )}",
                       style: defaultTextStyle.copyWith(
                         fontSize:
                             currHeight * (primaryTextStyleSize / defaultHeight),
                       ),
                     ),
                     Text(
-                      "${this.holdingDto.holding}",
+                      "${this.holdingDto.holding.toStringAsFixed(
+                            decimalDigits,
+                          )}",
                       style: secondaryTextStyle.copyWith(
                         fontSize: currHeight *
                             (secondaryTextStyleSize / defaultHeight),
