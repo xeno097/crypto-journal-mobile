@@ -11,3 +11,12 @@ const Color backGroundColorPrimary = Color(0xFF2B2D42);
 const Color backGroundColorSecondary = Color(0xFF212232);
 const Color googleButtonBackGroundColor = Color(0xFFC75749);
 const Color facebookButtonBackGroundColor = Color(0xFF375299);
+
+const Gradient defaultBackgroundGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [
+    backGroundColorSecondary,
+    Color(0x3F6A7EAC),
+  ],
+);

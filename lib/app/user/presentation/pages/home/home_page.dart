@@ -18,18 +18,8 @@ class HomePage extends StatelessWidget {
         backgroundColor: backGroundColorPrimary,
         body: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                backGroundColorSecondary,
-                // Color(0x7F212232),
-                // Color(0x7F37C6BB),
-                Color(0x3F6A7EAC)
-              ],
-            ),
+            gradient: defaultBackgroundGradient,
           ),
-          // padding: EdgeInsets.all(12.0),
           child: Stack(
             children: [
               TabBarView(
