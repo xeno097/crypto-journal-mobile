@@ -10,6 +10,22 @@ import 'package:crypto_journal_mobile/shared/errors/network/network_connection_e
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final holdingRepositoryProvider = FutureProvider<HoldingRepository>((
+  ProviderReference ref,
+) async {
+  final networkInfo = ref.read(networkInfoProvider);
+  final holdingRemoteDataSource =
+      await ref.read(holdingRemoteDataSourceProvider.future);
+
+  final holdingRepository = HoldingRepository(
+    networkInfo: networkInfo,
+    holdingRemoteDataSource: holdingRemoteDataSource,
+  );
+
+  return holdingRepository;
+});
 
 class HoldingRepository implements IHoldingRepository {
   final INetworkInfo _networkInfo;

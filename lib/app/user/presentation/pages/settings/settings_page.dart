@@ -64,7 +64,7 @@ class SettingsPage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Log out",
-                      style: secondaryTextStyle,
+                      style: defaultSecondaryTextStyle,
                     ),
                   ),
                 ),
