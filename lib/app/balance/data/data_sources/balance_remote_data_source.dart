@@ -1,13 +1,28 @@
 import 'package:crypto_journal_mobile/app/balance/data/graphql/queries.dart';
 import 'package:crypto_journal_mobile/app/balance/data/inputs/get_balance_input.dart';
 import 'package:crypto_journal_mobile/app/balance/data/models/balance_model.dart';
+import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class IBalanceRemoteDataSource {
   Future<BalanceModel> getBalance({
     required GetBalanceInput getBalanceInput,
   });
 }
+
+final balanceRemoteDataSourceProvider =
+    FutureProvider<BalanceRemoteDataSource>((
+  ProviderReference ref,
+) async {
+  final graphqlAuthClient = await ref.read(graphqlAuthClientProvider.future);
+
+  final balanceRemoteDataSource = BalanceRemoteDataSource(
+    graphqlAuthClient: graphqlAuthClient,
+  );
+
+  return balanceRemoteDataSource;
+});
 
 class BalanceRemoteDataSource implements IBalanceRemoteDataSource {
   final IGraphqlClient _graphqlAuthClient;
