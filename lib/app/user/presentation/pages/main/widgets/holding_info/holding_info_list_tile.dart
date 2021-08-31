@@ -1,7 +1,7 @@
 import 'package:crypto_journal_mobile/app/holding/service/dtos/holding_dto.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
-import 'package:crypto_journal_mobile/shared/theme/container_decoration.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
+import 'package:crypto_journal_mobile/shared/widgets/containers/default_container.dart';
 import "package:flutter/material.dart";
 
 class HoldingInfoListTile extends StatelessWidget {
@@ -23,10 +23,8 @@ class HoldingInfoListTile extends StatelessWidget {
               currHeight * (defaultContainerPadding / defaultHeight);
           final iconSize = currHeight - 2 * padding;
 
-          return Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: padding,
-            ),
+          return DefaultContainer(
+            padding: padding,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -74,7 +72,6 @@ class HoldingInfoListTile extends StatelessWidget {
                 )
               ],
             ),
-            decoration: defaultContainerDecoration,
           );
         },
       ),
