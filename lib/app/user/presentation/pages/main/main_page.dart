@@ -19,7 +19,7 @@ class MainPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              PageHeader(
+              SectionHeader(
                 title: "Home",
               ),
               BalanceInfoCard(),

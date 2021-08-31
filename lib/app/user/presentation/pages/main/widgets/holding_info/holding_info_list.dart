@@ -30,8 +30,9 @@ class HoldingInfoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PageHeader(
+        SectionHeader(
           title: "Holding",
+          titleStyle: TitleStyle.Secondary,
         ),
         Consumer(
           builder: (BuildContext context, watch, child) {
