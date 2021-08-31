@@ -1,6 +1,6 @@
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/create_transaction_page.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
-import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
+import 'package:crypto_journal_mobile/shared/widgets/headers/section_header.dart';
 import "package:flutter/material.dart";
 
 class TransactionHistoryPageHeader extends StatelessWidget {
@@ -17,25 +17,15 @@ class TransactionHistoryPageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Transaction History",
-              style: pageTitleTextStyle,
-            ),
-          ),
+    return SectionHeader(
+      title: "Transaction History",
+      trailing: GestureDetector(
+        onTap: () => this._createTransaction(context),
+        child: Icon(
+          Icons.add_circle_outline_rounded,
+          color: textColorPrimary,
         ),
-        GestureDetector(
-          onTap: () => this._createTransaction(context),
-          child: Icon(
-            Icons.add_circle_outline_rounded,
-            color: textColorPrimary,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
