@@ -11,33 +11,63 @@ enum TitleStyle {
 class SectionHeader extends StatelessWidget {
   final String title;
   final Widget? leading;
+  final Widget Function(BuildContext context, double height)? leadingBuilder;
   final Widget? trailing;
+  final Widget Function(BuildContext context, double height)? trailingBuilder;
   final TitleStyle? titleStyle;
 
   const SectionHeader({
     Key? key,
     this.leading,
+    this.leadingBuilder,
     this.trailing,
+    this.trailingBuilder,
     required this.title,
     this.titleStyle = TitleStyle.Primary,
   }) : super(key: key);
 
-  TextStyle _titleStyleBuilder(double containerHeigth) {
+  TextStyle _titleStyleBuilder(double height) {
+    final fontSize = (height * pageTitleTextStyleSize / defaultHeight);
+
     switch (this.titleStyle) {
       case TitleStyle.Primary:
         return boldDefaultTextStyle.copyWith(
-          fontSize: (containerHeigth * pageTitleTextStyleSize / defaultHeight),
+          fontSize: fontSize,
         );
       case TitleStyle.Secondary:
         return defaultTextStyle.copyWith(
-          fontSize: (containerHeigth * pageTitleTextStyleSize / defaultHeight),
+          fontSize: fontSize,
         );
 
       default:
         return defaultTextStyle.copyWith(
-          fontSize: (containerHeigth * pageTitleTextStyleSize / defaultHeight),
+          fontSize: fontSize,
         );
     }
+  }
+
+  Widget _leadingBuilder(BuildContext context, double height) {
+    if (this.leadingBuilder != null) {
+      return this.leadingBuilder!(context, height);
+    }
+
+    if (this.leading != null) {
+      return this.leading!;
+    }
+
+    return Container();
+  }
+
+  Widget _trailingBuilder(BuildContext context, double height) {
+    if (this.trailingBuilder != null) {
+      return this.trailingBuilder!(context, height);
+    }
+
+    if (this.trailing != null) {
+      return this.trailing!;
+    }
+
+    return Container();
   }
 
   @override
@@ -49,21 +79,21 @@ class SectionHeader extends StatelessWidget {
       child: BaseLayoutContainer(
         builder: (
           BuildContext context,
-          double heigth,
+          double height,
         ) {
           return Row(
             children: [
-              this.leading ?? Container(),
+              this._leadingBuilder(context, height),
               Expanded(
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     this.title,
-                    style: this._titleStyleBuilder(heigth),
+                    style: this._titleStyleBuilder(height),
                   ),
                 ),
               ),
-              this.trailing ?? Container(),
+              this._trailingBuilder(context, height),
             ],
           );
         },

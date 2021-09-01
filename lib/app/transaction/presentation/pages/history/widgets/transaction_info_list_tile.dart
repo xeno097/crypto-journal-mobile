@@ -58,7 +58,7 @@ class TransactionInfoListTile extends StatelessWidget {
                       this.transactionDto.coinSymbol,
                       style: subTitleTextStyle.copyWith(
                         fontSize:
-                            height * (subTitleTextStyleSize / defaultHeight),
+                            height * (primaryTextStyleSize / defaultHeight),
                       ),
                     ),
                     Text(
