@@ -3,8 +3,8 @@ import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
 import "package:flutter/material.dart";
 
-class HistoryPage extends StatelessWidget {
-  const HistoryPage({Key? key}) : super(key: key);
+class TransactionHistoryPage extends StatelessWidget {
+  const TransactionHistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
