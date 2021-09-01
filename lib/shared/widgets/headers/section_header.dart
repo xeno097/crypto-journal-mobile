@@ -1,5 +1,6 @@
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
+import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import 'package:flutter/material.dart';
 
 enum TitleStyle {
@@ -45,32 +46,27 @@ class SectionHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         vertical: defaultContainerPadding,
       ),
-      child: AspectRatio(
-        aspectRatio: defaultWidth / defaultHeight,
-        child: LayoutBuilder(
-          builder: (
-            BuildContext context,
-            BoxConstraints constraints,
-          ) {
-            final currHeight = constraints.maxHeight;
-
-            return Row(
-              children: [
-                this.leading ?? Container(),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      this.title,
-                      style: this._titleStyleBuilder(currHeight),
-                    ),
+      child: BaseLayoutContainer(
+        builder: (
+          BuildContext context,
+          double heigth,
+        ) {
+          return Row(
+            children: [
+              this.leading ?? Container(),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    this.title,
+                    style: this._titleStyleBuilder(heigth),
                   ),
                 ),
-                this.trailing ?? Container(),
-              ],
-            );
-          },
-        ),
+              ),
+              this.trailing ?? Container(),
+            ],
+          );
+        },
       ),
     );
   }
