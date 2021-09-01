@@ -1,4 +1,3 @@
-import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart';
 import 'package:crypto_journal_mobile/app/operation/service/dtos/operation_dto.dart';
 import 'package:crypto_journal_mobile/app/operation/service/repositories/operation_repository.dart';
 import 'package:crypto_journal_mobile/app/operation/service/services/operation_service.dart';
