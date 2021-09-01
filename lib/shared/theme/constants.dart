@@ -1,4 +1,5 @@
 const double defaultContainerPadding = 9.0;
+const double defaultListElementPadding = 12.0;
 const double defaultPagePadding = 21.0;
 
 const double defaultHeight = 51.0;
