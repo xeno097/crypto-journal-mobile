@@ -33,9 +33,9 @@ class TransactionInfoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseLayoutContainer(
-      builder: (context, size) {
-        final padding = size * (defaultContainerPadding / defaultHeight);
-        final iconSize = size - 2 * padding;
+      builder: (context, height) {
+        final padding = height * (defaultContainerPadding / defaultHeight);
+        final iconSize = height - 2 * padding;
 
         return BaseTileWidget(
           padding: padding,
@@ -46,23 +46,30 @@ class TransactionInfoListTile extends StatelessWidget {
                 size: iconSize,
                 color: Colors.white,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    this.transactionDto.coinSymbol,
-                    style: subTitleTextStyle.copyWith(
-                      fontSize: size * (subTitleTextStyleSize / defaultHeight),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: defaultRowItemPadding,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      this.transactionDto.coinSymbol,
+                      style: subTitleTextStyle.copyWith(
+                        fontSize:
+                            height * (subTitleTextStyleSize / defaultHeight),
+                      ),
                     ),
-                  ),
-                  Text(
-                    this.transactionDto.operation.name,
-                    style: defaultTextStyle.copyWith(
-                      fontSize: size * (secondaryTextStyleSize / defaultHeight),
-                    ),
-                  )
-                ],
+                    Text(
+                      this.transactionDto.operation.name,
+                      style: defaultTextStyle.copyWith(
+                        fontSize:
+                            height * (secondaryTextStyleSize / defaultHeight),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
@@ -75,10 +82,10 @@ class TransactionInfoListTile extends StatelessWidget {
                       decimalDigits,
                     )}",
                 style: defaultTextStyle.copyWith(
-                  fontSize: size * (primaryTextStyleSize / defaultHeight),
+                  fontSize: height * (primaryTextStyleSize / defaultHeight),
                 ),
               ),
-              this._coinsNumberTextFormatter(size),
+              this._coinsNumberTextFormatter(height),
             ],
           ),
         );

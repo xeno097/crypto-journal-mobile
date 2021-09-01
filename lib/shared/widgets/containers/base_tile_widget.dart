@@ -1,8 +1,9 @@
+import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_container.dart';
 import "package:flutter/material.dart";
 
 class BaseTileWidget extends StatelessWidget {
-  final double? padding;
+  final double padding;
   final Widget? leading;
   final Widget? trailing;
 
@@ -10,7 +11,7 @@ class BaseTileWidget extends StatelessWidget {
     Key? key,
     this.leading,
     this.trailing,
-    required this.padding,
+    this.padding = defaultContainerPadding,
   }) : super(key: key);
 
   @override
