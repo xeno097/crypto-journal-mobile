@@ -6,6 +6,6 @@ final defaultContainerDecoration = BoxDecoration(
   boxShadow: defaultElementShadow,
   color: backGroundColorSecondary,
   borderRadius: BorderRadius.circular(
-    10.0,
+    9.0,
   ),
 );
