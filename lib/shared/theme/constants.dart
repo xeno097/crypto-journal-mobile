@@ -3,6 +3,7 @@ const double defaultContainerPadding = 9.0;
 const double defaultListElementPadding = 12.0;
 const double defaultPagePadding = 21.0;
 
+const double subTitleHeight = 27.0;
 const double defaultHeight = 51.0;
 const double defaultWidth = 369.0;
 const double balanceCardHeight = 150.0;
