@@ -27,13 +27,15 @@ class GroupedSection extends StatelessWidget {
             ),
             child: BaseLayoutContainer(
               heigthProp: subTitleHeight,
-              builder: (context, heigth) {
+              builder: (context, size) {
+                final height = size.height;
+
                 return Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     this.title,
                     style: defaultTextStyle.copyWith(
-                      fontSize: heigth * subTitleTextStyleSize / subTitleHeight,
+                      fontSize: height * subTitleTextStyleSize / subTitleHeight,
                     ),
                   ),
                 );

@@ -2,7 +2,7 @@ import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:flutter/material.dart';
 
 class BaseLayoutContainer extends StatelessWidget {
-  final Widget Function(BuildContext, double)? builder;
+  final Widget Function(BuildContext, Size)? builder;
   final Widget? child;
   final double heigthProp;
   final double widthProp;
@@ -15,7 +15,7 @@ class BaseLayoutContainer extends StatelessWidget {
     this.widthProp = defaultWidth,
   }) : super(key: key);
 
-  Widget _build(BuildContext context, double size) {
+  Widget _build(BuildContext context, Size size) {
     if (this.builder != null) {
       return this.builder!(context, size);
     }
@@ -33,9 +33,10 @@ class BaseLayoutContainer extends StatelessWidget {
       aspectRatio: this.widthProp / this.heigthProp,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final currHeight = constraints.maxHeight;
+          final height = constraints.maxHeight;
+          final width = constraints.maxWidth;
 
-          return this._build(context, currHeight);
+          return this._build(context, Size(width, height));
         },
       ),
     );

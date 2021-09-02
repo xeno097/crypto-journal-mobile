@@ -79,8 +79,10 @@ class SectionHeader extends StatelessWidget {
       child: BaseLayoutContainer(
         builder: (
           BuildContext context,
-          double height,
+          Size size,
         ) {
+          final height = size.height;
+
           return Row(
             children: [
               this._leadingBuilder(context, height),

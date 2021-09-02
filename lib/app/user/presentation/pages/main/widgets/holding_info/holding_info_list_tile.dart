@@ -16,7 +16,8 @@ class HoldingInfoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseLayoutContainer(
-      builder: (context, height) {
+      builder: (context, size) {
+        final height = size.height;
         final padding = height * (defaultContainerPadding / defaultHeight);
         final iconSize = height - 2 * padding;
 

@@ -16,7 +16,9 @@ class GroupSectionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseLayoutContainer(
-      builder: (context, height) {
+      builder: (context, size) {
+        final height = size.height;
+
         return Container(
           alignment: Alignment.centerLeft,
           child: GestureDetector(
