@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 class BaseLayoutContainer extends StatelessWidget {
   final Widget Function(BuildContext, double)? builder;
   final Widget? child;
+  final double heigthProp;
+  final double widthProp;
 
   const BaseLayoutContainer({
     Key? key,
     this.builder,
     this.child,
+    this.heigthProp = defaultHeight,
+    this.widthProp = defaultWidth,
   }) : super(key: key);
 
   Widget _build(BuildContext context, double size) {
@@ -26,7 +30,7 @@ class BaseLayoutContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: defaultWidth / defaultHeight,
+      aspectRatio: this.widthProp / this.heigthProp,
       child: LayoutBuilder(
         builder: (context, constraints) {
           final currHeight = constraints.maxHeight;
