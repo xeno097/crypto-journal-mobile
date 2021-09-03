@@ -7,6 +7,8 @@ const double subTitleHeight = 27.0;
 const double buttonHeight = 42.0;
 const double defaultHeight = 51.0;
 const double defaultWidth = 369.0;
+const double loginPageMainTitleSectionHeight = 100.0;
+const double loginPageSubTitleSectionHeight = 75.0;
 const double balanceCardHeight = 150.0;
 
 const double secondaryTextStyleSize = 12.0;
