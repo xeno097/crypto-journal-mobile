@@ -5,14 +5,14 @@ class CryptoCurrencyDto extends Equatable {
   final String name;
   final String symbol;
   final double price;
-  final String icon;
+  final String? icon;
 
   CryptoCurrencyDto({
     required this.id,
     required this.name,
     required this.symbol,
     required this.price,
-    required this.icon,
+    this.icon,
   });
 
   @override

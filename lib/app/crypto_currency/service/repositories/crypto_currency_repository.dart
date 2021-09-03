@@ -4,7 +4,7 @@ import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ICryptoCurrencyRepository {
-  Future<Either<BaseError, CryptoCurrencyDto>> searchCryptoCurrency({
+  Future<Either<BaseError, List<CryptoCurrencyDto>>> searchCryptoCurrency({
     required SearchCryptoCurrencyDto searchCryptoCurrencyDto,
   });
 }
