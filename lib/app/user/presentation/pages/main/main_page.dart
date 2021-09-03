@@ -2,7 +2,6 @@ import 'package:crypto_journal_mobile/app/user/presentation/pages/main/widgets/b
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/headers/section_header.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/main/widgets/holding_info/holding_info_list.dart';
-import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import "package:flutter/material.dart";
 
 class MainPage extends StatelessWidget {

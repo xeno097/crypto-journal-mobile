@@ -17,6 +17,8 @@ class DefaultTextButton extends StatelessWidget {
   final ButtonWidth width;
   final TextStyle? textStyle;
   final Color? color;
+  final bool hasDecoration;
+  final double fontSizeProp;
 
   const DefaultTextButton({
     Key? key,
@@ -24,6 +26,8 @@ class DefaultTextButton extends StatelessWidget {
     this.textStyle,
     this.color,
     this.width = ButtonWidth.Half,
+    this.hasDecoration = true,
+    this.fontSizeProp = primaryTextStyleSize,
     required this.text,
   }) : super(key: key);
 
@@ -31,18 +35,18 @@ class DefaultTextButton extends StatelessWidget {
     final style = this.textStyle ?? defaultTextStyle;
 
     return style.copyWith(
-      fontSize: height * primaryTextStyleSize / defaultHeight,
+      fontSize: height * this.fontSizeProp / defaultHeight,
     );
   }
 
-  BoxDecoration _boxDecorationBuilder() {
+  BoxDecoration? _boxDecorationBuilder() {
     final decoration = this.color == null
         ? defaultContainerDecoration
         : defaultContainerDecoration.copyWith(
             color: this.color,
           );
 
-    return decoration;
+    return this.hasDecoration ? decoration : null;
   }
 
   double _buttonWidthBuilder(double width) {
