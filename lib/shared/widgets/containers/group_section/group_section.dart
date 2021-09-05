@@ -1,9 +1,9 @@
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
-import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/group_section/group_section_tile.dart';
+import 'package:crypto_journal_mobile/shared/widgets/headers/sub_section_header.dart';
 import "package:flutter/material.dart";
 
 class GroupedSection extends StatelessWidget {
@@ -21,26 +21,8 @@ class GroupedSection extends StatelessWidget {
     return DefaultListElementPadding(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: defaultRowItemPadding,
-            ),
-            child: BaseLayoutContainer(
-              heigthProp: subTitleHeight,
-              builder: (context, size) {
-                final height = size.height;
-
-                return Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    this.title,
-                    style: defaultTextStyle.copyWith(
-                      fontSize: height * subTitleTextStyleSize / subTitleHeight,
-                    ),
-                  ),
-                );
-              },
-            ),
+          SubSectionHeader(
+            subTitle: this.title,
           ),
           BaseLayoutContainer(
             heigthProp: this.children.length * defaultHeight,
