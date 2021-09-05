@@ -10,6 +10,7 @@ enum TitleStyle {
 
 class SectionHeader extends StatelessWidget {
   final String title;
+  final Alignment titleAligment;
   final Widget? leading;
   final Widget Function(BuildContext context, double height)? leadingBuilder;
   final Widget? trailing;
@@ -23,6 +24,7 @@ class SectionHeader extends StatelessWidget {
     this.trailing,
     this.trailingBuilder,
     required this.title,
+    this.titleAligment = Alignment.centerLeft,
     this.titleStyle = TitleStyle.Primary,
   }) : super(key: key);
 
@@ -88,7 +90,7 @@ class SectionHeader extends StatelessWidget {
               this._leadingBuilder(context, height),
               Expanded(
                 child: Container(
-                  alignment: Alignment.centerLeft,
+                  alignment: this.titleAligment,
                   child: Text(
                     this.title,
                     style: this._titleStyleBuilder(height),
