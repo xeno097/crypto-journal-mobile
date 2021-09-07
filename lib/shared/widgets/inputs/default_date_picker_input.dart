@@ -41,7 +41,6 @@ class _DefaultDatePickerState extends State<DefaultDatePicker> {
   }
 
   Widget _dateTextBuilder(double height) {
-    print(this._selectedDate);
     if (this._selectedDate != null) {
       return Text(
         "${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}",
