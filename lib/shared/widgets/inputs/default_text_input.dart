@@ -28,7 +28,7 @@ class DefaultTextBoxInput extends StatelessWidget {
         return DefaultContainer(
           child: TextFormField(
             validator: this.validator,
-            keyboardType: TextInputType.number,
+            keyboardType: this.textInputType,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(0),
               border: InputBorder.none,
