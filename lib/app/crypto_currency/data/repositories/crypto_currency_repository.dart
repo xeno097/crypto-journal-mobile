@@ -9,6 +9,23 @@ import 'package:crypto_journal_mobile/shared/errors/network/network_connection_e
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final cryptoCurrencyRepositoryProvider =
+    FutureProvider<CryptoCurrencyRepository>((
+  ProviderReference ref,
+) async {
+  final networkInfo = ref.read(networkInfoProvider);
+  final cryptoCurrencyRemoteDataSource =
+      await ref.read(cryptoCurrencyRemoteDataSourceProvider.future);
+
+  final cryptoCurrencyRepository = CryptoCurrencyRepository(
+    networkInfo: networkInfo,
+    cryptoCurrencyRemoteDataSource: cryptoCurrencyRemoteDataSource,
+  );
+
+  return cryptoCurrencyRepository;
+});
 
 class CryptoCurrencyRepository implements ICryptoCurrencyRepository {
   final ICryptoCurrencyRemoteDataSource _cryptoCurrencyRemoteDataSource;
