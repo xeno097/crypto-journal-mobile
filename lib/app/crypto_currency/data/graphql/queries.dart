@@ -1,7 +1,7 @@
 const SEARCH_CRYPTO_CURRENCY_DATA_KEY = "searchCryptoCurrency";
 const SEARCH_CRYPTO_CURRENCY_QUERY = ''' 
-query searchCryptoCurrency{
-  searchCryptoCurrency(input:"Solana"){
+query searchCryptoCurrency(\$input: String!){
+  searchCryptoCurrency(input:\$input){
     __typename
     ... on CryptoCurrency{
       id
