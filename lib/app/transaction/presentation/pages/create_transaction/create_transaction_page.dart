@@ -1,16 +1,9 @@
 import 'package:crypto_journal_mobile/app/operation/presentation/providers/get_operations_provider.dart';
-import 'package:crypto_journal_mobile/app/operation/service/dtos/operation_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_form.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_page_header.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_price_info_header.dart';
-import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/search_crypto_currency/search_crypto_currency_pop_up.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
-import 'package:crypto_journal_mobile/shared/theme/constants.dart';
-import 'package:crypto_journal_mobile/shared/widgets/buttons/default_drop_down_button.dart';
-import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
-import 'package:crypto_journal_mobile/shared/widgets/headers/sub_section_header.dart';
-import 'package:crypto_journal_mobile/shared/widgets/inputs/default_date_picker_input.dart';
-import 'package:crypto_journal_mobile/shared/widgets/inputs/default_text_input.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -124,117 +117,6 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CreateTransactionForm extends StatelessWidget {
-  final void Function(DateTime) setDate;
-  final void Function(String value) setFees;
-  final void Function(String value) setCoinAmount;
-  final void Function(String value) setCoinPrice;
-  final void Function(String value) setOperation;
-  final void Function(String value) setCryptoCurrency;
-  final List<OperationDto> operationOptions;
-
-  const CreateTransactionForm({
-    Key? key,
-    required this.setDate,
-    required this.setFees,
-    required this.setCoinPrice,
-    required this.setCoinAmount,
-    required this.setOperation,
-    required this.operationOptions,
-    required this.setCryptoCurrency,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SubSectionHeader(
-          subTitle: "Base info",
-        ),
-        CreateTransactionSelectSection(
-          setOperation: this.setOperation,
-          setCryptoCurrency: this.setCryptoCurrency,
-          operationOptions: operationOptions,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: defaultListElementPadding,
-          ),
-          child: DefaultDatePicker(
-            onChanged: this.setDate,
-          ),
-        ),
-        SubSectionHeader(
-          subTitle: "Price Detail",
-        ),
-        DefaultTextBoxInput(
-          hintText: "Coin Amount",
-          textInputType: TextInputType.number,
-          onChanged: this.setCoinAmount,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: defaultListElementPadding,
-          ),
-          child: DefaultTextBoxInput(
-            hintText: "Coin Price",
-            textInputType: TextInputType.number,
-            onChanged: this.setCoinPrice,
-          ),
-        ),
-        DefaultTextBoxInput(
-          hintText: "Fees",
-          textInputType: TextInputType.number,
-          onChanged: this.setFees,
-        ),
-      ],
-    );
-  }
-}
-
-class CreateTransactionSelectSection extends StatelessWidget {
-  const CreateTransactionSelectSection({
-    Key? key,
-    required this.setOperation,
-    required this.operationOptions,
-    required this.setCryptoCurrency,
-  }) : super(key: key);
-
-  final void Function(String value) setOperation;
-  final void Function(String value) setCryptoCurrency;
-  final List<OperationDto> operationOptions;
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseLayoutContainer(
-      builder: (context, size) {
-        return Container(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: DefaultDropDownButton(
-                  onChanged: this.setOperation,
-                  options: this.operationOptions,
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: SearchCryptoCurrencyPopUp(
-                  hintText: "Crypto Currency",
-                  onChanged: this.setCryptoCurrency,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }
