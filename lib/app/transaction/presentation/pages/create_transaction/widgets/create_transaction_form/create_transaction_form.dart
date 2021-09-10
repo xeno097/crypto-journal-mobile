@@ -1,5 +1,5 @@
 import 'package:crypto_journal_mobile/app/operation/service/dtos/operation_dto.dart';
-import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_form_select_section.dart';
+import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_form/create_transaction_form_select_section.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/headers/sub_section_header.dart';
 import 'package:crypto_journal_mobile/shared/widgets/inputs/default_date_picker_input.dart';
