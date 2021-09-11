@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:crypto_journal_mobile/app/user/data/data_sources/user_remote_data_source.dart';
+import 'package:crypto_journal_mobile/app/user/data/graphql/mutations.dart';
+import 'package:crypto_journal_mobile/app/user/data/graphql/queries.dart';
 import 'package:crypto_journal_mobile/app/user/data/inputs/update_user_input.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/user/mutations.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/user/queries.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
