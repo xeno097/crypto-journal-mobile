@@ -1,5 +1,5 @@
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/login_page.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
-import 'package:crypto_journal_mobile/app/user/presentation/pages/login/login_page.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/providers/get_login_status_provider.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';

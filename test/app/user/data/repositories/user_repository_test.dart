@@ -24,7 +24,7 @@ void main() {
   late MockINetworkInfo networkInfoMock;
   late UserRepository userRepository;
 
-  final userJson = json.decode(fixtureReader("user_fixture.json"));
+  final userJson = json.decode(fixtureReader("user/user_fixture.json"));
   final userModel = UserModel.fromJson(userJson);
 
   setUp(() {

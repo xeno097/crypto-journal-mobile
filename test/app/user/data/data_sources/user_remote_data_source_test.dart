@@ -1,22 +1,22 @@
 import 'dart:convert';
 import 'package:crypto_journal_mobile/app/user/data/data_sources/user_remote_data_source.dart';
+import 'package:crypto_journal_mobile/app/user/data/graphql/mutations.dart';
+import 'package:crypto_journal_mobile/app/user/data/graphql/queries.dart';
 import 'package:crypto_journal_mobile/app/user/data/inputs/update_user_input.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/user/mutations.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/user/queries.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import '../../../../shared/fixtures/fixture_reader.dart';
-import 'auth_remote_data_source_test.mocks.dart';
+import 'user_remote_data_source_test.mocks.dart';
 
 @GenerateMocks([IGraphqlClient])
 void main() {
   late MockIGraphqlClient graphqlClient;
   late UserRemoteDataSource userRemoteDataSource;
 
-  final userJson = json.decode(fixtureReader("user_fixture.json"));
+  final userJson = json.decode(fixtureReader("user/user_fixture.json"));
   final userModel = UserModel.fromJson(userJson);
 
   final updateUserInput = UpdateUserInput();

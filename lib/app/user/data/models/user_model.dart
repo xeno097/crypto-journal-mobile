@@ -1,16 +1,11 @@
 import 'package:crypto_journal_mobile/app/user/service/dtos/user_dto.dart';
 
 class UserModel extends UserDto {
-  final String id;
-  final String userName;
-  final String profilePicture;
-  final String email;
-
   UserModel({
-    required this.id,
-    required this.userName,
-    required this.profilePicture,
-    required this.email,
+    required String id,
+    required String userName,
+    required String profilePicture,
+    required String email,
   }) : super(
           id: id,
           userName: userName,
