@@ -15,7 +15,7 @@ void main() {
   late MockIUserRepository userRepositoryMock;
   late UserService userService;
 
-  final userJson = json.decode(fixtureReader("user_fixture.json"));
+  final userJson = json.decode(fixtureReader("user/user_fixture.json"));
   final userDto = UserModel.fromJson(userJson);
 
   setUp(() {
