@@ -2,14 +2,10 @@ import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/auth_payload_dto.dart';
 
 class AuthPayloadModel extends AuthPayloadDto {
-  final String accessToken;
-  final String refreshToken;
-  final UserModel user;
-
   AuthPayloadModel({
-    required this.accessToken,
-    required this.refreshToken,
-    required this.user,
+    required String accessToken,
+    required String refreshToken,
+    required UserModel user,
   }) : super(
           accessToken: accessToken,
           refreshToken: refreshToken,
