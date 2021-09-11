@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
+import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
+import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart';
+import 'package:crypto_journal_mobile/app/auth/service/services/auth_service.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
-import 'package:crypto_journal_mobile/app/user/service/repositories/auth_repository.dart';
-import 'package:crypto_journal_mobile/app/user/service/services/auth_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,7 +10,9 @@ import 'package:mockito/mockito.dart';
 import '../../../../shared/fixtures/fixture_reader.dart';
 import 'auth_service_test.mocks.dart';
 
-@GenerateMocks([IAuthRepository])
+@GenerateMocks([
+  IAuthRepository,
+])
 void main() {
   late MockIAuthRepository authRepositoryMock;
   late AuthService authService;

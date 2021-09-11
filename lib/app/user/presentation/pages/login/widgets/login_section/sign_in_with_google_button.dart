@@ -1,5 +1,5 @@
 import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
-import 'package:crypto_journal_mobile/app/user/presentation/providers/sign_in_provider.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/providers/sign_in_provider.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/default_text_button.dart';
 

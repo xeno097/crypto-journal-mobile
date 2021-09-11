@@ -1,8 +1,9 @@
-import 'package:crypto_journal_mobile/app/user/data/data_sources/google_auth_data_source.dart';
-import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
+import 'package:crypto_journal_mobile/app/auth/data/data_sources/firebase_auth_remote_data_source.dart';
+import 'package:crypto_journal_mobile/app/auth/data/data_sources/google_auth_data_source.dart';
+import 'package:crypto_journal_mobile/app/auth/data/graphql/mutations.dart';
+import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/auth/mutations.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_public_client.dart';
@@ -11,7 +12,6 @@ import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dt
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'firebase_auth_remote_data_source.dart';
 
 abstract class IAuthRemoteDataSource {
   Future<AuthPayloadModel> signIn(SIGN_IN_PROVIDER provider);

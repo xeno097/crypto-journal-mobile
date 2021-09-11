@@ -1,4 +1,4 @@
-import 'package:crypto_journal_mobile/app/user/service/services/auth_service.dart';
+import 'package:crypto_journal_mobile/app/auth/service/services/auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final signOutProvider = FutureProvider<bool>((ProviderReference ref) async {

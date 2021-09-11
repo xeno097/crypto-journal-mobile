@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import '../../../../shared/fixtures/fixture_reader.dart';
-import 'auth_remote_data_source_test.mocks.dart';
+import 'user_remote_data_source_test.mocks.dart';
 
 @GenerateMocks([IGraphqlClient])
 void main() {

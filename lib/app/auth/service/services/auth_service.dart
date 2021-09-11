@@ -1,7 +1,7 @@
-import 'package:crypto_journal_mobile/app/user/data/repositories/auth_repository.dart';
+import 'package:crypto_journal_mobile/app/auth/data/repositories/auth_repository.dart';
+import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/auth_payload_dto.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
-import 'package:crypto_journal_mobile/app/user/service/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

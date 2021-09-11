@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:crypto_journal_mobile/app/user/data/data_sources/auth_remote_data_source.dart';
-import 'package:crypto_journal_mobile/app/user/data/models/auth_payload_model.dart';
-import 'package:crypto_journal_mobile/app/user/data/repositories/auth_repository.dart';
+import 'package:crypto_journal_mobile/app/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
+import 'package:crypto_journal_mobile/app/auth/data/repositories/auth_repository.dart';
+import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
-import 'package:crypto_journal_mobile/app/user/service/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
