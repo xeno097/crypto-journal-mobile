@@ -6,10 +6,10 @@ import 'dart:async' as _i4;
 
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/auth_remote_data_source.dart'
     as _i5;
+import 'package:crypto_journal_mobile/app/auth/data/inputs/sign_in_input.dart'
+    as _i6;
 import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart'
     as _i2;
-import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart'
-    as _i6;
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -47,8 +47,8 @@ class MockIAuthRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.AuthPayloadModel> signIn(_i6.SIGN_IN_PROVIDER? provider) =>
-      (super.noSuchMethod(Invocation.method(#signIn, [provider]),
+  _i4.Future<_i2.AuthPayloadModel> signIn(_i6.SignInInput? signInInput) =>
+      (super.noSuchMethod(Invocation.method(#signIn, [signInInput]),
               returnValue:
                   Future<_i2.AuthPayloadModel>.value(_FakeAuthPayloadModel()))
           as _i4.Future<_i2.AuthPayloadModel>);

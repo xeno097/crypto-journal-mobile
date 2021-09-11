@@ -1,5 +1,10 @@
 import 'package:equatable/equatable.dart';
 
+enum SIGN_IN_PROVIDER {
+  GOOGLE,
+  FACEBOOK,
+}
+
 class SignInDto extends Equatable {
   final SIGN_IN_PROVIDER provider;
 
@@ -11,8 +16,4 @@ class SignInDto extends Equatable {
   List<Object?> get props => [
         this.provider,
       ];
-}
-
-enum SIGN_IN_PROVIDER {
-  GOOGLE,
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:crypto_journal_mobile/app/auth/data/inputs/sign_in_input.dart';
 import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/auth/data/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart';
@@ -80,7 +81,9 @@ void main() {
       final res = await authRepository.signIn(signInDto);
 
       // assert
-      verify(authRemoteDataSourceMock.signIn(signInDto.provider));
+      verify(authRemoteDataSourceMock.signIn(SignInInput(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      )));
       expect(res, Right(authPayloadDto));
     });
 

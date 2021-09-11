@@ -4,12 +4,12 @@
 
 import 'dart:async' as _i4;
 
-import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart'
-    as _i3;
 import 'package:crypto_journal_mobile/app/auth/service/dtos/auth_payload_dto.dart'
     as _i6;
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart'
     as _i7;
+import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart'
+    as _i3;
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart' as _i5;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;

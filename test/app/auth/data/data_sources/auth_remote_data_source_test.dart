@@ -3,6 +3,7 @@ import 'package:crypto_journal_mobile/app/auth/data/data_sources/auth_remote_dat
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/firebase_auth_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/google_auth_data_source.dart';
 import 'package:crypto_journal_mobile/app/auth/data/graphql/mutations.dart';
+import 'package:crypto_journal_mobile/app/auth/data/inputs/sign_in_input.dart';
 import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
@@ -92,7 +93,9 @@ void main() {
       setSuccessMocks();
 
       // act
-      await authRemoteDataSource.signIn(SIGN_IN_PROVIDER.GOOGLE);
+      await authRemoteDataSource.signIn(SignInInput(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      ));
 
       // assert
       verify(googleAuthDataSourceMock.signIn());
@@ -105,7 +108,9 @@ void main() {
       setSuccessMocks();
 
       // act
-      await authRemoteDataSource.signIn(SIGN_IN_PROVIDER.GOOGLE);
+      await authRemoteDataSource.signIn(SignInInput(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      ));
 
       // assert
       verify(googleAuthDataSourceMock.signIn());
@@ -117,7 +122,9 @@ void main() {
       setSuccessMocks();
 
       // act
-      await authRemoteDataSource.signIn(SIGN_IN_PROVIDER.GOOGLE);
+      await authRemoteDataSource.signIn(SignInInput(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      ));
 
       // assert
       verify(googleAuthDataSourceMock.signIn());
@@ -136,7 +143,9 @@ void main() {
       setSuccessMocks();
 
       // act
-      await authRemoteDataSource.signIn(SIGN_IN_PROVIDER.GOOGLE);
+      await authRemoteDataSource.signIn(SignInInput(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      ));
 
       // assert
       verify(googleAuthDataSourceMock.signIn());
@@ -159,7 +168,9 @@ void main() {
       setSuccessMocks();
 
       // act
-      await authRemoteDataSource.signIn(SIGN_IN_PROVIDER.GOOGLE);
+      await authRemoteDataSource.signIn(SignInInput(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      ));
 
       // assert
       verify(googleAuthDataSourceMock.signIn());
@@ -184,7 +195,9 @@ void main() {
       setSuccessMocks();
 
       // act
-      final res = await authRemoteDataSource.signIn(SIGN_IN_PROVIDER.GOOGLE);
+      final res = await authRemoteDataSource.signIn(SignInInput(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      ));
 
       // assert
       verify(googleAuthDataSourceMock.signIn());

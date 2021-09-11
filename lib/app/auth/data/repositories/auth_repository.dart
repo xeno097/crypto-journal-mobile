@@ -1,4 +1,5 @@
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:crypto_journal_mobile/app/auth/data/inputs/sign_in_input.dart';
 import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/app/auth/service/dtos/auth_payload_dto.dart';
@@ -43,7 +44,9 @@ class AuthRepository implements IAuthRepository {
       }
 
       final AuthPayloadDto authPayloadDto =
-          await this._authRemoteDataSource.signIn(signInDto.provider);
+          await this._authRemoteDataSource.signIn(SignInInput(
+                provider: signInDto.provider,
+              ));
 
       return Right(authPayloadDto);
     } on NetworkConnectionException {

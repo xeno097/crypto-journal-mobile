@@ -1,6 +1,7 @@
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/firebase_auth_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/google_auth_data_source.dart';
 import 'package:crypto_journal_mobile/app/auth/data/graphql/mutations.dart';
+import 'package:crypto_journal_mobile/app/auth/data/inputs/sign_in_input.dart';
 import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
@@ -13,7 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class IAuthRemoteDataSource {
-  Future<AuthPayloadModel> signIn(SIGN_IN_PROVIDER provider);
+  Future<AuthPayloadModel> signIn(SignInInput signInInput);
   Future<bool> signOut();
 }
 
@@ -50,8 +51,8 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
         this._googleAuthDataSource = googleAuthDataSource;
 
   @override
-  Future<AuthPayloadModel> signIn(SIGN_IN_PROVIDER provider) async {
-    final userToken = await this._signInWithGoogle();
+  Future<AuthPayloadModel> signIn(SignInInput signInInput) async {
+    final userToken = await this._handleProviderSignIn(signInInput.provider);
 
     final res = await this._graphqlPublicClient.mutate(
       mutation: SIGN_IN_MUTATION,
@@ -81,6 +82,15 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
         await this._firebaseAuthRemoteDataSource.getUserToken(credential);
 
     return userToken;
+  }
+
+  Future<String> _handleProviderSignIn(SIGN_IN_PROVIDER provider) async {
+    switch (provider) {
+      case SIGN_IN_PROVIDER.GOOGLE:
+        return await this._signInWithGoogle();
+      default:
+        return await this._signInWithGoogle();
+    }
   }
 
   @override
