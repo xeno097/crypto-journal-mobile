@@ -87,6 +87,24 @@ void main() {
       );
     }
 
+    test(
+        'should call the setData method of the ILocalStorage class to set ACCESS_TOKEN_KEY',
+        () async {
+      // arrange
+      setSuccessMocks();
+
+      // act
+      await authRemoteDataSource.signIn(SignInInput(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      ));
+
+      // assert
+      verify(localStorageMock.setData(SetDataDto(
+        key: ACCESS_TOKEN_KEY,
+        value: SIGN_IN_PROVIDER.GOOGLE.toString(),
+      )));
+    });
+
     test('should call the signIn method of the IGoogleAuthDataSource class',
         () async {
       // arrange
@@ -223,6 +241,12 @@ void main() {
   group("AuthRemoteDataSource.signOut", () {
     setSuccessMock() {
       when(firebaseAuthMock.signOut()).thenAnswer((_) => Future.value());
+      when(localStorageMock.getData(any)).thenAnswer(
+        (_) => Future.value(SIGN_IN_PROVIDER.GOOGLE.toString()),
+      );
+      when(googleAuthDataSourceMock.signOut()).thenAnswer(
+        (_) => Future.value(true),
+      );
       when(localStorageMock.removeData(any))
           .thenAnswer((_) => Future.value(true));
     }

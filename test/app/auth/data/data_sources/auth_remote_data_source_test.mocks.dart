@@ -124,4 +124,8 @@ class MockIGoogleAuthDataSource extends _i1.Mock
           Invocation.method(#signIn, []),
           returnValue: Future<_i3.AuthCredential>.value(_FakeAuthCredential()))
       as _i5.Future<_i3.AuthCredential>);
+  @override
+  _i5.Future<bool> signOut() =>
+      (super.noSuchMethod(Invocation.method(#signOut, []),
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
 }
