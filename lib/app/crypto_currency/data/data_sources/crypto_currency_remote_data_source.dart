@@ -1,13 +1,28 @@
 import 'package:crypto_journal_mobile/app/crypto_currency/data/graphql/queries.dart';
 import 'package:crypto_journal_mobile/app/crypto_currency/data/inputs/search_crypto_currency_input.dart';
 import 'package:crypto_journal_mobile/app/crypto_currency/data/models/crypto_currency_model.dart';
+import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ICryptoCurrencyRemoteDataSource {
   Future<List<CryptoCurrencyModel>> searchCryptoCurrency({
     required SearchCryptoCurrencyInput searchCryptoCurrencyInput,
   });
 }
+
+final cryptoCurrencyRemoteDataSourceProvider =
+    FutureProvider<CryptoCurrencyRemoteDataSource>((
+  ProviderReference ref,
+) async {
+  final graphqlAuthClient = await ref.read(graphqlAuthClientProvider.future);
+
+  final cryptoCurrencyRemoteDataSource = CryptoCurrencyRemoteDataSource(
+    graphqlAuthClient: graphqlAuthClient,
+  );
+
+  return cryptoCurrencyRemoteDataSource;
+});
 
 class CryptoCurrencyRemoteDataSource
     implements ICryptoCurrencyRemoteDataSource {

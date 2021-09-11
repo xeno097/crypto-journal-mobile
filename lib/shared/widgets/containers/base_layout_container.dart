@@ -2,7 +2,7 @@ import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:flutter/material.dart';
 
 class BaseLayoutContainer extends StatelessWidget {
-  final Widget Function(BuildContext, Size)? builder;
+  final Widget Function(BuildContext context, Size size)? builder;
   final Widget? child;
   final double heigthProp;
   final double widthProp;
