@@ -27,7 +27,7 @@ void main() {
   );
 
   final authPayloadJson =
-      json.decode(fixtureReader("auth_payload_fixture.json"));
+      json.decode(fixtureReader("auth/auth_payload_fixture.json"));
   final AuthPayloadModel authPayloadDto =
       AuthPayloadModel.fromJson(authPayloadJson);
 

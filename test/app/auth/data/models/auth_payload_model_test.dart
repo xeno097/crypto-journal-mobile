@@ -29,7 +29,7 @@ void main() {
         () {
       // arrange
       final Map<String, dynamic> jsonMap =
-          json.decode(fixtureReader("auth_payload_fixture.json"));
+          json.decode(fixtureReader("auth/auth_payload_fixture.json"));
 
       // act
       final res = AuthPayloadModel.fromJson(jsonMap);
