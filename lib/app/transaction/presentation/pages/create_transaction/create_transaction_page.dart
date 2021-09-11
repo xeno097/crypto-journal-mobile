@@ -2,7 +2,12 @@ import 'package:crypto_journal_mobile/app/operation/presentation/providers/get_o
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_form/create_transaction_form.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/header/create_transaction_page_header.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_form/create_transaction_price_info_header.dart';
+import 'package:crypto_journal_mobile/app/transaction/presentation/providers/create_transaction_provider.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
+import 'package:crypto_journal_mobile/shared/theme/constants.dart';
+import 'package:crypto_journal_mobile/shared/widgets/buttons/default_text_button.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import "package:flutter/material.dart";
@@ -24,8 +29,8 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
   double _coinAmount = 0;
   double _coinPrice = 0;
   DateTime _date = DateTime.now();
-  String? _operation;
-  String? _cryptoCurrency;
+  String _operation = "";
+  String _cryptoCurrency = "";
 
   void _setOperation(String operation) {
     this._operation = operation;
@@ -73,6 +78,25 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
     }
   }
 
+  void _createTransaction() async {
+    CreateTransactionDto createTransactionDto = CreateTransactionDto(
+      coinSymbol: this._cryptoCurrency,
+      coins: this._coinAmount,
+      fee: this._fees,
+      coinPrice: this._coinPrice,
+      date: this._date.toIso8601String(),
+      operation: this._operation,
+    );
+
+    final res = await context
+        .read(createTransactionProvider(createTransactionDto).future);
+
+    if (res != null) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, HomePage.route, (route) => false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     print("TransactionPage");
@@ -106,6 +130,15 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                               setDate: this._setDate,
                               setCryptoCurrency: this._setCryptoCurrency,
                             ),
+                            SizedBox(
+                              height: defaultPagePadding,
+                            ),
+                            DefaultTextButton(
+                              text: "Done",
+                              width: ButtonWidth.Half,
+                              color: backGroundColorSecondary,
+                              onTap: this._createTransaction,
+                            )
                           ],
                         );
                       },

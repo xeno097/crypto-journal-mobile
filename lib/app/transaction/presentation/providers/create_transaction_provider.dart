@@ -24,14 +24,14 @@ bool _validateCreateTransactionDto(CreateTransactionDto createTransactionDto) {
 }
 
 final createTransactionProvider =
-    FutureProviderFamily<TransactionDto?, CreateTransactionDto>((
+    FutureProvider.autoDispose.family<TransactionDto?, CreateTransactionDto>((
   ProviderReference ref,
   CreateTransactionDto createTransactionDto,
 ) async {
   final check = _validateCreateTransactionDto(createTransactionDto);
 
   if (!check) {
-    throw Exception();
+    return null;
   }
 
   final transactionService = await ref.read(transactionServiceProvider.future);

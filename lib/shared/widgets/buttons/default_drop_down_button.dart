@@ -26,13 +26,19 @@ class DefaultDropDownButton extends StatefulWidget {
 
 class _DefaultDropDownButtonState extends State<DefaultDropDownButton> {
   String? _selectedValue;
+  void Function(String)? _onChanged;
 
   @override
   void initState() {
     super.initState();
 
+    this._onChanged = this.widget.onChanged;
+
     if (this.widget.options.length != 0) {
       this._selectedValue = this.widget.options[0].id;
+      if (this._onChanged != null) {
+        this._onChanged!(this._selectedValue!);
+      }
     }
   }
 
@@ -61,6 +67,9 @@ class _DefaultDropDownButtonState extends State<DefaultDropDownButton> {
     if (value != null) {
       setState(() {
         this._selectedValue = value;
+        if (this._onChanged != null) {
+          this._onChanged!(this._selectedValue!);
+        }
       });
     }
   }

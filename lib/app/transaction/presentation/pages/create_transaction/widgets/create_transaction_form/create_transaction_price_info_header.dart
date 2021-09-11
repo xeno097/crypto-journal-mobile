@@ -16,7 +16,7 @@ class CreateTransactionPriceInfoHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseLayoutContainer(
-      heigthProp: balanceCardHeight,
+      heigthProp: createTransactionInfoHeight,
       builder: (
         BuildContext context,
         Size size,

@@ -47,7 +47,7 @@ class _SearchCryptoCurrencyPopUpState extends State<SearchCryptoCurrencyPopUp> {
       this._selectedCryptoCurrency = cryptoCurrencyDto;
 
       if (this._onChanged != null) {
-        this._onChanged!(cryptoCurrencyDto.id);
+        this._onChanged!(cryptoCurrencyDto.symbol);
       }
 
       Navigator.pop(context);
