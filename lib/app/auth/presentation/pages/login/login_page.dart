@@ -1,5 +1,5 @@
-import 'package:crypto_journal_mobile/app/user/presentation/pages/login/widgets/login_section/login_section.dart';
-import 'package:crypto_journal_mobile/app/user/presentation/pages/login/widgets/welcome_section/welcome_section.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/widgets/login_section/login_section.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/widgets/welcome_section/welcome_section.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
 import 'package:flutter/material.dart';

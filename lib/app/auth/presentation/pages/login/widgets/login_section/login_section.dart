@@ -1,6 +1,6 @@
-import 'package:crypto_journal_mobile/app/user/presentation/pages/login/widgets/login_section/about_button.dart';
-import 'package:crypto_journal_mobile/app/user/presentation/pages/login/widgets/login_section/sign_in_with_facebook_button.dart';
-import 'package:crypto_journal_mobile/app/user/presentation/pages/login/widgets/login_section/sign_in_with_google_button.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/widgets/login_section/about_button.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/widgets/login_section/sign_in_with_facebook_button.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/widgets/login_section/sign_in_with_google_button.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import "package:flutter/material.dart";
 

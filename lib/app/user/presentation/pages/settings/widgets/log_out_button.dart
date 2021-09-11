@@ -1,4 +1,4 @@
-import 'package:crypto_journal_mobile/app/user/presentation/pages/login/login_page.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/login_page.dart';
 import 'package:crypto_journal_mobile/app/auth/presentation/providers/sign_out_provider.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/default_text_button.dart';
