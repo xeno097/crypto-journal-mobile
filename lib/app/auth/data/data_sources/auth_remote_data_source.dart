@@ -39,10 +39,10 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   final IGoogleAuthDataSource _googleAuthDataSource;
 
   AuthRemoteDataSource({
-    required localStorage,
-    required firebaseAuthRemoteDataSource,
-    required googleAuthDataSource,
-    required graphqlPublicClient,
+    required ILocalStorage localStorage,
+    required IFirebaseAuthRemoteDataSource firebaseAuthRemoteDataSource,
+    required IGoogleAuthDataSource googleAuthDataSource,
+    required IGraphqlClient graphqlPublicClient,
   })  : this._localStorage = localStorage,
         this._graphqlPublicClient = graphqlPublicClient,
         this._firebaseAuthRemoteDataSource = firebaseAuthRemoteDataSource,

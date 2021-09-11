@@ -23,25 +23,26 @@ final authRepositoryProvider =
 });
 
 class AuthRepository implements IAuthRepository {
-  final IAuthRemoteDataSource authRemoteDataSource;
-  final INetworkInfo networkInfo;
+  final IAuthRemoteDataSource _authRemoteDataSource;
+  final INetworkInfo _networkInfo;
 
   AuthRepository({
-    required this.authRemoteDataSource,
-    required this.networkInfo,
-  });
+    required IAuthRemoteDataSource authRemoteDataSource,
+    required INetworkInfo networkInfo,
+  })  : this._authRemoteDataSource = authRemoteDataSource,
+        this._networkInfo = networkInfo;
 
   @override
   Future<Either<BaseError, AuthPayloadDto>> signIn(SignInDto signInDto) async {
     try {
-      final bool connectionStatus = await this.networkInfo.isConnected;
+      final bool connectionStatus = await this._networkInfo.isConnected;
 
       if (!connectionStatus) {
         throw NetworkConnectionException();
       }
 
       final AuthPayloadDto authPayloadDto =
-          await this.authRemoteDataSource.signIn(signInDto.provider);
+          await this._authRemoteDataSource.signIn(signInDto.provider);
 
       return Right(authPayloadDto);
     } on NetworkConnectionException {
@@ -54,13 +55,13 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<BaseError, bool>> signOut() async {
     try {
-      final bool connectionStatus = await this.networkInfo.isConnected;
+      final bool connectionStatus = await this._networkInfo.isConnected;
 
       if (!connectionStatus) {
         throw NetworkConnectionException();
       }
 
-      final signOutRes = await this.authRemoteDataSource.signOut();
+      final signOutRes = await this._authRemoteDataSource.signOut();
 
       return Right(signOutRes);
     } on NetworkConnectionException {
