@@ -8,7 +8,7 @@ import 'package:crypto_journal_mobile/app/auth/data/data_sources/auth_remote_dat
     as _i5;
 import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart'
     as _i2;
-import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart'
+import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart'
     as _i6;
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart'
     as _i3;

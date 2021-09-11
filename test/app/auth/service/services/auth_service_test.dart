@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/app/auth/service/services/auth_service.dart';
-import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
+import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

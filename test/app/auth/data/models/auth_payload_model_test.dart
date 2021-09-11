@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/user/data/models/user_model.dart';
-import 'package:crypto_journal_mobile/app/user/service/dtos/auth_payload_dto.dart';
+import 'package:crypto_journal_mobile/app/auth/service/dtos/auth_payload_dto.dart';
 import "package:flutter_test/flutter_test.dart";
 import '../../../../shared/fixtures/fixture_reader.dart';
 
