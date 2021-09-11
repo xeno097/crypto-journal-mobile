@@ -25,7 +25,6 @@ import 'auth_remote_data_source_test.mocks.dart';
 ])
 void main() {
   late MockILocalStorage localStorageMock;
-  late MockIGraphqlClient graphqlAuthClientMock;
   late MockIGraphqlClient graphqlPublicClientMock;
   late MockIFirebaseAuthRemoteDataSource firebaseAuthMock;
   late MockIGoogleAuthDataSource googleAuthDataSourceMock;
@@ -53,7 +52,6 @@ void main() {
 
   setUp(() {
     localStorageMock = MockILocalStorage();
-    graphqlAuthClientMock = MockIGraphqlClient();
     graphqlPublicClientMock = MockIGraphqlClient();
     firebaseAuthMock = MockIFirebaseAuthRemoteDataSource();
     googleAuthDataSourceMock = MockIGoogleAuthDataSource();
@@ -61,7 +59,6 @@ void main() {
       localStorage: localStorageMock,
       firebaseAuthRemoteDataSource: firebaseAuthMock,
       googleAuthDataSource: googleAuthDataSourceMock,
-      graphqlAuthClient: graphqlAuthClientMock,
       graphqlPublicClient: graphqlPublicClientMock,
     );
   });

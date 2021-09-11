@@ -4,7 +4,6 @@ import 'package:crypto_journal_mobile/app/auth/data/graphql/mutations.dart';
 import 'package:crypto_journal_mobile/app/auth/data/models/auth_payload_model.dart';
 import 'package:crypto_journal_mobile/app/user/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_public_client.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
@@ -22,13 +21,11 @@ final authRemoteDataSourceProvider =
     FutureProvider<AuthRemoteDataSource>((ProviderReference ref) async {
   final localStorage = await ref.read(localStorageProvider.future);
   final graphqlPublicClient = ref.read(graphqlPublicClientProvider);
-  final graphqlAuthClient = await ref.read(graphqlAuthClientProvider.future);
 
   final authRemoteDataSource = AuthRemoteDataSource(
     localStorage: localStorage,
     firebaseAuthRemoteDataSource: FirebaseAuthRemoteDataSource(),
     googleAuthDataSource: GoogleAuthDataSource(),
-    graphqlAuthClient: graphqlAuthClient,
     graphqlPublicClient: graphqlPublicClient,
   );
 
@@ -36,25 +33,26 @@ final authRemoteDataSourceProvider =
 });
 
 class AuthRemoteDataSource implements IAuthRemoteDataSource {
-  final ILocalStorage localStorage;
-  final IGraphqlClient graphqlAuthClient;
-  final IGraphqlClient graphqlPublicClient;
-  final IFirebaseAuthRemoteDataSource firebaseAuthRemoteDataSource;
-  final IGoogleAuthDataSource googleAuthDataSource;
+  final ILocalStorage _localStorage;
+  final IGraphqlClient _graphqlPublicClient;
+  final IFirebaseAuthRemoteDataSource _firebaseAuthRemoteDataSource;
+  final IGoogleAuthDataSource _googleAuthDataSource;
 
   AuthRemoteDataSource({
-    required this.localStorage,
-    required this.firebaseAuthRemoteDataSource,
-    required this.googleAuthDataSource,
-    required this.graphqlAuthClient,
-    required this.graphqlPublicClient,
-  });
+    required localStorage,
+    required firebaseAuthRemoteDataSource,
+    required googleAuthDataSource,
+    required graphqlPublicClient,
+  })  : this._localStorage = localStorage,
+        this._graphqlPublicClient = graphqlPublicClient,
+        this._firebaseAuthRemoteDataSource = firebaseAuthRemoteDataSource,
+        this._googleAuthDataSource = googleAuthDataSource;
 
   @override
   Future<AuthPayloadModel> signIn(SIGN_IN_PROVIDER provider) async {
     final userToken = await this._signInWithGoogle();
 
-    final res = await this.graphqlPublicClient.mutate(
+    final res = await this._graphqlPublicClient.mutate(
       mutation: SIGN_IN_MUTATION,
       dataKey: SIGN_IN_MUTATION_DATA_KEY,
       variables: {"input": userToken},
@@ -62,12 +60,12 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
 
     final authPayload = AuthPayloadModel.fromJson(res);
 
-    await this.localStorage.setData(SetDataDto(
+    await this._localStorage.setData(SetDataDto(
           key: ACCESS_TOKEN_KEY,
           value: authPayload.accessToken,
         ));
 
-    await this.localStorage.setData(SetDataDto(
+    await this._localStorage.setData(SetDataDto(
           key: REFRESH_TOKEN_KEY,
           value: authPayload.refreshToken,
         ));
@@ -76,21 +74,21 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   }
 
   Future<String> _signInWithGoogle() async {
-    final AuthCredential credential = await this.googleAuthDataSource.signIn();
+    final AuthCredential credential = await this._googleAuthDataSource.signIn();
 
     final userToken =
-        await this.firebaseAuthRemoteDataSource.getUserToken(credential);
+        await this._firebaseAuthRemoteDataSource.getUserToken(credential);
 
     return userToken;
   }
 
   @override
   Future<bool> signOut() async {
-    await this.firebaseAuthRemoteDataSource.signOut();
-    final deletedAccessToken = await this.localStorage.removeData(
+    await this._firebaseAuthRemoteDataSource.signOut();
+    final deletedAccessToken = await this._localStorage.removeData(
           GetDataDto(key: ACCESS_TOKEN_KEY),
         );
-    final deletedRefreshToken = await this.localStorage.removeData(
+    final deletedRefreshToken = await this._localStorage.removeData(
           GetDataDto(key: REFRESH_TOKEN_KEY),
         );
 
