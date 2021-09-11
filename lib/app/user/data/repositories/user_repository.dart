@@ -11,37 +11,41 @@ import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final userRepositoryProvider =
-    FutureProvider<UserRepository>((ProviderReference ref) async {
+final userRepositoryProvider = FutureProvider<UserRepository>((
+  ProviderReference ref,
+) async {
   final userRemoteDataSource =
       await ref.read(userRemoteDataSourceProvider.future);
   final networkInfo = ref.read(networkInfoProvider);
 
   final userRepository = UserRepository(
-      userRemoteDataSource: userRemoteDataSource, networkInfo: networkInfo);
+    userRemoteDataSource: userRemoteDataSource,
+    networkInfo: networkInfo,
+  );
 
   return userRepository;
 });
 
 class UserRepository implements IUserRepository {
-  final IUserRemoteDataSource userRemoteDataSource;
-  final INetworkInfo networkInfo;
+  final IUserRemoteDataSource _userRemoteDataSource;
+  final INetworkInfo _networkInfo;
 
   UserRepository({
-    required this.userRemoteDataSource,
-    required this.networkInfo,
-  });
+    required IUserRemoteDataSource userRemoteDataSource,
+    required INetworkInfo networkInfo,
+  })  : this._networkInfo = networkInfo,
+        this._userRemoteDataSource = userRemoteDataSource;
 
   @override
   Future<Either<BaseError, UserDto>> getUser() async {
     try {
-      final bool isConnected = await this.networkInfo.isConnected;
+      final bool isConnected = await this._networkInfo.isConnected;
 
       if (!isConnected) {
         throw NetworkConnectionException();
       }
 
-      final res = await this.userRemoteDataSource.getUser();
+      final res = await this._userRemoteDataSource.getUser();
 
       return Right(res);
     } on NetworkConnectionException {
@@ -55,13 +59,13 @@ class UserRepository implements IUserRepository {
   Future<Either<BaseError, UserDto>> updateUser(
       UpdateUserDto updateUserDto) async {
     try {
-      final bool isConnected = await this.networkInfo.isConnected;
+      final bool isConnected = await this._networkInfo.isConnected;
 
       if (!isConnected) {
         throw NetworkConnectionException();
       }
 
-      final res = await this.userRemoteDataSource.updateUser(UpdateUserInput(
+      final res = await this._userRemoteDataSource.updateUser(UpdateUserInput(
             profilePicture: updateUserDto.profilePicture,
             userName: updateUserDto.userName,
           ));

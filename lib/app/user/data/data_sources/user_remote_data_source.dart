@@ -22,15 +22,15 @@ final userRemoteDataSourceProvider =
 });
 
 class UserRemoteDataSource implements IUserRemoteDataSource {
-  final IGraphqlClient graphqlAuthClient;
+  final IGraphqlClient _graphqlAuthClient;
 
   UserRemoteDataSource({
-    required this.graphqlAuthClient,
-  });
+    required IGraphqlClient graphqlAuthClient,
+  }) : this._graphqlAuthClient = graphqlAuthClient;
 
   @override
   Future<UserModel> getUser() async {
-    final res = await this.graphqlAuthClient.query(
+    final res = await this._graphqlAuthClient.query(
           query: GET_LOGGED_USER_QUERY,
           dataKey: GET_LOGGED_USER_QUERY_DATA_KEY,
         );
@@ -40,7 +40,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
 
   @override
   Future<UserModel> updateUser(UpdateUserInput updateUserInput) async {
-    final res = await this.graphqlAuthClient.mutate(
+    final res = await this._graphqlAuthClient.mutate(
         mutation: UPDATE_LOGGED_USER_MUTATION,
         dataKey: UPDATE_LOGGED_USER_MUTATION_DATA_KEY,
         variables: {"input": updateUserInput.toJson()});
