@@ -4,6 +4,8 @@ import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_reposit
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/app/auth/service/dtos/auth_payload_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
+import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exist_with_another_provider_execption.dart';
+import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exists_with_another_provider_error.dart';
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_exception.dart';
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
@@ -51,6 +53,8 @@ class AuthRepository implements IAuthRepository {
       return Right(authPayloadDto);
     } on NetworkConnectionException {
       return Left(NetworkConnectionError());
+    } on UserAlreadyExistsWithAnotherSignInProviderException {
+      return Left(UserAlreadyExistsWithAnotherSignInProviderError());
     } catch (e) {
       return Left(UnexpectedError());
     }

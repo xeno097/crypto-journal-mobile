@@ -1,4 +1,5 @@
 import 'package:crypto_journal_mobile/shared/errors/api_error/api_exception.dart';
+import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exist_with_another_provider_execption.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class IFirebaseAuthRemoteDataSource {
@@ -10,18 +11,26 @@ abstract class IFirebaseAuthRemoteDataSource {
 class FirebaseAuthRemoteDataSource implements IFirebaseAuthRemoteDataSource {
   @override
   Future<String> getUserToken(AuthCredential credential) async {
-    // TODO: handle user already exists error
-    await FirebaseAuth.instance.signInWithCredential(credential);
+    try {
+      await FirebaseAuth.instance.signInWithCredential(credential);
 
-    final User? user = FirebaseAuth.instance.currentUser;
+      final User? user = FirebaseAuth.instance.currentUser;
 
-    if (user == null) {
-      throw UnauthorizedUserException();
+      if (user == null) {
+        throw UnauthorizedUserException();
+      }
+
+      final userToken = await user.getIdToken();
+
+      return userToken;
+    } catch (e) {
+      if (e is FirebaseAuthException &&
+          e.code == "account-exists-with-different-credential") {
+        throw UserAlreadyExistsWithAnotherSignInProviderException();
+      }
+
+      throw Exception();
     }
-
-    final userToken = await user.getIdToken();
-
-    return userToken;
   }
 
   @override

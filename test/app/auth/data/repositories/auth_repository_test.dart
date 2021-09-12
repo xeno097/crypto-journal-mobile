@@ -6,6 +6,8 @@ import 'package:crypto_journal_mobile/app/auth/data/repositories/auth_repository
 import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_repository.dart';
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
+import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exist_with_another_provider_execption.dart';
+import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exists_with_another_provider_error.dart';
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:dartz/dartz.dart';
@@ -122,6 +124,22 @@ void main() {
 
       // assert
       expect(res, equals(Left(UnexpectedError())));
+    });
+
+    test(
+        'should return a UserAlreadyExistsWithAnotherSignInProviderError if the user already has an account with another sign in provider',
+        () async {
+      // arrange
+      when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
+      when(authRemoteDataSourceMock.signIn(any))
+          .thenThrow(UserAlreadyExistsWithAnotherSignInProviderException());
+
+      // act
+      final res = await authRepository.signIn(signInDto);
+
+      // assert
+      expect(
+          res, equals(Left(UserAlreadyExistsWithAnotherSignInProviderError())));
     });
   });
 

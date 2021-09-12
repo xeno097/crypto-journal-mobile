@@ -2,6 +2,7 @@ import 'package:crypto_journal_mobile/app/auth/service/services/auth_service.dar
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/shared/errors/api_error/api_error.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
+import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exists_with_another_provider_error.dart';
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
 import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +12,8 @@ enum SignInResult {
   UnauthorizedUserError,
   BlockedUserError,
   UnexpectedError,
-  NetworkConnectionError
+  NetworkConnectionError,
+  UserAlreadyExistsError,
 }
 
 SignInResult _mapErrorsToSignInResult(BaseError error) {
@@ -27,6 +29,10 @@ SignInResult _mapErrorsToSignInResult(BaseError error) {
     return SignInResult.NetworkConnectionError;
   }
 
+  if (error is UserAlreadyExistsWithAnotherSignInProviderError) {
+    return SignInResult.UserAlreadyExistsError;
+  }
+
   return SignInResult.UnexpectedError;
 }
 
@@ -38,8 +44,9 @@ String mapSignInResultToErrorMessage(SignInResult signInResult) {
       return NETWORK_CONNECTION_ERROR;
     case SignInResult.UnauthorizedUserError:
       return UNAUTHORIZED_USER_ERROR_MESSAGE;
+    case SignInResult.UserAlreadyExistsError:
+      return USER_ALREADY_EXISTS_WITH_ANOTHER_PROVIDER_ERROR_MESSAGE;
     case SignInResult.UnexpectedError:
-      return UNEXPECTED_ERROR_MESSAGE;
     default:
       return UNEXPECTED_ERROR_MESSAGE;
   }

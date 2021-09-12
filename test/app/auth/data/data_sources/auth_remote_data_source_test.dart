@@ -12,6 +12,7 @@ import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/get_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/dtos/set_data_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/local_storage/local_storage.dart';
+import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exist_with_another_provider_execption.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -90,6 +91,16 @@ void main() {
               mutation: anyNamed('mutation'),
               variables: anyNamed('variables')))
           .thenAnswer((_) => Future.value(authPayloadJson));
+      when(localStorageMock.setData(any)).thenAnswer(
+        (_) => Future.value(true),
+      );
+    }
+
+    setFailureMockBecauseOfAlreadyExistingUser() {
+      when(googleAuthDataSourceMock.signIn())
+          .thenAnswer((_) => Future.value(credential));
+      when(firebaseAuthMock.getUserToken(any))
+          .thenThrow(UserAlreadyExistsWithAnotherSignInProviderException());
       when(localStorageMock.setData(any)).thenAnswer(
         (_) => Future.value(true),
       );
@@ -254,6 +265,30 @@ void main() {
 
       expect(res, equals(authPayloadModel));
     });
+
+    test(
+        'should throw a UserAlreadyExistsWithAnotherSignInProviderException if the user already has an account with another sign in provider',
+        () async {
+      // arrange
+      setFailureMockBecauseOfAlreadyExistingUser();
+
+      // act & assert
+      expect(
+        () async => await authRemoteDataSource.signIn(signInWithGoogleDto),
+        throwsA(isInstanceOf<
+            UserAlreadyExistsWithAnotherSignInProviderException>()),
+      );
+
+      await untilCalled(firebaseAuthMock.getUserToken(any));
+
+      verify(localStorageMock.setData(SetDataDto(
+        key: SIGN_IN_PROVIDER_KEY,
+        value: signInWithGoogleProvider,
+      )));
+      verify(googleAuthDataSourceMock.signIn());
+      verify(firebaseAuthMock.getUserToken(credential));
+      verifyZeroInteractions(graphqlPublicClientMock);
+    });
   });
 
   group("AuthRemoteDataSource.signIn with Facebook", () {
@@ -272,6 +307,16 @@ void main() {
               mutation: anyNamed('mutation'),
               variables: anyNamed('variables')))
           .thenAnswer((_) => Future.value(authPayloadJson));
+      when(localStorageMock.setData(any)).thenAnswer(
+        (_) => Future.value(true),
+      );
+    }
+
+    setFailureMockBecauseOfAlreadyExistingUser() {
+      when(facebookAuthDataSource.signIn())
+          .thenAnswer((_) => Future.value(credential));
+      when(firebaseAuthMock.getUserToken(any))
+          .thenThrow(UserAlreadyExistsWithAnotherSignInProviderException());
       when(localStorageMock.setData(any)).thenAnswer(
         (_) => Future.value(true),
       );
@@ -435,6 +480,30 @@ void main() {
       )));
 
       expect(res, equals(authPayloadModel));
+    });
+
+    test(
+        'should throw a UserAlreadyExistsWithAnotherSignInProviderException if the user already has an account with another sign in provider',
+        () async {
+      // arrange
+      setFailureMockBecauseOfAlreadyExistingUser();
+
+      // act & assert
+      expect(
+        () async => await authRemoteDataSource.signIn(signInDtoWithFacebook),
+        throwsA(isInstanceOf<
+            UserAlreadyExistsWithAnotherSignInProviderException>()),
+      );
+
+      await untilCalled(firebaseAuthMock.getUserToken(any));
+
+      verify(localStorageMock.setData(SetDataDto(
+        key: SIGN_IN_PROVIDER_KEY,
+        value: signInWithFacebookProvider,
+      )));
+      verify(facebookAuthDataSource.signIn());
+      verify(firebaseAuthMock.getUserToken(credential));
+      verifyZeroInteractions(graphqlPublicClientMock);
     });
   });
 
