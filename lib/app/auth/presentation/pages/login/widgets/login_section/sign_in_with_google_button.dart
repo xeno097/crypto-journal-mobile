@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
 import 'package:crypto_journal_mobile/app/auth/presentation/providers/sign_in_provider.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
@@ -10,7 +11,11 @@ class SignInWithGoogleButton extends StatelessWidget {
   const SignInWithGoogleButton({Key? key}) : super(key: key);
 
   void _signIn(BuildContext context) async {
-    final res = await context.read(signInProvider.future);
+    final res = await context.read(signInProvider(
+      SignInDto(
+        provider: SIGN_IN_PROVIDER.GOOGLE,
+      ),
+    ).future);
 
     if (res != null) {
       Navigator.pushNamedAndRemoveUntil(
