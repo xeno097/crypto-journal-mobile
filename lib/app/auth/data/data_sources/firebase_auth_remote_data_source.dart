@@ -10,6 +10,7 @@ abstract class IFirebaseAuthRemoteDataSource {
 class FirebaseAuthRemoteDataSource implements IFirebaseAuthRemoteDataSource {
   @override
   Future<String> getUserToken(AuthCredential credential) async {
+    // TODO: handle user already exists error
     await FirebaseAuth.instance.signInWithCredential(credential);
 
     final User? user = FirebaseAuth.instance.currentUser;
