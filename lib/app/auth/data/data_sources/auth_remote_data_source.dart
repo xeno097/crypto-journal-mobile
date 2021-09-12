@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/app/auth/data/data_sources/facebook_auth_data_source.dart';
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/firebase_auth_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/google_auth_data_source.dart';
 import 'package:crypto_journal_mobile/app/auth/data/graphql/mutations.dart';
@@ -29,6 +30,7 @@ final authRemoteDataSourceProvider = FutureProvider<AuthRemoteDataSource>((
     firebaseAuthRemoteDataSource: FirebaseAuthRemoteDataSource(),
     googleAuthDataSource: GoogleAuthDataSource(),
     graphqlPublicClient: graphqlPublicClient,
+    facebookAuthDataSource: FacebookAuthDataSource(),
   );
 
   return authRemoteDataSource;
@@ -39,16 +41,19 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   final IGraphqlClient _graphqlPublicClient;
   final IFirebaseAuthRemoteDataSource _firebaseAuthRemoteDataSource;
   final IGoogleAuthDataSource _googleAuthDataSource;
+  final IFacebookAuthDataSource _facebookAuthDataSource;
 
   AuthRemoteDataSource({
     required ILocalStorage localStorage,
     required IFirebaseAuthRemoteDataSource firebaseAuthRemoteDataSource,
     required IGoogleAuthDataSource googleAuthDataSource,
     required IGraphqlClient graphqlPublicClient,
+    required IFacebookAuthDataSource facebookAuthDataSource,
   })  : this._localStorage = localStorage,
         this._graphqlPublicClient = graphqlPublicClient,
         this._firebaseAuthRemoteDataSource = firebaseAuthRemoteDataSource,
-        this._googleAuthDataSource = googleAuthDataSource;
+        this._googleAuthDataSource = googleAuthDataSource,
+        this._facebookAuthDataSource = facebookAuthDataSource;
 
   @override
   Future<AuthPayloadModel> signIn(SignInInput signInInput) async {
@@ -84,18 +89,41 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
     return userToken;
   }
 
+  Future<String> _signInWithFacebook() async {
+    final AuthCredential credential =
+        await this._facebookAuthDataSource.signIn();
+
+    final userToken =
+        await this._firebaseAuthRemoteDataSource.getUserToken(credential);
+
+    return userToken;
+  }
+
   Future<String> _handleProviderSignIn(SIGN_IN_PROVIDER provider) async {
+    final hasSetSignInProvider = await this._localStorage.setData(SetDataDto(
+          key: SIGN_IN_PROVIDER_KEY,
+          value: provider.toString(),
+        ));
+
+    if (!hasSetSignInProvider) {
+      throw Exception();
+    }
+
     switch (provider) {
       case SIGN_IN_PROVIDER.GOOGLE:
         return await this._signInWithGoogle();
+      case SIGN_IN_PROVIDER.FACEBOOK:
+        return await this._signInWithFacebook();
       default:
-        return await this._signInWithGoogle();
+        throw Exception();
     }
   }
 
   @override
   Future<bool> signOut() async {
     await this._firebaseAuthRemoteDataSource.signOut();
+
+    await this._handleProviderSignOut();
 
     final deletedAccessToken = await this._localStorage.removeData(
           GetDataDto(key: ACCESS_TOKEN_KEY),
@@ -105,6 +133,28 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
           GetDataDto(key: REFRESH_TOKEN_KEY),
         );
 
-    return deletedAccessToken && deletedRefreshToken;
+    final deletedSignInProvider = await this._localStorage.removeData(
+          GetDataDto(key: SIGN_IN_PROVIDER_KEY),
+        );
+
+    return deletedAccessToken && deletedRefreshToken && deletedSignInProvider;
+  }
+
+  Future<bool> _handleProviderSignOut() async {
+    final provider = await this._localStorage.getData(GetDataDto(
+          key: SIGN_IN_PROVIDER_KEY,
+        ));
+
+    final SIGN_IN_PROVIDER signInProvider =
+        SignInProviderExtension.fromString(provider);
+
+    switch (signInProvider) {
+      case SIGN_IN_PROVIDER.GOOGLE:
+        return await this._googleAuthDataSource.signOut();
+      case SIGN_IN_PROVIDER.FACEBOOK:
+        return await this._facebookAuthDataSource.signOut();
+      default:
+        throw Exception();
+    }
   }
 }

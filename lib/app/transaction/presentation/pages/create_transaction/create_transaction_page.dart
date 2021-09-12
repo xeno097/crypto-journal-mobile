@@ -7,6 +7,7 @@ import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transa
 import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
+import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/default_text_button.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';

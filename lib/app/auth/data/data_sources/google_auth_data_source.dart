@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class IGoogleAuthDataSource {
   Future<AuthCredential> signIn();
+  Future<bool> signOut();
 }
 
 class GoogleAuthDataSource implements IGoogleAuthDataSource {
@@ -27,5 +28,12 @@ class GoogleAuthDataSource implements IGoogleAuthDataSource {
     );
 
     return credential;
+  }
+
+  @override
+  Future<bool> signOut() async {
+    await GoogleSignIn().disconnect();
+
+    return true;
   }
 }

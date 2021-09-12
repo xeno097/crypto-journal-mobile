@@ -23,6 +23,7 @@ dependencies:
   cached_network_image: ^3.1.0
   google_fonts: ^2.1.0
   url_launcher: ^6.0.9
+  flutter_facebook_auth: ^3.5.1
 
   cupertino_icons: ^1.0.2
 

@@ -4,6 +4,8 @@
 
 import 'dart:async' as _i5;
 
+import 'package:crypto_journal_mobile/app/auth/data/data_sources/facebook_auth_data_source.dart'
+    as _i11;
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/firebase_auth_remote_data_source.dart'
     as _i9;
 import 'package:crypto_journal_mobile/app/auth/data/data_sources/google_auth_data_source.dart'
@@ -124,4 +126,28 @@ class MockIGoogleAuthDataSource extends _i1.Mock
           Invocation.method(#signIn, []),
           returnValue: Future<_i3.AuthCredential>.value(_FakeAuthCredential()))
       as _i5.Future<_i3.AuthCredential>);
+  @override
+  _i5.Future<bool> signOut() =>
+      (super.noSuchMethod(Invocation.method(#signOut, []),
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+}
+
+/// A class which mocks [IFacebookAuthDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIFacebookAuthDataSource extends _i1.Mock
+    implements _i11.IFacebookAuthDataSource {
+  MockIFacebookAuthDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i3.AuthCredential> signIn() => (super.noSuchMethod(
+          Invocation.method(#signIn, []),
+          returnValue: Future<_i3.AuthCredential>.value(_FakeAuthCredential()))
+      as _i5.Future<_i3.AuthCredential>);
+  @override
+  _i5.Future<bool> signOut() =>
+      (super.noSuchMethod(Invocation.method(#signOut, []),
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
 }

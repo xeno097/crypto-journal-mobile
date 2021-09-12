@@ -1,0 +1,2 @@
+class UserAlreadyExistsWithAnotherSignInProviderException implements Exception {
+}

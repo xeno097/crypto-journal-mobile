@@ -1,4 +1,4 @@
-import 'package:crypto_journal_mobile/app/user/presentation/pages/settings/widgets/log_out_button.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/settings/widgets/log_out_button.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/providers/get_logged_user_provider.dart';
 import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:crypto_journal_mobile/shared/functions/launch_url.dart';
