@@ -19,13 +19,16 @@ void signIn(
       ScaffoldMessenger.of(context).showSnackBar(
         buildSuccessSnackBar(),
       );
+
       Navigator.pushNamedAndRemoveUntil(
           context, HomePage.route, (route) => false);
 
       break;
     default:
       ScaffoldMessenger.of(context).showSnackBar(
-        buildErrorSnackBar(),
+        buildErrorSnackBar(
+          message: mapSignInResultToErrorMessage(res),
+        ),
       );
   }
 }
