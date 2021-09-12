@@ -2,7 +2,6 @@ import 'package:crypto_journal_mobile/app/auth/presentation/providers/sign_in_pr
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
 import 'package:crypto_journal_mobile/shared/widgets/snackbars/error_snackbar.dart';
-import 'package:crypto_journal_mobile/shared/widgets/snackbars/success_snackbar.dart';
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -16,10 +15,6 @@ void signIn(
 
   switch (res) {
     case SignInResult.SignedIn:
-      ScaffoldMessenger.of(context).showSnackBar(
-        buildSuccessSnackBar(),
-      );
-
       Navigator.pushNamedAndRemoveUntil(
           context, HomePage.route, (route) => false);
 
