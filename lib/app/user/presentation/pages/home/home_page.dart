@@ -36,7 +36,6 @@ class HomePage extends StatelessWidget {
                   bottom: defaultPagePadding,
                 ),
                 child: BaseButton(
-                  backGroundColor: backGroundColorSecondary,
                   child: TabBar(
                     indicatorColor: Colors.transparent,
                     unselectedLabelColor: textColorSecondary,
