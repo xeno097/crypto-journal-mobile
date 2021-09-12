@@ -1,6 +1,6 @@
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/settings/settings_page.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history/transaction_history_page.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/main/main_page.dart';
-import 'package:crypto_journal_mobile/app/user/presentation/pages/settings/settings_page.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';

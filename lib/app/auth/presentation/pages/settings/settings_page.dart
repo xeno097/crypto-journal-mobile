@@ -1,4 +1,4 @@
-import 'package:crypto_journal_mobile/app/user/presentation/pages/settings/widgets/settings_section.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/settings/widgets/settings_section.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/headers/section_header.dart';
 import 'package:flutter/material.dart';
