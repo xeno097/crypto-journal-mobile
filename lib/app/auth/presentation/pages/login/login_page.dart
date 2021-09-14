@@ -2,6 +2,7 @@ import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/widgets/
 import 'package:crypto_journal_mobile/app/auth/presentation/pages/login/widgets/welcome_section/welcome_section.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
+import 'package:crypto_journal_mobile/shared/widgets/scaffold/default_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -11,9 +12,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backGroundColorPrimary,
-      body: Container(
+    return DefaultScaffold(
+      child: Container(
         height: double.infinity,
         decoration: BoxDecoration(
           gradient: defaultBackgroundGradient,
