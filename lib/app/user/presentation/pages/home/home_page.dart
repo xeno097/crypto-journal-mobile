@@ -4,6 +4,7 @@ import 'package:crypto_journal_mobile/app/user/presentation/pages/main/main_page
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
+import 'package:crypto_journal_mobile/shared/widgets/scaffold/default_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,9 +16,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        backgroundColor: backGroundColorPrimary,
-        body: Container(
+      child: DefaultScaffold(
+        child: Container(
           decoration: BoxDecoration(
             gradient: defaultBackgroundGradient,
           ),
