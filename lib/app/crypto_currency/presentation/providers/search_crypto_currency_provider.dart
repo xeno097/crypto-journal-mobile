@@ -1,6 +1,7 @@
 import 'package:crypto_journal_mobile/app/crypto_currency/service/dtos/crypto_currency_dto.dart';
 import 'package:crypto_journal_mobile/app/crypto_currency/service/dtos/search_crypto_currency_dto.dart';
 import 'package:crypto_journal_mobile/app/crypto_currency/service/services/crypto_currency_service.dart';
+import 'package:crypto_journal_mobile/shared/errors/functions/handle_error.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final searchStringStateProvider =
@@ -21,7 +22,7 @@ final searchCryptoCurrencyProvider =
   );
 
   final cryptoCurrencyRes = res.fold(
-    (err) => throw Exception(),
+    (err) => handleProviderErrorResult(ref, err),
     (cryptoCurrencies) => cryptoCurrencies,
   );
 

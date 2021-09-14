@@ -1,6 +1,7 @@
 import 'package:crypto_journal_mobile/app/holding/service/dtos/get_holdings_dto.dart';
 import 'package:crypto_journal_mobile/app/holding/service/dtos/holding_dto.dart';
 import 'package:crypto_journal_mobile/app/holding/service/services/holding_service.dart';
+import 'package:crypto_journal_mobile/shared/errors/functions/handle_error.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final getHoldingsProvider = FutureProvider.autoDispose<List<HoldingDto>>((
@@ -12,10 +13,8 @@ final getHoldingsProvider = FutureProvider.autoDispose<List<HoldingDto>>((
     getHoldingsDto: GetHoldingsDto(),
   );
 
-  final holdings = res.fold(
-    (err) => throw err,
+  return res.fold(
+    (err) => handleProviderErrorResult(ref, err),
     (holdings) => holdings,
   );
-
-  return holdings;
 });
