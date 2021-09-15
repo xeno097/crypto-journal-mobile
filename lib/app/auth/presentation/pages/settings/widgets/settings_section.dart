@@ -40,7 +40,7 @@ class SettingsSection extends StatelessWidget {
                   title: "App Info",
                   children: [
                     GroupSectionTile(
-                      label: "Version 0.0.2",
+                      label: "Version 0.1.0",
                     ),
                     GroupSectionTile(
                       label: "Github",
