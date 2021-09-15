@@ -11,6 +11,7 @@ import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/default_text_button.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
+import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
 import 'package:crypto_journal_mobile/shared/widgets/scaffold/default_scaffold.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -145,9 +146,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                         );
                       },
                       loading: () => DefaultCircularProgressIndicator(),
-                      error: (error, _) {
-                        return Text("Error?");
-                      },
+                      error: (err, _) => ErrorPlaceholder(),
                     );
                   },
                 ),

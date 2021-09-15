@@ -10,6 +10,7 @@ import 'package:crypto_journal_mobile/shared/widgets/containers/default_containe
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
 import 'package:crypto_journal_mobile/shared/widgets/inputs/default_text_input.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
+import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -115,9 +116,7 @@ class _SearchCryptoCurrencyPopUpState extends State<SearchCryptoCurrencyPopUp> {
                       );
                     },
                     loading: () => DefaultCircularProgressIndicator(),
-                    error: (error, stackTrace) {
-                      return Text("Error?");
-                    },
+                    error: (err, _) => ErrorPlaceholder(),
                   );
                 },
               ),

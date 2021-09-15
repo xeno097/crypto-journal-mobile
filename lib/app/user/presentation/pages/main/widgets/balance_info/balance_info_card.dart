@@ -3,6 +3,7 @@ import 'package:crypto_journal_mobile/app/user/presentation/pages/main/widgets/b
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
+import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,7 +27,7 @@ class BalanceInfoCard extends StatelessWidget {
                 balanceDto: balance,
               ),
               loading: () => DefaultCircularProgressIndicator(),
-              error: (err, _) => Text("An error occured"),
+              error: (err, _) => ErrorPlaceholder(),
             );
           },
         ),
