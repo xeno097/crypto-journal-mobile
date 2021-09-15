@@ -11,6 +11,7 @@ import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/default_text_button.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_page_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
+import 'package:crypto_journal_mobile/shared/widgets/scaffold/default_scaffold.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -92,7 +93,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
     final res = await context
         .read(createTransactionProvider(createTransactionDto).future);
 
-    if (res != null) {
+    if (res == CreateTransactionResult.CreatedTransaction) {
       Navigator.pushNamedAndRemoveUntil(
           context, HomePage.route, (route) => false);
     }
@@ -102,9 +103,9 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
   Widget build(BuildContext context) {
     print("TransactionPage");
 
-    return Scaffold(
-      backgroundColor: backGroundColorPrimary,
-      body: DefaultPageContainer(
+    return DefaultScaffold(
+      isListener: false,
+      child: DefaultPageContainer(
         child: Column(
           children: [
             CreateTransactionPageHeader(),

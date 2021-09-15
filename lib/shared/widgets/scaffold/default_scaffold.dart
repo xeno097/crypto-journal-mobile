@@ -8,8 +8,40 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DefaultScaffold extends StatelessWidget {
   final Widget child;
+  final bool isListener;
 
-  const DefaultScaffold({Key? key, required this.child}) : super(key: key);
+  const DefaultScaffold({
+    Key? key,
+    this.isListener = true,
+    required this.child,
+  }) : super(key: key);
+
+  Widget _build() {
+    if (!this.isListener) {
+      return this.child;
+    }
+
+    return ProviderListener(
+      provider: notificationStateNotifierProvider,
+      onChange: (
+        BuildContext context,
+        EventState state,
+      ) {
+        if (state is SuccessEventState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildSuccessSnackBar(message: state.message),
+          );
+        }
+
+        if (state is ErrorEventState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildErrorSnackBar(message: state.error.message),
+          );
+        }
+      },
+      child: this.child,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,26 +52,7 @@ class DefaultScaffold extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: defaultBackgroundGradient,
         ),
-        child: ProviderListener(
-          provider: notificationStateNotifierProvider,
-          onChange: (
-            BuildContext context,
-            EventState state,
-          ) {
-            if (state is SuccessEventState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                buildSuccessSnackBar(message: state.message),
-              );
-            }
-
-            if (state is ErrorEventState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                buildErrorSnackBar(message: state.error.message),
-              );
-            }
-          },
-          child: this.child,
-        ),
+        child: this._build(),
       ),
     );
   }
