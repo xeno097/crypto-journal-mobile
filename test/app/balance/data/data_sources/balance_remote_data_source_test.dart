@@ -47,8 +47,7 @@ void main() {
       setSuccessMocks();
 
       // act
-      await balanceRemoteDataSource.getBalance(
-          getBalanceInput: GetBalanceInput());
+      await balanceRemoteDataSource.getBalance(GetBalanceInput());
 
       // assert
       verify(graphqlAuthClient.query(
@@ -63,8 +62,7 @@ void main() {
       final expectedResult = BalanceModel.fromJson(balanceJson);
 
       // act
-      final res = await balanceRemoteDataSource.getBalance(
-          getBalanceInput: GetBalanceInput());
+      final res = await balanceRemoteDataSource.getBalance(GetBalanceInput());
 
       // assert
       verify(graphqlAuthClient.query(

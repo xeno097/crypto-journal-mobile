@@ -7,10 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final getBalanceProvider = FutureProvider.autoDispose<BalanceDto>((
   ProviderReference ref,
 ) async {
-  final balanceService = await ref.read(balanceServiceProvider.future);
+  final balanceService = await ref.read(
+    balanceServiceProvider.future,
+  );
 
   final res = await balanceService.getBalance(
-    getBalanceDto: GetBalanceDto(),
+    GetBalanceDto(),
   );
 
   return res.fold(

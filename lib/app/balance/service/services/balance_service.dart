@@ -7,15 +7,17 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class IBalanceService {
-  Future<Either<BaseError, BalanceDto>> getBalance({
-    required GetBalanceDto getBalanceDto,
-  });
+  Future<Either<BaseError, BalanceDto>> getBalance(
+    GetBalanceDto getBalanceDto,
+  );
 }
 
 final balanceServiceProvider = FutureProvider<BalanceService>((
   ProviderReference ref,
 ) async {
-  final balanceRepository = await ref.read(balanceRepositoryProvider.future);
+  final balanceRepository = await ref.read(
+    balanceRepositoryProvider.future,
+  );
 
   final balanceService = BalanceService(
     balanceRepository: balanceRepository,
@@ -32,11 +34,11 @@ class BalanceService implements IBalanceService {
   }) : this._balanceRepository = balanceRepository;
 
   @override
-  Future<Either<BaseError, BalanceDto>> getBalance({
-    required GetBalanceDto getBalanceDto,
-  }) async {
-    return await this
-        ._balanceRepository
-        .getBalance(getBalanceDto: getBalanceDto);
+  Future<Either<BaseError, BalanceDto>> getBalance(
+    GetBalanceDto getBalanceDto,
+  ) async {
+    return await this._balanceRepository.getBalance(
+          getBalanceDto,
+        );
   }
 }

@@ -56,7 +56,7 @@ void main() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
       when(
         balanceRemoteDataSourceMock.getBalance(
-          getBalanceInput: anyNamed("getBalanceInput"),
+          any,
         ),
       ).thenAnswer((_) async => Future.value(balanceModel));
     }
@@ -67,7 +67,7 @@ void main() {
       setSuccessMock();
 
       // act
-      await balanceRepository.getBalance(getBalanceDto: GetBalanceDto());
+      await balanceRepository.getBalance(GetBalanceDto());
 
       // assert
       verify(networkInfoMock.isConnected);
@@ -81,14 +81,14 @@ void main() {
 
       // act
       await balanceRepository.getBalance(
-        getBalanceDto: GetBalanceDto(),
+        GetBalanceDto(),
       );
 
       // assert
       verify(networkInfoMock.isConnected);
       verify(
         balanceRemoteDataSourceMock.getBalance(
-          getBalanceInput: GetBalanceInput(),
+          GetBalanceInput(),
         ),
       );
     });
@@ -101,7 +101,7 @@ void main() {
 
       // act
       await balanceRepository.getBalance(
-        getBalanceDto: GetBalanceDto(),
+        GetBalanceDto(),
       );
 
       // assert
@@ -116,7 +116,7 @@ void main() {
 
       // act
       final res = await balanceRepository.getBalance(
-        getBalanceDto: GetBalanceDto(),
+        GetBalanceDto(),
       );
 
       // assert
@@ -130,7 +130,7 @@ void main() {
 
       // act
       final res = await balanceRepository.getBalance(
-        getBalanceDto: GetBalanceDto(),
+        GetBalanceDto(),
       );
 
       // assert

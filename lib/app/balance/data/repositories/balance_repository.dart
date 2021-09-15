@@ -14,8 +14,9 @@ final balanceRepositoryProvider = FutureProvider<BalanceRepository>((
   ProviderReference ref,
 ) async {
   final networkInfo = ref.read(networkInfoProvider);
-  final balanceRemoteDataSource =
-      await ref.read(balanceRemoteDataSourceProvider.future);
+  final balanceRemoteDataSource = await ref.read(
+    balanceRemoteDataSourceProvider.future,
+  );
 
   final balanceRepository = BalanceRepository(
     networkInfo: networkInfo,
@@ -37,7 +38,8 @@ class BalanceRepository extends BaseRepository implements IBalanceRepository {
 
   @override
   Future<Either<BaseError, BalanceDto>> getBalance(
-      {required GetBalanceDto getBalanceDto}) async {
+    GetBalanceDto getBalanceDto,
+  ) async {
     return await this.safeRequestHandler<BalanceDto>(() async {
       final bool connectionStatus = await this._networkInfo.isConnected;
 
@@ -46,7 +48,7 @@ class BalanceRepository extends BaseRepository implements IBalanceRepository {
       }
 
       return await this._balanceRemoteDataSource.getBalance(
-            getBalanceInput: GetBalanceInput(),
+            GetBalanceInput(),
           );
     });
   }
