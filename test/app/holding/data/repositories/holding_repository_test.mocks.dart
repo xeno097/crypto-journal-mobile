@@ -33,10 +33,8 @@ class MockIHoldingRemoteDataSource extends _i1.Mock
 
   @override
   _i3.Future<List<_i4.HoldingModel>> getHoldings(
-          {_i5.GetHoldingInput? getHoldingInput}) =>
-      (super.noSuchMethod(
-              Invocation.method(
-                  #getHoldings, [], {#getHoldingInput: getHoldingInput}),
+          _i5.GetHoldingInput? getHoldingInput) =>
+      (super.noSuchMethod(Invocation.method(#getHoldings, [getHoldingInput]),
               returnValue:
                   Future<List<_i4.HoldingModel>>.value(<_i4.HoldingModel>[]))
           as _i3.Future<List<_i4.HoldingModel>>);

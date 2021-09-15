@@ -35,10 +35,8 @@ class MockIHoldingRepository extends _i1.Mock
 
   @override
   _i4.Future<_i2.Either<_i5.BaseError, List<_i6.HoldingDto>>> getHoldings(
-          {_i7.GetHoldingsDto? getHoldingsDto}) =>
-      (super.noSuchMethod(
-              Invocation.method(
-                  #getHoldings, [], {#getHoldingsDto: getHoldingsDto}),
+          _i7.GetHoldingsDto? getHoldingsDto) =>
+      (super.noSuchMethod(Invocation.method(#getHoldings, [getHoldingsDto]),
               returnValue:
                   Future<_i2.Either<_i5.BaseError, List<_i6.HoldingDto>>>.value(
                       _FakeEither_0<_i5.BaseError, List<_i6.HoldingDto>>()))

@@ -10,7 +10,7 @@ final getHoldingsProvider = FutureProvider.autoDispose<List<HoldingDto>>((
   final holdingService = await ref.read(holdingServiceProvider.future);
 
   final res = await holdingService.getHoldings(
-    getHoldingsDto: GetHoldingsDto(),
+    GetHoldingsDto(),
   );
 
   return res.fold(

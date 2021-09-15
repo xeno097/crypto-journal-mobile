@@ -37,9 +37,9 @@ class HoldingRepository extends BaseRepository implements IHoldingRepository {
         this._holdingRemoteDataSource = holdingRemoteDataSource;
 
   @override
-  Future<Either<BaseError, List<HoldingDto>>> getHoldings({
-    required GetHoldingsDto getHoldingsDto,
-  }) async {
+  Future<Either<BaseError, List<HoldingDto>>> getHoldings(
+    GetHoldingsDto getHoldingsDto,
+  ) async {
     return await this.safeRequestHandler<List<HoldingDto>>(() async {
       final bool connectionStatus = await this._networkInfo.isConnected;
 
@@ -48,7 +48,7 @@ class HoldingRepository extends BaseRepository implements IHoldingRepository {
       }
 
       return await this._holdingRemoteDataSource.getHoldings(
-            getHoldingInput: GetHoldingInput(),
+            GetHoldingInput(),
           );
     });
   }

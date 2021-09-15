@@ -6,9 +6,9 @@ import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class IHoldingRemoteDataSource {
-  Future<List<HoldingModel>> getHoldings({
-    required GetHoldingInput getHoldingInput,
-  });
+  Future<List<HoldingModel>> getHoldings(
+    GetHoldingInput getHoldingInput,
+  );
 }
 
 final holdingRemoteDataSourceProvider =
@@ -32,9 +32,9 @@ class HoldingRemoteDataSource implements IHoldingRemoteDataSource {
   }) : this._graphqlAuthClient = graphqlAuthClient;
 
   @override
-  Future<List<HoldingModel>> getHoldings({
-    required GetHoldingInput getHoldingInput,
-  }) async {
+  Future<List<HoldingModel>> getHoldings(
+    GetHoldingInput getHoldingInput,
+  ) async {
     final List res = await this._graphqlAuthClient.query(
           query: GET_SELF_HOLDINGS_QUERY,
           dataKey: GET_SELF_HOLDINGS_DATA_KEY,

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:crypto_journal_mobile/app/holding/data/data_sources/holding_remote_data_source.dart';
-import 'package:crypto_journal_mobile/app/holding/data/inputs/get_holding_input.dart';
 import 'package:crypto_journal_mobile/app/holding/data/models/holding_model.dart';
 import 'package:crypto_journal_mobile/app/holding/data/repositories/holding_repository.dart';
 import 'package:crypto_journal_mobile/app/holding/service/dtos/get_holdings_dto.dart';
@@ -58,7 +57,7 @@ void main() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
       when(
         holdingRemoteDataSourceMock.getHoldings(
-          getHoldingInput: anyNamed("getHoldingInput"),
+          any,
         ),
       ).thenAnswer((_) async => Future.value(getHoldingsResult));
     }
@@ -70,7 +69,7 @@ void main() {
 
       // act
       await holdingRepository.getHoldings(
-        getHoldingsDto: GetHoldingsDto(),
+        GetHoldingsDto(),
       );
 
       // assert
@@ -85,14 +84,14 @@ void main() {
 
       // act
       await holdingRepository.getHoldings(
-        getHoldingsDto: GetHoldingsDto(),
+        GetHoldingsDto(),
       );
 
       // assert
       verify(networkInfoMock.isConnected);
       verify(
         holdingRemoteDataSourceMock.getHoldings(
-          getHoldingInput: GetHoldingInput(),
+          any,
         ),
       );
     });
@@ -105,7 +104,7 @@ void main() {
 
       // act
       await holdingRepository.getHoldings(
-        getHoldingsDto: GetHoldingsDto(),
+        GetHoldingsDto(),
       );
 
       // assert
@@ -120,7 +119,7 @@ void main() {
 
       // act
       final res = await holdingRepository.getHoldings(
-        getHoldingsDto: GetHoldingsDto(),
+        GetHoldingsDto(),
       );
 
       // assert
@@ -134,7 +133,7 @@ void main() {
 
       // act
       final res = await holdingRepository.getHoldings(
-        getHoldingsDto: GetHoldingsDto(),
+        GetHoldingsDto(),
       );
 
       // assert

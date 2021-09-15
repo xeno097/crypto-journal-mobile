@@ -7,15 +7,17 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class IHoldingService {
-  Future<Either<BaseError, List<HoldingDto>>> getHoldings({
-    required GetHoldingsDto getHoldingsDto,
-  });
+  Future<Either<BaseError, List<HoldingDto>>> getHoldings(
+    GetHoldingsDto getHoldingsDto,
+  );
 }
 
 final holdingServiceProvider = FutureProvider<HoldingService>((
   ProviderReference ref,
 ) async {
-  final holdingRepository = await ref.read(holdingRepositoryProvider.future);
+  final holdingRepository = await ref.read(
+    holdingRepositoryProvider.future,
+  );
 
   final holdingService = HoldingService(
     holdingRepository: holdingRepository,
@@ -32,11 +34,9 @@ class HoldingService implements IHoldingService {
   }) : this._holdingRepository = holdingRepository;
 
   @override
-  Future<Either<BaseError, List<HoldingDto>>> getHoldings({
-    required GetHoldingsDto getHoldingsDto,
-  }) async {
-    return await this
-        ._holdingRepository
-        .getHoldings(getHoldingsDto: getHoldingsDto);
+  Future<Either<BaseError, List<HoldingDto>>> getHoldings(
+    GetHoldingsDto getHoldingsDto,
+  ) async {
+    return await this._holdingRepository.getHoldings(getHoldingsDto);
   }
 }

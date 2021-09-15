@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:crypto_journal_mobile/app/crypto_currency/data/data_sources/crypto_currency_remote_data_source.dart';
-import 'package:crypto_journal_mobile/app/crypto_currency/data/inputs/search_crypto_currency_input.dart';
 import 'package:crypto_journal_mobile/app/crypto_currency/data/models/crypto_currency_model.dart';
 import 'package:crypto_journal_mobile/app/crypto_currency/data/repositories/crypto_currency_repository.dart';
 import 'package:crypto_journal_mobile/app/crypto_currency/service/dtos/search_crypto_currency_dto.dart';
@@ -27,7 +26,6 @@ void main() {
   late CryptoCurrencyRepository cryptoCurrencyRepository;
 
   final searchCryptoCurrencyDto = SearchCryptoCurrencyDto(text: "BTC");
-  final searchCryptoCurrencyInput = SearchCryptoCurrencyInput(text: "BTC");
   final cryptoCurrencyModel = CryptoCurrencyModel.fromJson(
     json.decode(
       fixtureReader("crypto_currency/crypto_currency_fixture.json"),
