@@ -33,13 +33,12 @@ class MockICryptoCurrencyRemoteDataSource extends _i1.Mock
 
   @override
   _i3.Future<List<_i4.CryptoCurrencyModel>> searchCryptoCurrency(
-          {_i5.SearchCryptoCurrencyInput? searchCryptoCurrencyInput}) =>
+          _i5.SearchCryptoCurrencyInput? searchCryptoCurrencyInput) =>
       (super.noSuchMethod(
-              Invocation.method(#searchCryptoCurrency, [],
-                  {#searchCryptoCurrencyInput: searchCryptoCurrencyInput}),
-              returnValue: Future<List<_i4.CryptoCurrencyModel>>.value(
-                  <_i4.CryptoCurrencyModel>[]))
-          as _i3.Future<List<_i4.CryptoCurrencyModel>>);
+          Invocation.method(#searchCryptoCurrency, [searchCryptoCurrencyInput]),
+          returnValue: Future<List<_i4.CryptoCurrencyModel>>.value(
+              <_i4.CryptoCurrencyModel>[])) as _i3
+          .Future<List<_i4.CryptoCurrencyModel>>);
   @override
   String toString() => super.toString();
 }

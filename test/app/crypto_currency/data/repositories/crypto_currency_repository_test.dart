@@ -60,7 +60,7 @@ void main() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
       when(
         cryptoCurrencyRemoteDataSourceMock.searchCryptoCurrency(
-          searchCryptoCurrencyInput: anyNamed("searchCryptoCurrencyInput"),
+          any,
         ),
       ).thenAnswer((_) async => Future.value(expectedValue));
     }
@@ -72,7 +72,7 @@ void main() {
 
       // act
       await cryptoCurrencyRepository.searchCryptoCurrency(
-        searchCryptoCurrencyDto: searchCryptoCurrencyDto,
+        searchCryptoCurrencyDto,
       );
 
       // assert
@@ -87,14 +87,14 @@ void main() {
 
       // act
       await cryptoCurrencyRepository.searchCryptoCurrency(
-        searchCryptoCurrencyDto: searchCryptoCurrencyDto,
+        searchCryptoCurrencyDto,
       );
 
       // assert
       verify(networkInfoMock.isConnected);
       verify(
         cryptoCurrencyRemoteDataSourceMock.searchCryptoCurrency(
-          searchCryptoCurrencyInput: searchCryptoCurrencyInput,
+          any,
         ),
       );
     });
@@ -107,7 +107,7 @@ void main() {
 
       // act
       await cryptoCurrencyRepository.searchCryptoCurrency(
-        searchCryptoCurrencyDto: searchCryptoCurrencyDto,
+        searchCryptoCurrencyDto,
       );
 
       // assert
@@ -122,7 +122,7 @@ void main() {
 
       // act
       final res = await cryptoCurrencyRepository.searchCryptoCurrency(
-        searchCryptoCurrencyDto: searchCryptoCurrencyDto,
+        searchCryptoCurrencyDto,
       );
 
       // assert
@@ -136,7 +136,7 @@ void main() {
 
       // act
       final res = await cryptoCurrencyRepository.searchCryptoCurrency(
-        searchCryptoCurrencyDto: searchCryptoCurrencyDto,
+        searchCryptoCurrencyDto,
       );
 
       // assert

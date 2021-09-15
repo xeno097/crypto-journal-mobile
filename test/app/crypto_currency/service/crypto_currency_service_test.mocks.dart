@@ -34,16 +34,15 @@ class MockICryptoCurrencyRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.BaseError, List<_i6.CryptoCurrencyDto>>>
-      searchCryptoCurrency(
-              {_i7.SearchCryptoCurrencyDto? searchCryptoCurrencyDto}) =>
-          (super.noSuchMethod(
-              Invocation.method(#searchCryptoCurrency, [],
-                  {#searchCryptoCurrencyDto: searchCryptoCurrencyDto}),
-              returnValue:
-                  Future<_i2.Either<_i5.BaseError, List<_i6.CryptoCurrencyDto>>>.value(
-                      _FakeEither_0<_i5.BaseError, List<_i6.CryptoCurrencyDto>>())) as _i4
-              .Future<_i2.Either<_i5.BaseError, List<_i6.CryptoCurrencyDto>>>);
+  _i4.Future<
+      _i2.Either<_i5.BaseError, List<_i6.CryptoCurrencyDto>>> searchCryptoCurrency(
+          _i7.SearchCryptoCurrencyDto? searchCryptoCurrencyDto) =>
+      (super.noSuchMethod(
+          Invocation.method(#searchCryptoCurrency, [searchCryptoCurrencyDto]),
+          returnValue:
+              Future<_i2.Either<_i5.BaseError, List<_i6.CryptoCurrencyDto>>>.value(
+                  _FakeEither_0<_i5.BaseError, List<_i6.CryptoCurrencyDto>>())) as _i4
+          .Future<_i2.Either<_i5.BaseError, List<_i6.CryptoCurrencyDto>>>);
   @override
   String toString() => super.toString();
 }

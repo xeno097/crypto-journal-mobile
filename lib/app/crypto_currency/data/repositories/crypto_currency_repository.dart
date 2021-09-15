@@ -39,9 +39,9 @@ class CryptoCurrencyRepository extends BaseRepository
         this._networkInfo = networkInfo;
 
   @override
-  Future<Either<BaseError, List<CryptoCurrencyDto>>> searchCryptoCurrency({
-    required SearchCryptoCurrencyDto searchCryptoCurrencyDto,
-  }) async {
+  Future<Either<BaseError, List<CryptoCurrencyDto>>> searchCryptoCurrency(
+    SearchCryptoCurrencyDto searchCryptoCurrencyDto,
+  ) async {
     return await this.safeRequestHandler<List<CryptoCurrencyDto>>(() async {
       final bool connectionStatus = await this._networkInfo.isConnected;
 
@@ -54,7 +54,7 @@ class CryptoCurrencyRepository extends BaseRepository
       );
 
       return await this._cryptoCurrencyRemoteDataSource.searchCryptoCurrency(
-            searchCryptoCurrencyInput: searchCryptoCurrencyInput,
+            searchCryptoCurrencyInput,
           );
     });
   }

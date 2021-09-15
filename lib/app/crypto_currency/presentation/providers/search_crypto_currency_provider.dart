@@ -4,8 +4,9 @@ import 'package:crypto_journal_mobile/app/crypto_currency/service/services/crypt
 import 'package:crypto_journal_mobile/shared/errors/functions/handle_error.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final searchStringStateProvider =
-    StateProvider<String>((ProviderReference ref) {
+final searchStringStateProvider = StateProvider<String>((
+  ProviderReference ref,
+) {
   return "";
 });
 
@@ -14,11 +15,12 @@ final searchCryptoCurrencyProvider =
   ProviderReference ref,
 ) async {
   final searchString = ref.watch(searchStringStateProvider).state;
-  final searchCryptoCurrencyService =
-      await ref.read(cryptoCurrencyServiceProvider.future);
+  final searchCryptoCurrencyService = await ref.read(
+    cryptoCurrencyServiceProvider.future,
+  );
 
   final res = await searchCryptoCurrencyService.searchCryptoCurrency(
-    searchCryptoCurrencyDto: SearchCryptoCurrencyDto(text: searchString),
+    SearchCryptoCurrencyDto(text: searchString),
   );
 
   final cryptoCurrencyRes = res.fold(
