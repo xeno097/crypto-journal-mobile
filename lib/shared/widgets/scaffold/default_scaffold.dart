@@ -15,25 +15,31 @@ class DefaultScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backGroundColorPrimary,
-      body: ProviderListener(
-        provider: notificationStateNotifierProvider,
-        onChange: (
-          BuildContext context,
-          EventState state,
-        ) {
-          if (state is SuccessEventState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              buildSuccessSnackBar(message: state.message),
-            );
-          }
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: defaultBackgroundGradient,
+        ),
+        child: ProviderListener(
+          provider: notificationStateNotifierProvider,
+          onChange: (
+            BuildContext context,
+            EventState state,
+          ) {
+            if (state is SuccessEventState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildSuccessSnackBar(message: state.message),
+              );
+            }
 
-          if (state is ErrorEventState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              buildErrorSnackBar(message: state.error.message),
-            );
-          }
-        },
-        child: this.child,
+            if (state is ErrorEventState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildErrorSnackBar(message: state.error.message),
+              );
+            }
+          },
+          child: this.child,
+        ),
       ),
     );
   }

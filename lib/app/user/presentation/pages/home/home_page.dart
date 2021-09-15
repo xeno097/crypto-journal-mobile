@@ -17,38 +17,33 @@ class HomePage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: DefaultScaffold(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: defaultBackgroundGradient,
-          ),
-          child: Stack(
-            children: [
-              TabBarView(
-                children: [
-                  MainPage(),
-                  TransactionHistoryPage(),
-                  SettingsPage(),
-                ],
+        child: Stack(
+          children: [
+            TabBarView(
+              children: [
+                MainPage(),
+                TransactionHistoryPage(),
+                SettingsPage(),
+              ],
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              padding: const EdgeInsets.only(
+                bottom: defaultPagePadding,
               ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.only(
-                  bottom: defaultPagePadding,
-                ),
-                child: BaseButton(
-                  child: TabBar(
-                    indicatorColor: Colors.transparent,
-                    unselectedLabelColor: textColorSecondary,
-                    tabs: [
-                      Icon(Icons.home),
-                      Icon(Icons.sync),
-                      Icon(Icons.account_circle)
-                    ],
-                  ),
+              child: BaseButton(
+                child: TabBar(
+                  indicatorColor: Colors.transparent,
+                  unselectedLabelColor: textColorSecondary,
+                  tabs: [
+                    Icon(Icons.home),
+                    Icon(Icons.sync),
+                    Icon(Icons.account_circle)
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
