@@ -13,12 +13,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final authRepositoryProvider = FutureProvider<AuthRepository>((
   ProviderReference ref,
 ) async {
-  final authRemoteDataSource =
-      await ref.read(authRemoteDataSourceProvider.future);
+  final authRemoteDataSource = await ref.read(
+    authRemoteDataSourceProvider.future,
+  );
   final networkInfo = ref.read(networkInfoProvider);
 
   final authRepository = AuthRepository(
-      authRemoteDataSource: authRemoteDataSource, networkInfo: networkInfo);
+    authRemoteDataSource: authRemoteDataSource,
+    networkInfo: networkInfo,
+  );
 
   return authRepository;
 });

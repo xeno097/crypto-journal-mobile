@@ -23,12 +23,10 @@ class FirebaseAuthRemoteDataSource implements IFirebaseAuthRemoteDataSource {
       final userToken = await user.getIdToken();
 
       return userToken;
-    } catch (e) {
-      if (e is FirebaseAuthException &&
-          e.code == "account-exists-with-different-credential") {
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "account-exists-with-different-credential") {
         throw UserAlreadyExistsWithAnotherSignInProviderException();
       }
-
       throw Exception();
     }
   }

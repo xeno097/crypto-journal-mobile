@@ -4,6 +4,8 @@ import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class IAuthRepository {
-  Future<Either<BaseError, AuthPayloadDto>> signIn(SignInDto signInDto);
+  Future<Either<BaseError, AuthPayloadDto>> signIn(
+    SignInDto signInDto,
+  );
   Future<Either<BaseError, bool>> signOut();
 }
