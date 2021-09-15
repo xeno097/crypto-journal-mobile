@@ -4,11 +4,8 @@ import 'package:crypto_journal_mobile/app/auth/service/repositories/auth_reposit
 import 'package:crypto_journal_mobile/app/auth/service/dtos/sign_in_dto.dart';
 import 'package:crypto_journal_mobile/app/auth/service/dtos/auth_payload_dto.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
-import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exist_with_another_provider_execption.dart';
-import 'package:crypto_journal_mobile/shared/errors/firebase/user_already_exists_with_another_provider_error.dart';
-import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
+import 'package:crypto_journal_mobile/shared/data/repository/base_repository.dart';
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_exception.dart';
-import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +23,7 @@ final authRepositoryProvider = FutureProvider<AuthRepository>((
   return authRepository;
 });
 
-class AuthRepository implements IAuthRepository {
+class AuthRepository extends BaseRepository implements IAuthRepository {
   final IAuthRemoteDataSource _authRemoteDataSource;
   final INetworkInfo _networkInfo;
 
@@ -38,44 +35,29 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<Either<BaseError, AuthPayloadDto>> signIn(SignInDto signInDto) async {
-    try {
+    return await this.safeRequestHandler<AuthPayloadDto>(() async {
       final bool connectionStatus = await this._networkInfo.isConnected;
 
       if (!connectionStatus) {
         throw NetworkConnectionException();
       }
 
-      final AuthPayloadDto authPayloadDto =
-          await this._authRemoteDataSource.signIn(SignInInput(
-                provider: signInDto.provider,
-              ));
-
-      return Right(authPayloadDto);
-    } on NetworkConnectionException {
-      return Left(NetworkConnectionError());
-    } on UserAlreadyExistsWithAnotherSignInProviderException {
-      return Left(UserAlreadyExistsWithAnotherSignInProviderError());
-    } catch (e) {
-      return Left(UnexpectedError());
-    }
+      return await this._authRemoteDataSource.signIn(SignInInput(
+            provider: signInDto.provider,
+          ));
+    });
   }
 
   @override
   Future<Either<BaseError, bool>> signOut() async {
-    try {
+    return await this.safeRequestHandler<bool>(() async {
       final bool connectionStatus = await this._networkInfo.isConnected;
 
       if (!connectionStatus) {
         throw NetworkConnectionException();
       }
 
-      final signOutRes = await this._authRemoteDataSource.signOut();
-
-      return Right(signOutRes);
-    } on NetworkConnectionException {
-      return Left(NetworkConnectionError());
-    } catch (e) {
-      return Left(UnexpectedError());
-    }
+      return await this._authRemoteDataSource.signOut();
+    });
   }
 }
