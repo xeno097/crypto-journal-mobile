@@ -11,13 +11,15 @@ class TransactionHistoryPage extends StatelessWidget {
     print("HistoryPage");
 
     return DefaultPageContainer(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            TransactionHistoryPageHeader(),
-            TransactionHistoryInfoList(),
-          ],
-        ),
+      child: Column(
+        children: [
+          TransactionHistoryPageHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: TransactionHistoryInfoList(),
+            ),
+          ),
+        ],
       ),
     );
   }

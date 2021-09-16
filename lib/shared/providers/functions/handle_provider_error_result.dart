@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 T handleProviderErrorResult<T>(ProviderReference ref, BaseError error,
     {T Function()? callback}) {
-  ref.read(notificationStateNotifierProvider.notifier).setErrorState(
+  ref.read(notificationStateNotifierProvider.notifier).setEventState(
         ErrorEventState(
           error: error,
         ),

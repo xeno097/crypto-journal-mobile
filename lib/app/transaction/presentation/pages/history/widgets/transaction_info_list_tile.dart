@@ -4,6 +4,7 @@ import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/base_tile_widget.dart';
+import 'package:crypto_journal_mobile/shared/widgets/images/network_icon_image.dart';
 import "package:flutter/material.dart";
 
 class TransactionInfoListTile extends StatelessWidget {
@@ -42,10 +43,10 @@ class TransactionInfoListTile extends StatelessWidget {
           padding: padding,
           leading: Row(
             children: [
-              Icon(
-                Icons.monetization_on_outlined,
+              NetworkIconImage(
+                placeholder: Icons.monetization_on_outlined,
                 size: iconSize,
-                color: Colors.white,
+                url: this.transactionDto.cryptoCurrencyDto.icon,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(

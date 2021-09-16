@@ -1,6 +1,7 @@
 import 'package:crypto_journal_mobile/app/holding/presentation/providers/get_holdings_provider.dart';
 import 'package:crypto_journal_mobile/app/holding/service/dtos/holding_dto.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
+import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
 import 'package:crypto_journal_mobile/shared/widgets/headers/section_header.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/main/widgets/holding_info/holding_info_list_tile.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
@@ -43,11 +44,10 @@ class HoldingInfoList extends StatelessWidget {
             final request = watch(getHoldingsProvider);
 
             return request.when(
-              data: (holdings) => Column(
-                children: this._buildHoldingList(
-                  holdings,
-                ),
-              ),
+              data: (holdings) => Column(children: [
+                ...this._buildHoldingList(holdings),
+                LastListElement(),
+              ]),
               loading: () => DefaultCircularProgressIndicator(),
               error: (err, _) => ErrorPlaceholder(),
             );

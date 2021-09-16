@@ -25,7 +25,7 @@ void main() {
         () {
       // arrange
       final Map<String, dynamic> jsonMap =
-          json.decode(fixtureReader("operation_fixture.json"));
+          json.decode(fixtureReader("operations/operation_fixture.json"));
 
       // act
       final res = OperationModel.fromJson(jsonMap);

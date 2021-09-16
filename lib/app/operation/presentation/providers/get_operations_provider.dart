@@ -1,6 +1,6 @@
 import 'package:crypto_journal_mobile/app/operation/service/dtos/operation_dto.dart';
 import 'package:crypto_journal_mobile/app/operation/service/services/operation_service.dart';
-import 'package:crypto_journal_mobile/shared/errors/functions/handle_error.dart';
+import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider_error_result.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final getOperationsProvider = FutureProvider.autoDispose<List<OperationDto>>(

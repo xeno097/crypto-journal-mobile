@@ -1,7 +1,7 @@
 import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/operation/queries.dart';
+import 'package:crypto_journal_mobile/app/operation/data/graphql/queries.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class IOperationRemoteDataSource {

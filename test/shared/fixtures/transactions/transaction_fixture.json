@@ -10,5 +10,11 @@
     "name": "Sell",
     "slug": "sell",
     "type": "SELL"
+  },
+  "cryptoCurrency": {
+    "id": "BTC",
+    "name": "Bitcoin",
+    "price": 50000,
+    "symbol": "BTC"
   }
 }

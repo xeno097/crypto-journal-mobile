@@ -11,15 +11,17 @@ class SettingsPage extends StatelessWidget {
     print("SettingsPage");
 
     return DefaultPageContainer(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SectionHeader(
-              title: "Settings",
+      child: Column(
+        children: [
+          SectionHeader(
+            title: "Settings",
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: SettingsSection(),
             ),
-            SettingsSection(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
