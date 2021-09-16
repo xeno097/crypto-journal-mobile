@@ -1,23 +1,22 @@
 import 'package:crypto_journal_mobile/app/balance/data/data_sources/balance_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/balance/data/inputs/get_balance_input.dart';
-import 'package:crypto_journal_mobile/app/balance/data/models/balance_model.dart';
-import 'package:crypto_journal_mobile/app/balance/service/dtos/get_balance_dto.dart';
 import 'package:crypto_journal_mobile/app/balance/service/dtos/balance_dto.dart';
+import 'package:crypto_journal_mobile/app/balance/service/dtos/get_balance_dto.dart';
 import 'package:crypto_journal_mobile/app/balance/service/repositories/balance_repository.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
-import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
-import 'package:crypto_journal_mobile/shared/errors/network/network_connection_exception.dart';
-import 'package:crypto_journal_mobile/shared/errors/unexpected/unexpected_error.dart';
-import 'package:dartz/dartz.dart';
+import 'package:crypto_journal_mobile/shared/data/repository/base_repository.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
+import 'package:crypto_journal_mobile/shared/errors/network/network_connection_exception.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final balanceRepositoryProvider = FutureProvider<BalanceRepository>((
   ProviderReference ref,
 ) async {
   final networkInfo = ref.read(networkInfoProvider);
-  final balanceRemoteDataSource =
-      await ref.read(balanceRemoteDataSourceProvider.future);
+  final balanceRemoteDataSource = await ref.read(
+    balanceRemoteDataSourceProvider.future,
+  );
 
   final balanceRepository = BalanceRepository(
     networkInfo: networkInfo,
@@ -27,7 +26,7 @@ final balanceRepositoryProvider = FutureProvider<BalanceRepository>((
   return balanceRepository;
 });
 
-class BalanceRepository implements IBalanceRepository {
+class BalanceRepository extends BaseRepository implements IBalanceRepository {
   final INetworkInfo _networkInfo;
   final IBalanceRemoteDataSource _balanceRemoteDataSource;
 
@@ -39,24 +38,18 @@ class BalanceRepository implements IBalanceRepository {
 
   @override
   Future<Either<BaseError, BalanceDto>> getBalance(
-      {required GetBalanceDto getBalanceDto}) async {
-    try {
+    GetBalanceDto getBalanceDto,
+  ) async {
+    return await this.safeRequestHandler<BalanceDto>(() async {
       final bool connectionStatus = await this._networkInfo.isConnected;
 
       if (!connectionStatus) {
         throw NetworkConnectionException();
       }
 
-      final BalanceModel balance =
-          await this._balanceRemoteDataSource.getBalance(
-                getBalanceInput: GetBalanceInput(),
-              );
-
-      return Right(balance);
-    } on NetworkConnectionException {
-      return Left(NetworkConnectionError());
-    } catch (e) {
-      return Left(UnexpectedError());
-    }
+      return await this._balanceRemoteDataSource.getBalance(
+            GetBalanceInput(),
+          );
+    });
   }
 }

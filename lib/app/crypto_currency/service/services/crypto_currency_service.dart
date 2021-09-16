@@ -7,16 +7,17 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ICryptoCurrencyService {
-  Future<Either<BaseError, List<CryptoCurrencyDto>>> searchCryptoCurrency({
-    required SearchCryptoCurrencyDto searchCryptoCurrencyDto,
-  });
+  Future<Either<BaseError, List<CryptoCurrencyDto>>> searchCryptoCurrency(
+    SearchCryptoCurrencyDto searchCryptoCurrencyDto,
+  );
 }
 
 final cryptoCurrencyServiceProvider = FutureProvider<CryptoCurrencyService>((
   ProviderReference ref,
 ) async {
-  final cryptoCurrencyRepository =
-      await ref.read(cryptoCurrencyRepositoryProvider.future);
+  final cryptoCurrencyRepository = await ref.read(
+    cryptoCurrencyRepositoryProvider.future,
+  );
 
   final cryptoCurrencyService = CryptoCurrencyService(
     cryptoCurrencyRepository: cryptoCurrencyRepository,
@@ -33,11 +34,11 @@ class CryptoCurrencyService implements ICryptoCurrencyService {
   }) : this._cryptoCurrencyRepository = cryptoCurrencyRepository;
 
   @override
-  Future<Either<BaseError, List<CryptoCurrencyDto>>> searchCryptoCurrency({
-    required SearchCryptoCurrencyDto searchCryptoCurrencyDto,
-  }) async {
+  Future<Either<BaseError, List<CryptoCurrencyDto>>> searchCryptoCurrency(
+    SearchCryptoCurrencyDto searchCryptoCurrencyDto,
+  ) async {
     return await this._cryptoCurrencyRepository.searchCryptoCurrency(
-          searchCryptoCurrencyDto: searchCryptoCurrencyDto,
+          searchCryptoCurrencyDto,
         );
   }
 }

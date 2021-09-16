@@ -44,7 +44,7 @@ void main() {
       // arrange
       when(
         cryptoCurrencyRepository.searchCryptoCurrency(
-          searchCryptoCurrencyDto: anyNamed("searchCryptoCurrencyDto"),
+          any,
         ),
       ).thenAnswer((_) => Future.value(Right(searchCryptoCurrencyResult)));
 
@@ -52,12 +52,12 @@ void main() {
 
       // act
       final res = await cryptoCurrencyService.searchCryptoCurrency(
-        searchCryptoCurrencyDto: searchCryptoCurrencyDto,
+        searchCryptoCurrencyDto,
       );
 
       // assert
       verify(cryptoCurrencyRepository.searchCryptoCurrency(
-        searchCryptoCurrencyDto: searchCryptoCurrencyDto,
+        any,
       ));
       expect(res, equals(Right(searchCryptoCurrencyResult)));
     });

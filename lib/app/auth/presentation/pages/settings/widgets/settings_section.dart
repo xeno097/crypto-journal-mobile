@@ -6,6 +6,7 @@ import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/group_section/group_section.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/group_section/group_section_tile.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
+import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,7 +40,7 @@ class SettingsSection extends StatelessWidget {
                   title: "App Info",
                   children: [
                     GroupSectionTile(
-                      label: "Version 0.0.2",
+                      label: "Version 0.1.0",
                     ),
                     GroupSectionTile(
                       label: "Github",
@@ -55,7 +56,7 @@ class SettingsSection extends StatelessWidget {
             );
           },
           loading: () => DefaultCircularProgressIndicator(),
-          error: (err, _) => Text("Error?"),
+          error: (err, _) => ErrorPlaceholder(),
         );
       },
     );

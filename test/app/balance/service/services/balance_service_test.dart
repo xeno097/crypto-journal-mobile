@@ -41,17 +41,17 @@ void main() {
       // arrange
       when(
         balanceRepositoryMock.getBalance(
-          getBalanceDto: anyNamed("getBalanceDto"),
+          any,
         ),
       ).thenAnswer((_) => Future.value(Right(balanceDto)));
 
       final getBalanceDto = GetBalanceDto();
 
       // act
-      final res = await balanceService.getBalance(getBalanceDto: getBalanceDto);
+      final res = await balanceService.getBalance(getBalanceDto);
 
       // assert
-      verify(balanceRepositoryMock.getBalance(getBalanceDto: getBalanceDto));
+      verify(balanceRepositoryMock.getBalance(getBalanceDto));
       expect(res, equals(Right(balanceDto)));
     });
   });

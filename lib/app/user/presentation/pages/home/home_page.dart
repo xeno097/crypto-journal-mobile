@@ -4,6 +4,7 @@ import 'package:crypto_journal_mobile/app/user/presentation/pages/main/main_page
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
+import 'package:crypto_journal_mobile/shared/widgets/scaffold/default_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,40 +16,34 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        backgroundColor: backGroundColorPrimary,
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: defaultBackgroundGradient,
-          ),
-          child: Stack(
-            children: [
-              TabBarView(
-                children: [
-                  MainPage(),
-                  TransactionHistoryPage(),
-                  SettingsPage(),
-                ],
+      child: DefaultScaffold(
+        child: Stack(
+          children: [
+            TabBarView(
+              children: [
+                MainPage(),
+                TransactionHistoryPage(),
+                SettingsPage(),
+              ],
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              padding: const EdgeInsets.only(
+                bottom: defaultPagePadding,
               ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.only(
-                  bottom: defaultPagePadding,
-                ),
-                child: BaseButton(
-                  child: TabBar(
-                    indicatorColor: Colors.transparent,
-                    unselectedLabelColor: textColorSecondary,
-                    tabs: [
-                      Icon(Icons.home),
-                      Icon(Icons.sync),
-                      Icon(Icons.account_circle)
-                    ],
-                  ),
+              child: BaseButton(
+                child: TabBar(
+                  indicatorColor: Colors.transparent,
+                  unselectedLabelColor: textColorSecondary,
+                  tabs: [
+                    Icon(Icons.home),
+                    Icon(Icons.sync),
+                    Icon(Icons.account_circle)
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

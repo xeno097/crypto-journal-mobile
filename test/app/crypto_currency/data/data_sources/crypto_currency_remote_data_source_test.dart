@@ -54,7 +54,7 @@ void main() {
 
       // act
       await cryptoCurrencyRemoteDataSource.searchCryptoCurrency(
-        searchCryptoCurrencyInput: searchCryptoCurrencyInput,
+        searchCryptoCurrencyInput,
       );
 
       // assert
@@ -71,7 +71,7 @@ void main() {
 
       // act
       final res = await cryptoCurrencyRemoteDataSource.searchCryptoCurrency(
-        searchCryptoCurrencyInput: searchCryptoCurrencyInput,
+        searchCryptoCurrencyInput,
       );
 
       // assert

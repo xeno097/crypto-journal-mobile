@@ -9,9 +9,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final authServiceProvider = FutureProvider<AuthService>((
   ProviderReference ref,
 ) async {
-  final authRepository = await ref.read(authRepositoryProvider.future);
+  final authRepository = await ref.read(
+    authRepositoryProvider.future,
+  );
 
-  final authService = AuthService(authRepository: authRepository);
+  final authService = AuthService(
+    authRepository: authRepository,
+  );
 
   return authService;
 });
@@ -23,7 +27,9 @@ class AuthService {
     required IAuthRepository authRepository,
   }) : this._authRepository = authRepository;
 
-  Future<Either<BaseError, AuthPayloadDto>> signIn(SignInDto signInDto) async {
+  Future<Either<BaseError, AuthPayloadDto>> signIn(
+    SignInDto signInDto,
+  ) async {
     return await this._authRepository.signIn(signInDto);
   }
 

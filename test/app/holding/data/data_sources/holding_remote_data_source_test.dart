@@ -51,8 +51,7 @@ void main() {
       setSuccessMocks();
 
       // act
-      await holdingRemoteDataSource.getHoldings(
-          getHoldingInput: GetHoldingInput());
+      await holdingRemoteDataSource.getHoldings(GetHoldingInput());
 
       // assert
       verify(graphqlAuthClient.query(
@@ -71,8 +70,7 @@ void main() {
       ];
 
       // act
-      final res = await holdingRemoteDataSource.getHoldings(
-          getHoldingInput: GetHoldingInput());
+      final res = await holdingRemoteDataSource.getHoldings(GetHoldingInput());
 
       // assert
       verify(graphqlAuthClient.query(

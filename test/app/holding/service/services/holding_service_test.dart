@@ -42,19 +42,16 @@ void main() {
         () async {
       // arrange
       when(
-        holdingRepository.getHoldings(
-          getHoldingsDto: anyNamed("getHoldingsDto"),
-        ),
+        holdingRepository.getHoldings(any),
       ).thenAnswer((_) => Future.value(Right(getHoldingsResult)));
 
       final getHoldingsDto = GetHoldingsDto();
 
       // act
-      final res =
-          await holdingService.getHoldings(getHoldingsDto: getHoldingsDto);
+      final res = await holdingService.getHoldings(getHoldingsDto);
 
       // assert
-      verify(holdingRepository.getHoldings(getHoldingsDto: getHoldingsDto));
+      verify(holdingRepository.getHoldings(getHoldingsDto));
       expect(res, equals(Right(getHoldingsResult)));
     });
   });

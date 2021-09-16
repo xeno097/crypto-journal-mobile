@@ -1,0 +1,11 @@
+<svg width="448" height="448" viewBox="0 0 448 448" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="160" width="128" height="128" fill="#6A7EAC" fill-opacity="0.4"/>
+<rect y="160" width="128" height="128" fill="#6A7EAC" fill-opacity="0.4"/>
+<rect x="160" y="160" width="128" height="128" fill="#6A7EAC" fill-opacity="0.4"/>
+<rect x="320" y="160" width="128" height="128" fill="#6A7EAC" fill-opacity="0.4"/>
+<rect x="160" y="320" width="128" height="128" fill="#6A7EAC" fill-opacity="0.4"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M32 0C14.3269 0 0 14.3269 0 32V128H20V36C20 27.1634 27.1634 20 36 20H128V0H32Z" fill="#6A7EAC" fill-opacity="0.4"/>
+<path d="M40 48C40 43.5817 43.5817 40 48 40H128V128H40V48Z" fill="#6A7EAC" fill-opacity="0.4"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M416 448C433.673 448 448 433.673 448 416V320H428V412C428 420.837 420.837 428 412 428H320L320 448H416Z" fill="#6A7EAC" fill-opacity="0.4"/>
+<path d="M408 400C408 404.418 404.418 408 400 408H320V320H408V400Z" fill="#6A7EAC" fill-opacity="0.4"/>
+</svg>
