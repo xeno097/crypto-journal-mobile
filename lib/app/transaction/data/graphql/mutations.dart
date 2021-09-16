@@ -3,7 +3,7 @@ const CREATE_TRANSACTION_MUTATION = '''
 mutation createTransactions(\$input: CreateTransactionInput!){
   createTransaction(input: \$input){
     __typename
-    ... on Transaction{
+    ... on Transaction {
       id
       coinSymbol
       coins
@@ -11,15 +11,32 @@ mutation createTransactions(\$input: CreateTransactionInput!){
       fee
       coinPrice
       date
-      operation{
-        __typename
-        ... on Operation{
+      operation {
+        ... on Operation {
           id
           name
           slug
           type
         }
-        ... on ApiError{
+        ... on ApiError {
+          code
+          message
+          errors {
+            field
+            message
+          }
+        }
+      }
+      cryptoCurrency {
+        __typename
+        ... on CryptoCurrency {
+          id
+          name
+          symbol
+          price
+          icon
+        }
+        ... on ApiError {
           code
           message
           errors {
@@ -29,10 +46,10 @@ mutation createTransactions(\$input: CreateTransactionInput!){
         }
       }
     }
-    ... on ApiError{
+    ... on ApiError {
       code
       message
-      errors{
+      errors {
         field
         message
       }
