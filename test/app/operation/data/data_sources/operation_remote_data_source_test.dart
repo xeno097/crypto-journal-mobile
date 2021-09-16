@@ -15,7 +15,8 @@ import 'operation_remote_data_source_test.mocks.dart';
 void main() {
   late MockIGraphqlClient graphqlAuthClient;
   late OperationRemoteDataSource operationRemoteDataSource;
-  final operationJson = json.decode(fixtureReader("operation_fixture.json"));
+  final operationJson =
+      json.decode(fixtureReader("operations/operation_fixture.json"));
 
   setUp(() {
     graphqlAuthClient = MockIGraphqlClient();

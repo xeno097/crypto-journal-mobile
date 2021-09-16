@@ -18,7 +18,7 @@ void main() {
     fee: 0,
     operation: OperationModel.fromJson(
       json.decode(
-        fixtureReader("operation_fixture.json"),
+        fixtureReader("operations/operation_fixture.json"),
       ),
     ),
     cryptoCurrency: CryptoCurrencyModel.fromJson(

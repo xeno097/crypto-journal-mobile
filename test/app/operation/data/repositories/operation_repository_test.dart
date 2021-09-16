@@ -25,7 +25,7 @@ void main() {
   late OperationRepository operationRepository;
   final getOperationsResult = [
     OperationModel.fromJson(
-        json.decode(fixtureReader("operation_fixture.json")))
+        json.decode(fixtureReader("operations/operation_fixture.json")))
   ];
 
   setUp(() {
