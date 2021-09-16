@@ -1,6 +1,6 @@
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/services/transaction_service.dart';
-import 'package:crypto_journal_mobile/shared/errors/functions/handle_error.dart';
+import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider_error_result.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final getTransactionsProvider =

@@ -16,7 +16,7 @@ class EventStateNotifier extends StateNotifier<EventState> {
           InitialEventState(),
         );
 
-  void setErrorState(EventState state) {
+  void setEventState(EventState state) {
     this.state = state;
   }
 }

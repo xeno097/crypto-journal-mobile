@@ -1,7 +1,8 @@
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/services/transaction_service.dart';
 import 'package:crypto_journal_mobile/shared/errors/api_error/api_error.dart';
-import 'package:crypto_journal_mobile/shared/errors/functions/handle_error.dart';
+import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider_error_result.dart';
+import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider_success_result.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum CreateTransactionResult {
@@ -41,6 +42,9 @@ final createTransactionProvider = FutureProvider.autoDispose
       err,
       callback: () => CreateTransactionResult.TransactionNotCreated,
     ),
-    (createdTransaction) => CreateTransactionResult.CreatedTransaction,
+    (createdTransaction) => handleProviderSuccessResult(
+      ref,
+      () => CreateTransactionResult.CreatedTransaction,
+    ),
   );
 });
