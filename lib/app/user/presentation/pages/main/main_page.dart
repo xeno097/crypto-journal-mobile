@@ -12,16 +12,22 @@ class MainPage extends StatelessWidget {
     print("MainPage");
 
     return DefaultPageContainer(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SectionHeader(
-              title: "Home",
+      child: Column(
+        children: [
+          SectionHeader(
+            title: "Home",
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  BalanceInfoCard(),
+                  HoldingInfoList(),
+                ],
+              ),
             ),
-            BalanceInfoCard(),
-            HoldingInfoList(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

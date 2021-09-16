@@ -5,6 +5,7 @@ import 'package:crypto_journal_mobile/shared/functions/launch_url.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/group_section/group_section.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/group_section/group_section_tile.dart';
+import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ class SettingsSection extends StatelessWidget {
                   height: defaultListElementPadding,
                 ),
                 LogOutButton(),
+                LastListElement(),
               ],
             );
           },

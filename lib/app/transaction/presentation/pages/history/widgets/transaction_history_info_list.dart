@@ -2,6 +2,7 @@ import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/get_transactions_provider.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
+import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
 import "package:flutter/material.dart";
@@ -33,7 +34,10 @@ class TransactionHistoryInfoList extends StatelessWidget {
         return userDto.when(
           data: (data) => Container(
             child: Column(
-              children: this._buildTransactionHistoryList(data),
+              children: [
+                ...this._buildTransactionHistoryList(data),
+                LastListElement(),
+              ],
             ),
           ),
           loading: () => DefaultCircularProgressIndicator(),
