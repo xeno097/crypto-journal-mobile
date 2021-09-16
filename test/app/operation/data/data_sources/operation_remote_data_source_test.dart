@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:crypto_journal_mobile/app/operation/data/data_sources/operation_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/operation/queries.dart';
+import 'package:crypto_journal_mobile/app/operation/data/graphql/queries.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
