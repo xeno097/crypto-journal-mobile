@@ -1,5 +1,6 @@
 import 'package:crypto_journal_mobile/app/transaction/data/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
@@ -7,7 +8,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ITransactionService {
-  Future<Either<BaseError, List<TransactionDto>>> getTransactions();
+  Future<Either<BaseError, List<TransactionDto>>> getTransactions(
+    GetTransactionsDto getTransactionsDto,
+  );
   Future<Either<BaseError, TransactionDto>> createTransaction(
     CreateTransactionDto createTransactionDto,
   );
@@ -40,7 +43,11 @@ class TransactionService implements ITransactionService {
   }
 
   @override
-  Future<Either<BaseError, List<TransactionDto>>> getTransactions() async {
-    return await this._transactionRepository.getTransactions();
+  Future<Either<BaseError, List<TransactionDto>>> getTransactions(
+    GetTransactionsDto getTransactionsDto,
+  ) async {
+    return await this._transactionRepository.getTransactions(
+          getTransactionsDto,
+        );
   }
 }

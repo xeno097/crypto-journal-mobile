@@ -1,6 +1,7 @@
 import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transaction_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
@@ -66,7 +67,9 @@ class TransactionRepository extends BaseRepository
   }
 
   @override
-  Future<Either<BaseError, List<TransactionDto>>> getTransactions() async {
+  Future<Either<BaseError, List<TransactionDto>>> getTransactions(
+    GetTransactionsDto getTransactionsDto,
+  ) async {
     return await this.safeRequestHandler(() async {
       final bool connectionStatus = await this._networkInfo.isConnected;
 
