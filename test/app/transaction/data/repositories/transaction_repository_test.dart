@@ -5,6 +5,7 @@ import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transac
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
@@ -48,6 +49,11 @@ void main() {
     operation: "1",
   );
 
+  final getTransactionsDto = GetTransactionsDto(
+    start: 0,
+    limit: 15,
+  );
+
   final getTransactionsResult = [
     transactionDto,
     transactionDto,
@@ -86,7 +92,7 @@ void main() {
       setSuccessMock();
 
       // act
-      await transactionRepository.getTransactions();
+      await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       verify(networkInfoMock.isConnected);
@@ -99,7 +105,8 @@ void main() {
       setSuccessMock();
 
       // act
-      final res = await transactionRepository.getTransactions();
+      final res =
+          await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       verify(transactionRemoteDataSource.getTransactions());
@@ -113,7 +120,7 @@ void main() {
       setFailureMock();
 
       // act
-      await transactionRepository.getTransactions();
+      await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       verifyZeroInteractions(transactionRemoteDataSource);
@@ -125,7 +132,8 @@ void main() {
       setFailureMock();
 
       // act
-      final res = await transactionRepository.getTransactions();
+      final res =
+          await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       expect(res, equals(Left(NetworkConnectionError())));
@@ -137,7 +145,8 @@ void main() {
       when(networkInfoMock.isConnected).thenThrow(Exception());
 
       // act
-      final res = await transactionRepository.getTransactions();
+      final res =
+          await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       expect(res, equals(Left(UnexpectedError())));
