@@ -27,23 +27,25 @@ class TransactionHistoryInfoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, watch, child) {
-        final userDto = watch(getTransactionsProvider);
+    return SingleChildScrollView(
+      child: Consumer(
+        builder: (context, watch, child) {
+          final userDto = watch(getTransactionsProvider);
 
-        return userDto.when(
-          data: (data) => Container(
-            child: Column(
-              children: [
-                ...this._buildTransactionHistoryList(data),
-                LastListElement(),
-              ],
+          return userDto.when(
+            data: (data) => Container(
+              child: Column(
+                children: [
+                  ...this._buildTransactionHistoryList(data),
+                  LastListElement(),
+                ],
+              ),
             ),
-          ),
-          loading: () => DefaultCircularProgressIndicator(),
-          error: (err, _) => ErrorPlaceholder(),
-        );
-      },
+            loading: () => DefaultCircularProgressIndicator(),
+            error: (err, _) => ErrorPlaceholder(),
+          );
+        },
+      ),
     );
   }
 }
