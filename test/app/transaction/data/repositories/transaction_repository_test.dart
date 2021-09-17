@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transaction_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
@@ -49,9 +50,17 @@ void main() {
     operation: "1",
   );
 
+  final start = 0;
+  final limit = 15;
+
   final getTransactionsDto = GetTransactionsDto(
-    start: 0,
-    limit: 15,
+    start: start,
+    limit: limit,
+  );
+
+  final getTransactionsInput = GetTransactionsInput(
+    start: start,
+    limit: limit,
   );
 
   final getTransactionsResult = [
@@ -82,7 +91,7 @@ void main() {
   group('TransactionRepository.getTransactions', () {
     setSuccessMock() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
-      when(transactionRemoteDataSource.getTransactions())
+      when(transactionRemoteDataSource.getTransactions(any))
           .thenAnswer((_) async => Future.value(getTransactionsResult));
     }
 
@@ -109,7 +118,7 @@ void main() {
           await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
-      verify(transactionRemoteDataSource.getTransactions());
+      verify(transactionRemoteDataSource.getTransactions(getTransactionsInput));
       expect(res, Right(getTransactionsResult));
     });
 

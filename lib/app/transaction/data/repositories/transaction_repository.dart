@@ -1,5 +1,6 @@
 import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transaction_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
@@ -77,7 +78,14 @@ class TransactionRepository extends BaseRepository
         throw NetworkConnectionException();
       }
 
-      return await this._transactionRemoteDataSource.getTransactions();
+      final getTransactionsInput = GetTransactionsInput(
+        start: getTransactionsDto.start,
+        limit: getTransactionsDto.limit,
+      );
+
+      return await this
+          ._transactionRemoteDataSource
+          .getTransactions(getTransactionsInput);
     });
   }
 }
