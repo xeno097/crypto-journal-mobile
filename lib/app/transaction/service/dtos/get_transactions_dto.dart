@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/shared/constants/constants.dart';
 import 'package:equatable/equatable.dart';
 
 class GetTransactionsDto extends Equatable {
@@ -5,8 +6,8 @@ class GetTransactionsDto extends Equatable {
   final int limit;
 
   GetTransactionsDto({
-    required this.start,
-    required this.limit,
+    this.start = DEFAULT_APP_PAGINATION_START,
+    this.limit = DEFAULT_APP_PAGINATION_LIMIT,
   });
 
   @override

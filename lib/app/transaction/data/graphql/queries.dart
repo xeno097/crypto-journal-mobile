@@ -1,7 +1,7 @@
 const GET_TRANSACTIONS_DATA_KEY = "getSelfTransactions";
 const GET_TRANSACTIONS_QUERY = ''' 
-query getSelfTransactions {
-  getSelfTransactions {
+query getSelfTransactions(\$input: FilterInput) {
+  getSelfTransactions(input: \$input) {
     __typename
     ... on Transaction {
       id
