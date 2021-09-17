@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/shared/widgets/buttons/default_drop_down_button.dart';
 import 'package:equatable/equatable.dart';
 
 enum OperationType {
@@ -5,7 +6,7 @@ enum OperationType {
   SELL,
 }
 
-class OperationDto extends Equatable {
+class OperationDto extends Equatable implements DropDownListItem {
   final String id;
   final String name;
   final String slug;

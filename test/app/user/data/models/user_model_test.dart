@@ -30,7 +30,7 @@ void main() {
         () {
       // arrange
       final Map<String, dynamic> jsonMap =
-          json.decode(fixtureReader("user_fixture.json"));
+          json.decode(fixtureReader("user/user_fixture.json"));
 
       // act
       final res = UserModel.fromJson(jsonMap);
@@ -44,8 +44,8 @@ void main() {
         () {
       // arrange
 
-      final Map<String, dynamic> jsonMap =
-          json.decode(fixtureReader("user_with_missing_email_fixture.json"));
+      final Map<String, dynamic> jsonMap = json
+          .decode(fixtureReader("user/user_with_missing_email_fixture.json"));
 
       // act
       final res = UserModel.fromJson(jsonMap);

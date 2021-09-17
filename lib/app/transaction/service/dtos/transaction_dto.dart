@@ -1,3 +1,4 @@
+import 'package:crypto_journal_mobile/app/crypto_currency/service/dtos/crypto_currency_dto.dart';
 import 'package:crypto_journal_mobile/app/operation/service/dtos/operation_dto.dart';
 import 'package:equatable/equatable.dart';
 
@@ -9,6 +10,7 @@ class TransactionDto extends Equatable {
   final double fee;
   final String date;
   final OperationDto operation;
+  final CryptoCurrencyDto cryptoCurrencyDto;
 
   TransactionDto({
     required this.id,
@@ -18,6 +20,7 @@ class TransactionDto extends Equatable {
     required this.fee,
     required this.date,
     required this.operation,
+    required this.cryptoCurrencyDto,
   });
 
   @override

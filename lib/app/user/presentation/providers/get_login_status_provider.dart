@@ -1,15 +1,25 @@
 import 'package:crypto_journal_mobile/app/user/service/services/user_service.dart';
+import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider_error_result.dart';
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
-final getLoginStatusProvider = FutureProvider.autoDispose<bool>((ref) async {
+enum AuthStatus {
+  SignedIn,
+  NotSignedIn,
+}
+
+final getLoginStatusProvider = FutureProvider.autoDispose<AuthStatus>((
+  ProviderReference ref,
+) async {
   final userService = await ref.read(userServiceProvider.future);
 
   final res = await userService.getLoggedUser();
 
-  final bool loginStatus = res.fold(
-    (err) => false,
-    (data) => true,
+  return res.fold(
+    (err) => handleProviderErrorResult<AuthStatus>(
+      ref,
+      err,
+      callback: () => AuthStatus.NotSignedIn,
+    ),
+    (data) => AuthStatus.SignedIn,
   );
-
-  return loginStatus;
 });

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:crypto_journal_mobile/app/operation/data/data_sources/operation_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/operation/data/models/operation_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
-import 'package:crypto_journal_mobile/shared/data/graphql/operation/queries.dart';
+import 'package:crypto_journal_mobile/app/operation/data/graphql/queries.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -15,7 +15,8 @@ import 'operation_remote_data_source_test.mocks.dart';
 void main() {
   late MockIGraphqlClient graphqlAuthClient;
   late OperationRemoteDataSource operationRemoteDataSource;
-  final operationJson = json.decode(fixtureReader("operation_fixture.json"));
+  final operationJson =
+      json.decode(fixtureReader("operations/operation_fixture.json"));
 
   setUp(() {
     graphqlAuthClient = MockIGraphqlClient();

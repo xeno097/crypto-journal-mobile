@@ -4,7 +4,7 @@ import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class IBalanceRepository {
-  Future<Either<BaseError, BalanceDto>> getBalance({
-    required GetBalanceDto getBalanceDto,
-  });
+  Future<Either<BaseError, BalanceDto>> getBalance(
+    GetBalanceDto getBalanceDto,
+  );
 }

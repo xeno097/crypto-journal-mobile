@@ -1,8 +1,10 @@
-import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history/history_page.dart';
+import 'package:crypto_journal_mobile/app/auth/presentation/pages/settings/settings_page.dart';
+import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history/transaction_history_page.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/main/main_page.dart';
-import 'package:crypto_journal_mobile/app/user/presentation/pages/settings/settings_page.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
+import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/buttons/base_button.dart';
+import 'package:crypto_journal_mobile/shared/widgets/scaffold/default_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,30 +16,34 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        backgroundColor: backGroundColorPrimary,
-        body: Container(
-          child: TabBarView(
-            children: [
-              MainPage(),
-              HistoryPage(),
-              SettingsPage(),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(21.0),
-          child: BaseButton(
-            backGroundColor: backGroundColorSecondary,
-            child: TabBar(
-              indicatorColor: Colors.transparent,
-              tabs: [
-                Icon(Icons.home),
-                Icon(Icons.sync),
-                Icon(Icons.account_circle)
+      child: DefaultScaffold(
+        child: Stack(
+          children: [
+            TabBarView(
+              children: [
+                MainPage(),
+                TransactionHistoryPage(),
+                SettingsPage(),
               ],
             ),
-          ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              padding: const EdgeInsets.only(
+                bottom: defaultPagePadding,
+              ),
+              child: BaseButton(
+                child: TabBar(
+                  indicatorColor: Colors.transparent,
+                  unselectedLabelColor: textColorSecondary,
+                  tabs: [
+                    Icon(Icons.home),
+                    Icon(Icons.sync),
+                    Icon(Icons.account_circle)
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
