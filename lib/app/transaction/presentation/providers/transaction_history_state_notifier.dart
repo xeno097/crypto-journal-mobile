@@ -23,7 +23,7 @@ class TransactionHistoryStateNotifier
   List<TransactionDto> _transactions = [];
 
   TransactionHistoryStateNotifier({
-    required providerReference,
+    required ProviderReference providerReference,
   }) : super(
           InitialTransactionHistoryState(),
         ) {
