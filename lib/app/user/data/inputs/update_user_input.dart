@@ -1,16 +1,13 @@
-import 'package:equatable/equatable.dart';
+import 'package:crypto_journal_mobile/app/user/service/dtos/update_user_dto.dart';
 
-class UpdateUserInput extends Equatable {
-  final String? userName;
-  final String? profilePicture;
-
+class UpdateUserInput extends UpdateUserDto {
   UpdateUserInput({
-    this.userName,
-    this.profilePicture,
-  });
-
-  @override
-  List<Object?> get props => [this.userName, this.userName];
+    String? userName,
+    String? profilePicture,
+  }) : super(
+          profilePicture: profilePicture,
+          userName: userName,
+        );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> jsonMap = {};
