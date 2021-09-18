@@ -7,12 +7,14 @@ import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final transactionHistoryStateNotifierProvider = StateNotifierProvider
-    .autoDispose<TransactionHistoryStateNotifier, TransactionHistoryState>((
-  ProviderReference ref,
-) =>
-        TransactionHistoryStateNotifier(
-          providerReference: ref,
-        ));
+    .autoDispose<TransactionHistoryStateNotifier, TransactionHistoryState>(
+  (
+    ProviderReference ref,
+  ) =>
+      TransactionHistoryStateNotifier(
+    providerReference: ref,
+  ),
+);
 
 class TransactionHistoryStateNotifier
     extends StateNotifier<TransactionHistoryState> {

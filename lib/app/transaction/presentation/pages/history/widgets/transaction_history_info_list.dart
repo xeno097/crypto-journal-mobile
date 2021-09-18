@@ -64,6 +64,10 @@ class _TransactionHistoryInfoListState
         builder: (context, watch, child) {
           final state = watch(transactionHistoryStateNotifierProvider);
 
+          if (state is InitialTransactionHistoryState) {
+            return DefaultCircularProgressIndicator();
+          }
+
           if (state is LoadingTransactionHistoryState) {
             return Container(
               child: Column(
