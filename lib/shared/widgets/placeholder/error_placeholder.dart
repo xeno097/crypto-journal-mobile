@@ -13,7 +13,6 @@ class ErrorPlaceholder extends StatelessWidget {
       child: BaseLayoutContainer(
         builder: (context, size) {
           final height = size.height;
-          print(height);
 
           return Center(
             child: Text(
