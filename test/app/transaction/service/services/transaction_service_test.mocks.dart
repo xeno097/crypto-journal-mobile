@@ -5,6 +5,8 @@
 import 'dart:async' as _i4;
 
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart'
+    as _i8;
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart'
     as _i7;
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart'
     as _i6;
@@ -34,16 +36,17 @@ class MockITransactionRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.BaseError, List<_i6.TransactionDto>>>
-      getTransactions() => (super.noSuchMethod(
-          Invocation.method(#getTransactions, []),
+  _i4.Future<_i2.Either<_i5.BaseError, List<_i6.TransactionDto>>> getTransactions(
+          _i7.GetTransactionsDto? getTransactionsDto) =>
+      (super.noSuchMethod(
+          Invocation.method(#getTransactions, [getTransactionsDto]),
           returnValue: Future<
                   _i2.Either<_i5.BaseError, List<_i6.TransactionDto>>>.value(
               _FakeEither_0<_i5.BaseError, List<_i6.TransactionDto>>())) as _i4
           .Future<_i2.Either<_i5.BaseError, List<_i6.TransactionDto>>>);
   @override
   _i4.Future<_i2.Either<_i5.BaseError, _i6.TransactionDto>> createTransaction(
-          _i7.CreateTransactionDto? createTransactionDto) =>
+          _i8.CreateTransactionDto? createTransactionDto) =>
       (super.noSuchMethod(
               Invocation.method(#createTransaction, [createTransactionDto]),
               returnValue:

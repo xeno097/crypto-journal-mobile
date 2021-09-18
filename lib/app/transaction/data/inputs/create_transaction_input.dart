@@ -1,31 +1,21 @@
-import 'package:equatable/equatable.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
 
-class CreateTransactionInput extends Equatable {
-  final String coinSymbol;
-  final double coins;
-  final double fee;
-  final double coinPrice;
-  final String date;
-  final String operation;
-
+class CreateTransactionInput extends CreateTransactionDto {
   CreateTransactionInput({
-    required this.coinSymbol,
-    required this.coins,
-    required this.fee,
-    required this.coinPrice,
-    required this.date,
-    required this.operation,
-  });
-
-  @override
-  List<Object?> get props => [
-        this.coinPrice,
-        this.coinSymbol,
-        this.coins,
-        this.date,
-        this.fee,
-        this.operation,
-      ];
+    required String coinSymbol,
+    required double coins,
+    required double fee,
+    required double coinPrice,
+    required String date,
+    required String operation,
+  }) : super(
+          coinPrice: coinPrice,
+          coinSymbol: coinSymbol,
+          coins: coins,
+          date: date,
+          fee: fee,
+          operation: operation,
+        );
 
   Map<String, dynamic> toJson() {
     return {
