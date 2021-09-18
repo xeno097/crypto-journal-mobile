@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transaction_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
 import 'package:crypto_journal_mobile/shared/errors/network/network_connection_error.dart';
@@ -48,6 +50,19 @@ void main() {
     operation: "1",
   );
 
+  final start = 0;
+  final limit = 15;
+
+  final getTransactionsDto = GetTransactionsDto(
+    start: start,
+    limit: limit,
+  );
+
+  final getTransactionsInput = GetTransactionsInput(
+    start: start,
+    limit: limit,
+  );
+
   final getTransactionsResult = [
     transactionDto,
     transactionDto,
@@ -76,7 +91,7 @@ void main() {
   group('TransactionRepository.getTransactions', () {
     setSuccessMock() {
       when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
-      when(transactionRemoteDataSource.getTransactions())
+      when(transactionRemoteDataSource.getTransactions(any))
           .thenAnswer((_) async => Future.value(getTransactionsResult));
     }
 
@@ -86,7 +101,7 @@ void main() {
       setSuccessMock();
 
       // act
-      await transactionRepository.getTransactions();
+      await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       verify(networkInfoMock.isConnected);
@@ -99,10 +114,11 @@ void main() {
       setSuccessMock();
 
       // act
-      final res = await transactionRepository.getTransactions();
+      final res =
+          await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
-      verify(transactionRemoteDataSource.getTransactions());
+      verify(transactionRemoteDataSource.getTransactions(getTransactionsInput));
       expect(res, Right(getTransactionsResult));
     });
 
@@ -113,7 +129,7 @@ void main() {
       setFailureMock();
 
       // act
-      await transactionRepository.getTransactions();
+      await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       verifyZeroInteractions(transactionRemoteDataSource);
@@ -125,7 +141,8 @@ void main() {
       setFailureMock();
 
       // act
-      final res = await transactionRepository.getTransactions();
+      final res =
+          await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       expect(res, equals(Left(NetworkConnectionError())));
@@ -137,7 +154,8 @@ void main() {
       when(networkInfoMock.isConnected).thenThrow(Exception());
 
       // act
-      final res = await transactionRepository.getTransactions();
+      final res =
+          await transactionRepository.getTransactions(getTransactionsDto);
 
       // assert
       expect(res, equals(Left(UnexpectedError())));

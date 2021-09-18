@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/services/transaction_service.dart';
 import 'package:dartz/dartz.dart';
@@ -31,6 +32,11 @@ void main() {
     operation: "1",
   );
 
+  final getTransactionsDto = GetTransactionsDto(
+    start: 0,
+    limit: 15,
+  );
+
   final getTransactionsResult = [
     transactionDto,
     transactionDto,
@@ -55,14 +61,14 @@ void main() {
         'should call the getTransactions method of the ITransactionRepository class',
         () async {
       // arrange
-      when(transactionRepository.getTransactions())
+      when(transactionRepository.getTransactions(any))
           .thenAnswer((_) => Future.value(Right(getTransactionsResult)));
 
       // act
-      final res = await transactionService.getTransactions();
+      final res = await transactionService.getTransactions(getTransactionsDto);
 
       // assert
-      verify(transactionRepository.getTransactions());
+      verify(transactionRepository.getTransactions(any));
       expect(res, equals(Right(getTransactionsResult)));
     });
   });

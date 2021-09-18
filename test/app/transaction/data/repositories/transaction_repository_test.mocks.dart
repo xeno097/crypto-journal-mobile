@@ -7,6 +7,8 @@ import 'dart:async' as _i4;
 import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transaction_remote_data_source.dart'
     as _i5;
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart'
+    as _i7;
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart'
     as _i6;
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart'
     as _i2;
@@ -51,14 +53,16 @@ class MockITransactionRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<List<_i2.TransactionModel>> getTransactions() =>
-      (super.noSuchMethod(Invocation.method(#getTransactions, []),
+  _i4.Future<List<_i2.TransactionModel>> getTransactions(
+          _i6.GetTransactionsInput? getTransactionsInput) =>
+      (super.noSuchMethod(
+              Invocation.method(#getTransactions, [getTransactionsInput]),
               returnValue: Future<List<_i2.TransactionModel>>.value(
                   <_i2.TransactionModel>[]))
           as _i4.Future<List<_i2.TransactionModel>>);
   @override
   _i4.Future<_i2.TransactionModel> createTransaction(
-          _i6.CreateTransactionInput? createTransactionDto) =>
+          _i7.CreateTransactionInput? createTransactionDto) =>
       (super.noSuchMethod(
               Invocation.method(#createTransaction, [createTransactionDto]),
               returnValue:

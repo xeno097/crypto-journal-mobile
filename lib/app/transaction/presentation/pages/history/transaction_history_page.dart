@@ -15,9 +15,7 @@ class TransactionHistoryPage extends StatelessWidget {
         children: [
           TransactionHistoryPageHeader(),
           Expanded(
-            child: SingleChildScrollView(
-              child: TransactionHistoryInfoList(),
-            ),
+            child: TransactionHistoryInfoList(),
           ),
         ],
       ),

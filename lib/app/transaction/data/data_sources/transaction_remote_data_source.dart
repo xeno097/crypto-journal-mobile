@@ -1,13 +1,16 @@
 import 'package:crypto_journal_mobile/app/transaction/data/graphql/mutations.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/graphql/queries.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ITransactionRemoteDataSource {
-  Future<List<TransactionModel>> getTransactions();
+  Future<List<TransactionModel>> getTransactions(
+    GetTransactionsInput getTransactionsInput,
+  );
   Future<TransactionModel> createTransaction(
     CreateTransactionInput createTransactionDto,
   );
@@ -50,11 +53,15 @@ class TransactionRemoteDataSource implements ITransactionRemoteDataSource {
   }
 
   @override
-  Future<List<TransactionModel>> getTransactions() async {
+  Future<List<TransactionModel>> getTransactions(
+    GetTransactionsInput getTransactionsInput,
+  ) async {
     final List res = await this._graphqlAuthClient.query(
-          query: GET_TRANSACTIONS_QUERY,
-          dataKey: GET_TRANSACTIONS_DATA_KEY,
-        );
+        query: GET_TRANSACTIONS_QUERY,
+        dataKey: GET_TRANSACTIONS_DATA_KEY,
+        variables: {
+          "input": getTransactionsInput.toJson(),
+        });
 
     final ret = res
         .map(

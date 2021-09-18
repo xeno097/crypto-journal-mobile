@@ -4,6 +4,7 @@ import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transact
 import 'package:crypto_journal_mobile/app/transaction/data/graphql/mutations.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/graphql/queries.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -30,6 +31,18 @@ void main() {
     date: "12/02/2020",
     operation: "1",
   );
+
+  final start = 0;
+  final limit = 15;
+
+  final getTransactionsInput = GetTransactionsInput(
+    start: start,
+    limit: limit,
+  );
+
+  final getTransactionsGqlInput = {
+    "input": getTransactionsInput.toJson(),
+  };
 
   setUp(() {
     graphqlAuthClient = MockIGraphqlClient();
@@ -62,12 +75,15 @@ void main() {
       setSuccessMocks();
 
       // act
-      await transactionRemoteDataSource.getTransactions();
+      await transactionRemoteDataSource.getTransactions(
+        getTransactionsInput,
+      );
 
       // assert
       verify(graphqlAuthClient.query(
         query: GET_TRANSACTIONS_QUERY,
         dataKey: GET_TRANSACTIONS_DATA_KEY,
+        variables: getTransactionsGqlInput,
       ));
     });
 
@@ -81,12 +97,15 @@ void main() {
       ];
 
       // act
-      final res = await transactionRemoteDataSource.getTransactions();
+      final res = await transactionRemoteDataSource.getTransactions(
+        getTransactionsInput,
+      );
 
       // assert
       verify(graphqlAuthClient.query(
         query: GET_TRANSACTIONS_QUERY,
         dataKey: GET_TRANSACTIONS_DATA_KEY,
+        variables: getTransactionsGqlInput,
       ));
       expect(res, expectedResult);
     });
