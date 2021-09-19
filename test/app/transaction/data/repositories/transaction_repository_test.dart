@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transaction_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/delete_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/shared/data/network_info/network_info.dart';
@@ -48,6 +50,14 @@ void main() {
     coinPrice: 3709,
     date: "12/02/2020",
     operation: "1",
+  );
+
+  final deleteTransactionDto = DeleteTransactionDto(
+    id: transactionDto.id,
+  );
+
+  final deleteTransactionInput = DeleteTransactionInput(
+    id: transactionDto.id,
   );
 
   final start = 0;
@@ -231,6 +241,81 @@ void main() {
       // act
       final res =
           await transactionRepository.createTransaction(createTransactionDto);
+
+      // assert
+      expect(res, equals(Left(UnexpectedError())));
+    });
+  });
+
+  group('TransactionRepository.deleteTransaction', () {
+    setSuccessMock() {
+      when(networkInfoMock.isConnected).thenAnswer((_) => Future.value(true));
+      when(transactionRemoteDataSource.deleteTransaction(any))
+          .thenAnswer((_) async => Future.value(transactionDto));
+    }
+
+    test('should call the isConnected method of the INetworkInfo class',
+        () async {
+      // arrange
+      setSuccessMock();
+
+      // act
+      await transactionRepository.deleteTransaction(deleteTransactionDto);
+
+      // assert
+      verify(networkInfoMock.isConnected);
+    });
+
+    test(
+        'should call the deleteTransaction method of the ITransactionRemoteDataSource class if the connection is ok',
+        () async {
+      // arrange
+      setSuccessMock();
+
+      // act
+      final res =
+          await transactionRepository.deleteTransaction(deleteTransactionDto);
+
+      // assert
+      verify(transactionRemoteDataSource
+          .deleteTransaction(deleteTransactionInput));
+      expect(res, Right(transactionDto));
+    });
+
+    test(
+        'should not call the getTransactions method of the ITransactionRemoteDataSource class if the connection is not ok ',
+        () async {
+      // arrange
+      setFailureMock();
+
+      // act
+      await transactionRepository.deleteTransaction(deleteTransactionDto);
+
+      // assert
+      verifyZeroInteractions(transactionRemoteDataSource);
+    });
+
+    test('should return NetworkConnectionError if the connection is not ok ',
+        () async {
+      // arrange
+      setFailureMock();
+
+      // act
+      final res =
+          await transactionRepository.deleteTransaction(deleteTransactionDto);
+
+      // assert
+      expect(res, equals(Left(NetworkConnectionError())));
+    });
+
+    test('should return an UnexpectedError if an uncaught exption occurs',
+        () async {
+      // arrange
+      when(networkInfoMock.isConnected).thenThrow(Exception());
+
+      // act
+      final res =
+          await transactionRepository.deleteTransaction(deleteTransactionDto);
 
       // assert
       expect(res, equals(Left(UnexpectedError())));
