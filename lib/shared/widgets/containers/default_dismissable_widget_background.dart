@@ -14,6 +14,15 @@ class DefaultDismissableWidgetBackground extends StatelessWidget {
     this.color = googleButtonBackGroundColor,
   }) : super(key: key);
 
+  Widget _buildLabel(double height) {
+    return Text(
+      this.label,
+      style: defaultTextStyle.copyWith(
+        fontSize: height * (primaryTextStyleSize / defaultHeight),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,13 +34,10 @@ class DefaultDismissableWidgetBackground extends StatelessWidget {
           final height = size.height;
 
           return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                this.label,
-                style: defaultTextStyle.copyWith(
-                  fontSize: height * (primaryTextStyleSize / defaultHeight),
-                ),
-              ),
+              this._buildLabel(height),
+              this._buildLabel(height),
             ],
           );
         },
