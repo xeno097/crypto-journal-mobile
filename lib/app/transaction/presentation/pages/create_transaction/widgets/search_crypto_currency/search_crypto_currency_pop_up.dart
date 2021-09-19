@@ -96,11 +96,19 @@ class _SearchCryptoCurrencyPopUpState extends State<SearchCryptoCurrencyPopUp> {
 
                     if (state is InitialSearchCryptoCurrencyState ||
                         state is LoadingSearchCryptoCurrencyState) {
-                      return DefaultCircularProgressIndicator();
+                      return Column(
+                        children: [
+                          DefaultCircularProgressIndicator(),
+                        ],
+                      );
                     }
 
                     if (state is ErrorSearchCryptoCurrencyState) {
-                      return ErrorPlaceholder();
+                      return Column(
+                        children: [
+                          ErrorPlaceholder(),
+                        ],
+                      );
                     }
 
                     final cryptoCurrencies = state.cryptoCurrencies;
