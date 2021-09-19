@@ -28,15 +28,19 @@ class DefaultScaffold extends StatelessWidget {
       ) {
         if (state is SuccessEventState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            buildEventSnackBar(message: state.message),
+            buildEventSnackBar(
+              message: state.message,
+              callBackAction: state.action,
+            ),
           );
         }
 
         if (state is ErrorEventState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildEventSnackBar(
-                color: googleButtonBackGroundColor,
-                message: state.error.message),
+              color: googleButtonBackGroundColor,
+              message: state.error.message,
+            ),
           );
         }
       },
