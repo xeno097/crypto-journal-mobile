@@ -80,8 +80,17 @@ class TransactionRemoteDataSource implements ITransactionRemoteDataSource {
   @override
   Future<TransactionModel> deleteTransaction(
     DeleteTransactionInput deleteTransactionInput,
-  ) {
-    // TODO: implement deleteTransaction
-    throw UnimplementedError();
+  ) async {
+    final Map<String, dynamic> res = await this._graphqlAuthClient.mutate(
+      mutation: DELETE_TRANSACTION_MUTATION,
+      dataKey: DELETE_TRANSACTION_DATA_KEY,
+      variables: {
+        "input": deleteTransactionInput.id,
+      },
+    );
+
+    final ret = TransactionModel.fromJson(res);
+
+    return ret;
   }
 }
