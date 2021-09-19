@@ -111,14 +111,14 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
           children: [
             CreateTransactionPageHeader(),
             Expanded(
-              child: SingleChildScrollView(
-                child: Consumer(
-                  builder: (context, watch, child) {
-                    final request = watch(getOperationsProvider);
+              child: Consumer(
+                builder: (context, watch, child) {
+                  final request = watch(getOperationsProvider);
 
-                    return request.when(
-                      data: (value) {
-                        return Column(
+                  return request.when(
+                    data: (value) {
+                      return SingleChildScrollView(
+                        child: Column(
                           children: [
                             CreateTransactionPriceInfoHeader(
                               total: this._total,
@@ -143,13 +143,13 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                               onTap: this._createTransaction,
                             )
                           ],
-                        );
-                      },
-                      loading: () => DefaultCircularProgressIndicator(),
-                      error: (err, _) => ErrorPlaceholder(),
-                    );
-                  },
-                ),
+                        ),
+                      );
+                    },
+                    loading: () => DefaultCircularProgressIndicator(),
+                    error: (err, _) => ErrorPlaceholder(),
+                  );
+                },
               ),
             ),
           ],
