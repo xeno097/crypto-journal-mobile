@@ -1,6 +1,7 @@
 import 'package:crypto_journal_mobile/app/transaction/data/graphql/mutations.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/graphql/queries.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/delete_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_auth_client.dart';
@@ -13,6 +14,10 @@ abstract class ITransactionRemoteDataSource {
   );
   Future<TransactionModel> createTransaction(
     CreateTransactionInput createTransactionDto,
+  );
+
+  Future<TransactionModel> deleteTransaction(
+    DeleteTransactionInput deleteTransactionInput,
   );
 }
 
@@ -70,5 +75,13 @@ class TransactionRemoteDataSource implements ITransactionRemoteDataSource {
         .toList();
 
     return ret;
+  }
+
+  @override
+  Future<TransactionModel> deleteTransaction(
+    DeleteTransactionInput deleteTransactionInput,
+  ) {
+    // TODO: implement deleteTransaction
+    throw UnimplementedError();
   }
 }
