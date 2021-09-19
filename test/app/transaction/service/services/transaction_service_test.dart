@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/services/transaction_service.dart';
@@ -32,6 +33,10 @@ void main() {
     operation: "1",
   );
 
+  final deleteTransactionDto = DeleteTransactionDto(
+    id: transactionDto.id,
+  );
+
   final getTransactionsDto = GetTransactionsDto(
     start: 0,
     limit: 15,
@@ -56,7 +61,7 @@ void main() {
     });
   });
 
-  group("TransactionService.getOperations", () {
+  group("TransactionService.getTransactions", () {
     test(
         'should call the getTransactions method of the ITransactionRepository class',
         () async {
@@ -87,6 +92,24 @@ void main() {
 
       // assert
       verify(transactionRepository.createTransaction(createTransactionDto));
+      expect(res, equals(Right(transactionDto)));
+    });
+  });
+
+  group("TransactionService.deleteTransaction", () {
+    test(
+        'should call the deleteTransaction method of the ITransactionRepository class',
+        () async {
+      // arrange
+      when(transactionRepository.deleteTransaction(any))
+          .thenAnswer((_) => Future.value(Right(transactionDto)));
+
+      // act
+      final res =
+          await transactionService.deleteTransaction(deleteTransactionDto);
+
+      // assert
+      verify(transactionRepository.deleteTransaction(deleteTransactionDto));
       expect(res, equals(Right(transactionDto)));
     });
   });
