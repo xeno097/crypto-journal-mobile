@@ -1,5 +1,6 @@
 import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transaction_remote_data_source.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/delete_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
@@ -93,8 +94,21 @@ class TransactionRepository extends BaseRepository
   @override
   Future<Either<BaseError, TransactionDto>> deleteTransaction(
     DeleteTransactionDto deleteTransactionDto,
-  ) {
-    // TODO: implement deleteTransaction
-    throw UnimplementedError();
+  ) async {
+    return await this.safeRequestHandler(() async {
+      final bool connectionStatus = await this._networkInfo.isConnected;
+
+      if (!connectionStatus) {
+        throw NetworkConnectionException();
+      }
+
+      final deleteTransactionInput = DeleteTransactionInput(
+        id: deleteTransactionDto.id,
+      );
+
+      return await this
+          ._transactionRemoteDataSource
+          .deleteTransaction(deleteTransactionInput);
+    });
   }
 }

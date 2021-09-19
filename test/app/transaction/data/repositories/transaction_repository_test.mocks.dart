@@ -8,6 +8,8 @@ import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transact
     as _i5;
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart'
     as _i7;
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/delete_transaction_input.dart'
+    as _i8;
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart'
     as _i6;
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart'
@@ -65,6 +67,14 @@ class MockITransactionRemoteDataSource extends _i1.Mock
           _i7.CreateTransactionInput? createTransactionDto) =>
       (super.noSuchMethod(
               Invocation.method(#createTransaction, [createTransactionDto]),
+              returnValue:
+                  Future<_i2.TransactionModel>.value(_FakeTransactionModel_0()))
+          as _i4.Future<_i2.TransactionModel>);
+  @override
+  _i4.Future<_i2.TransactionModel> deleteTransaction(
+          _i8.DeleteTransactionInput? deleteTransactionInput) =>
+      (super.noSuchMethod(
+              Invocation.method(#deleteTransaction, [deleteTransactionInput]),
               returnValue:
                   Future<_i2.TransactionModel>.value(_FakeTransactionModel_0()))
           as _i4.Future<_i2.TransactionModel>);
