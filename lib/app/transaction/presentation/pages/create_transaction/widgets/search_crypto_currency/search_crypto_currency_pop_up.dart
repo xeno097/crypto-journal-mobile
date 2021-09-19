@@ -1,4 +1,5 @@
-import 'package:crypto_journal_mobile/app/crypto_currency/presentation/providers/search_crypto_currency_provider.dart';
+import 'package:crypto_journal_mobile/app/crypto_currency/presentation/providers/search_crypto_currency_state.dart';
+import 'package:crypto_journal_mobile/app/crypto_currency/presentation/providers/search_crypto_currency_state_notifier.dart';
 import 'package:crypto_journal_mobile/app/crypto_currency/service/dtos/crypto_currency_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/search_crypto_currency/search_crypto_currency_list_tile.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
@@ -8,6 +9,7 @@ import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
+import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
 import 'package:crypto_journal_mobile/shared/widgets/inputs/default_text_input.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
@@ -55,23 +57,6 @@ class _SearchCryptoCurrencyPopUpState extends State<SearchCryptoCurrencyPopUp> {
     });
   }
 
-  List<Widget> _selectableListBuilder(List<CryptoCurrencyDto> items) {
-    final ret = items.map(
-      (cryptoCurrency) => DefaultListElementPadding(
-        child: GestureDetector(
-          onTap: () => this._setSelectedCryptoCurrency(
-            cryptoCurrency,
-          ),
-          child: SelectCyptoCurrencyListTile(
-            cryptoCurrencyDto: cryptoCurrency,
-          ),
-        ),
-      ),
-    );
-
-    return ret.toList();
-  }
-
   Widget _searcheablePopUpBuilder(BuildContext context) {
     return Material(
       color: Colors.transparent,
@@ -91,34 +76,60 @@ class _SearchCryptoCurrencyPopUpState extends State<SearchCryptoCurrencyPopUp> {
               child: DefaultTextBoxInput(
                 hintText: this.widget.hintText,
                 onChanged: (String value) {
-                  context.read(searchStringStateProvider).state = value;
+                  context
+                      .read(
+                        searchCryptoCurrencyStateNotifierProvider.notifier,
+                      )
+                      .searchCryptoCurrency(value);
                 },
               ),
             ),
             Expanded(
-              child: Consumer(
-                builder: (context, watch, child) {
-                  final request = watch(searchCryptoCurrencyProvider);
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: defaultContainerPadding,
+                ),
+                child: Consumer(
+                  builder: (context, watch, child) {
+                    final state =
+                        watch(searchCryptoCurrencyStateNotifierProvider);
 
-                  return request.when(
-                    data: (cryptoCurrencies) {
-                      return Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: defaultContainerPadding,
-                        ),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: _selectableListBuilder(
-                              cryptoCurrencies,
+                    if (state is InitialSearchCryptoCurrencyState ||
+                        state is LoadingSearchCryptoCurrencyState) {
+                      return DefaultCircularProgressIndicator();
+                    }
+
+                    if (state is ErrorSearchCryptoCurrencyState) {
+                      return ErrorPlaceholder();
+                    }
+
+                    final cryptoCurrencies = state.cryptoCurrencies;
+                    final cryptoCurrenciesLen = cryptoCurrencies.length;
+
+                    return ListView.builder(
+                      itemCount: cryptoCurrenciesLen + 1,
+                      itemBuilder: (context, index) {
+                        if (index == cryptoCurrenciesLen) {
+                          return LastListElement();
+                        }
+
+                        final cryptoCurrency = cryptoCurrencies[index];
+
+                        return DefaultListElementPadding(
+                          key: Key(cryptoCurrency.id),
+                          child: GestureDetector(
+                            onTap: () => this._setSelectedCryptoCurrency(
+                              cryptoCurrency,
+                            ),
+                            child: SelectCyptoCurrencyListTile(
+                              cryptoCurrencyDto: cryptoCurrency,
                             ),
                           ),
-                        ),
-                      );
-                    },
-                    loading: () => DefaultCircularProgressIndicator(),
-                    error: (err, _) => ErrorPlaceholder(),
-                  );
-                },
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ],
