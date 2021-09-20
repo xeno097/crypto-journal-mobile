@@ -16,6 +16,7 @@ void main() {
     cost: 10,
     date: "12/02/2020",
     fee: 0,
+    coinPrice: 3217,
     operation: OperationModel.fromJson(
       json.decode(
         fixtureReader("operations/operation_fixture.json"),

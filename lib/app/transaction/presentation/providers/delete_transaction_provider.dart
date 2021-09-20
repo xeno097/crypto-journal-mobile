@@ -53,7 +53,7 @@ Future _createDeletedTransaction(
     coinSymbol: transaction.coinSymbol,
     coins: transaction.coins,
     fee: transaction.fee,
-    coinPrice: transaction.cost - transaction.fee,
+    coinPrice: transaction.coinPrice,
     date: transaction.date,
     operation: transaction.operation.id,
   );
