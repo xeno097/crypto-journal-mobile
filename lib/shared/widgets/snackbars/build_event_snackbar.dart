@@ -19,10 +19,9 @@ SnackBar buildEventSnackBar({
   );
 }
 
-class DefaultSnackBarContent extends StatelessWidget {
+class DefaultSnackBarContent extends StatefulWidget {
   final String message;
   final CallBackAction? action;
-  final _snackBarHeightProp = 15.0;
 
   const DefaultSnackBarContent({
     Key? key,
@@ -30,25 +29,52 @@ class DefaultSnackBarContent extends StatelessWidget {
     required this.message,
   }) : super(key: key);
 
+  @override
+  _DefaultSnackBarContentState createState() => _DefaultSnackBarContentState();
+}
+
+class _DefaultSnackBarContentState extends State<DefaultSnackBarContent> {
+  String _message = "";
+  CallBackAction? _action;
+  bool _isActive = true;
+
+  @override
+  void initState() {
+    super.initState();
+    this._message = this.widget.message;
+    this._action = this.widget.action;
+  }
+
   Widget _buildText(String text, double height) {
     return Text(
       text,
       style: defaultTextStyle.copyWith(
-        fontSize: height * (primaryTextStyleSize / this._snackBarHeightProp),
+        fontSize: height * (primaryTextStyleSize / snackBarHeight),
       ),
     );
   }
 
-  Widget _buildCallbackActionWidget(double heigth) {
-    if (this.action == null) {
+  Widget _buildCallbackActionWidget(double height) {
+    if (this._action == null) {
       return Container();
     }
 
+    if (!this._isActive) {
+      return _buildText(
+        "Ok",
+        height,
+      );
+    }
+
     return GestureDetector(
-      onTap: this.action!.callback,
+      onTap: () {
+        this._action!.callback();
+        this._isActive = false;
+        setState(() {});
+      },
       child: _buildText(
-        this.action!.label,
-        heigth,
+        this._action!.label,
+        height,
       ),
     );
   }
@@ -56,18 +82,18 @@ class DefaultSnackBarContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseLayoutContainer(
-      heigthProp: this._snackBarHeightProp,
+      heigthProp: snackBarHeight,
       builder: (context, size) {
         final height = size.height;
 
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildText(
-              message,
+            this._buildText(
+              _message,
               height,
             ),
-            _buildCallbackActionWidget(
+            this._buildCallbackActionWidget(
               height,
             ),
           ],
