@@ -4,11 +4,16 @@ import 'package:crypto_journal_mobile/app/transaction/presentation/providers/tra
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state_notifier.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
+import 'package:crypto_journal_mobile/shared/classes/call_back_action.dart';
+import 'package:crypto_journal_mobile/shared/theme/colors.dart';
+import 'package:crypto_journal_mobile/shared/theme/constants.dart';
+import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_dismissable_widget_background.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
+import 'package:crypto_journal_mobile/shared/widgets/snackbars/build_event_snackbar.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -41,6 +46,28 @@ class _TransactionHistoryInfoListState
           )
           .fetchMore();
     }
+  }
+
+  Future<bool> _confirmRemoveTransaction(
+    DismissDirection direction,
+  ) async {
+    bool res = false;
+
+    await ScaffoldMessenger.of(context)
+        .showSnackBar(
+          DefaultSnackBarBuilder.buildSnackBar(
+            message: "Delete the item?",
+            action: CallBackAction(
+              label: "Yes",
+              callback: () {
+                res = true;
+              },
+            ),
+          ),
+        )
+        .closed;
+
+    return res;
   }
 
   Future<void> _removeTransaction(
@@ -109,8 +136,10 @@ class _TransactionHistoryInfoListState
                   direction: DismissToDeleteDirection.EndToStart,
                   label: "Delete",
                 ),
+                confirmDismiss: this._confirmRemoveTransaction,
                 onDismissed: (direction) async {
                   transactions.removeAt(index);
+                  setState(() {});
                   await this._removeTransaction(transaction);
                 },
                 child: TransactionInfoListTile(

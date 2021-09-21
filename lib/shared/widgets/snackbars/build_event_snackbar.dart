@@ -5,6 +5,35 @@ import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import 'package:flutter/material.dart';
 
+abstract class DefaultSnackBarBuilder {
+  static SnackBarAction? _getAction(
+    CallBackAction? action,
+  ) {
+    if (action == null) {
+      return null;
+    }
+
+    return SnackBarAction(
+      label: action.label,
+      onPressed: action.callback,
+    );
+  }
+
+  static SnackBar buildSnackBar({
+    Color color = textColorStonks,
+    required String message,
+    required CallBackAction action,
+  }) {
+    return SnackBar(
+      backgroundColor: color,
+      content: DefaultSnackBarContent(
+        message: message,
+      ),
+      action: _getAction(action),
+    );
+  }
+}
+
 SnackBar buildEventSnackBar({
   Color color = textColorStonks,
   String message = "Success",
