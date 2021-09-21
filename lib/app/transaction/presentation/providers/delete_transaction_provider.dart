@@ -1,7 +1,5 @@
-import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/services/transaction_service.dart';
-import 'package:crypto_journal_mobile/shared/classes/call_back_action.dart';
 import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider_error_result.dart';
 import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider_success_result.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,19 +32,6 @@ final deleteTransactionProvider = FutureProvider.autoDispose
         handleProviderSuccessResult<DeleteTransactionResult>(
       ref,
       () => DeleteTransactionResult.DeletedTransaction,
-      action: CallBackAction(
-        label: "Undo",
-        callback: () async => await transactionService.createTransaction(
-          CreateTransactionDto(
-            coinSymbol: deletedTransaction.coinSymbol,
-            coins: deletedTransaction.coins,
-            fee: deletedTransaction.fee,
-            coinPrice: deletedTransaction.coinPrice,
-            date: deletedTransaction.date,
-            operation: deletedTransaction.operation.id,
-          ),
-        ),
-      ),
     ),
   );
 });
