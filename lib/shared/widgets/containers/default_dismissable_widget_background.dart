@@ -4,13 +4,20 @@ import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import "package:flutter/material.dart";
 
+enum DismissToDeleteDirection {
+  StartToEnd,
+  EndToStart,
+}
+
 class DefaultDismissableWidgetBackground extends StatelessWidget {
   final String label;
   final Color color;
+  final DismissToDeleteDirection direction;
 
   const DefaultDismissableWidgetBackground({
     Key? key,
     required this.label,
+    this.direction = DismissToDeleteDirection.StartToEnd,
     this.color = googleButtonBackGroundColor,
   }) : super(key: key);
 
@@ -23,6 +30,12 @@ class DefaultDismissableWidgetBackground extends StatelessWidget {
     );
   }
 
+  Alignment _getAligment() {
+    return this.direction == DismissToDeleteDirection.StartToEnd
+        ? Alignment.centerLeft
+        : Alignment.centerRight;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,12 +46,9 @@ class DefaultDismissableWidgetBackground extends StatelessWidget {
         builder: (context, size) {
           final height = size.height;
 
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              this._buildLabel(height),
-              this._buildLabel(height),
-            ],
+          return Container(
+            alignment: this._getAligment(),
+            child: this._buildLabel(height),
           );
         },
       ),
