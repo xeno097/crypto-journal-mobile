@@ -105,6 +105,10 @@ class _TransactionHistoryInfoListState
                 background: DefaultDismissableWidgetBackground(
                   label: "Delete",
                 ),
+                secondaryBackground: DefaultDismissableWidgetBackground(
+                  direction: DismissToDeleteDirection.EndToStart,
+                  label: "Delete",
+                ),
                 onDismissed: (direction) async {
                   transactions.removeAt(index);
                   setState(() {});
