@@ -1,4 +1,5 @@
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/shared/errors/base_error.dart';
@@ -10,5 +11,8 @@ abstract class ITransactionRepository {
   );
   Future<Either<BaseError, TransactionDto>> createTransaction(
     CreateTransactionDto createTransactionDto,
+  );
+  Future<Either<BaseError, TransactionDto>> deleteTransaction(
+    DeleteTransactionDto deleteTransactionDto,
   );
 }

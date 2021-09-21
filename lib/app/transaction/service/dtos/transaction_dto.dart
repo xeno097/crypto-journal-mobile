@@ -10,6 +10,7 @@ class TransactionDto extends Equatable {
   final double fee;
   final String date;
   final OperationDto operation;
+  final double coinPrice;
   final CryptoCurrencyDto cryptoCurrencyDto;
 
   TransactionDto({
@@ -20,6 +21,7 @@ class TransactionDto extends Equatable {
     required this.fee,
     required this.date,
     required this.operation,
+    required this.coinPrice,
     required this.cryptoCurrencyDto,
   });
 

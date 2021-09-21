@@ -1,5 +1,6 @@
 import 'package:crypto_journal_mobile/app/transaction/data/repositories/transaction_repository.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/repositories/transaction_repository.dart';
@@ -13,6 +14,9 @@ abstract class ITransactionService {
   );
   Future<Either<BaseError, TransactionDto>> createTransaction(
     CreateTransactionDto createTransactionDto,
+  );
+  Future<Either<BaseError, TransactionDto>> deleteTransaction(
+    DeleteTransactionDto deleteTransactionDto,
   );
 }
 
@@ -48,6 +52,15 @@ class TransactionService implements ITransactionService {
   ) async {
     return await this._transactionRepository.getTransactions(
           getTransactionsDto,
+        );
+  }
+
+  @override
+  Future<Either<BaseError, TransactionDto>> deleteTransaction(
+    DeleteTransactionDto deleteTransactionDto,
+  ) async {
+    return await this._transactionRepository.deleteTransaction(
+          deleteTransactionDto,
         );
   }
 }
