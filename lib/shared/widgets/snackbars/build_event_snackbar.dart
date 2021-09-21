@@ -19,7 +19,7 @@ SnackBar buildEventSnackBar({
   );
 }
 
-class DefaultSnackBarContent extends StatefulWidget {
+class DefaultSnackBarContent extends StatelessWidget {
   final String message;
   final CallBackAction? action;
 
@@ -28,22 +28,6 @@ class DefaultSnackBarContent extends StatefulWidget {
     this.action,
     required this.message,
   }) : super(key: key);
-
-  @override
-  _DefaultSnackBarContentState createState() => _DefaultSnackBarContentState();
-}
-
-class _DefaultSnackBarContentState extends State<DefaultSnackBarContent> {
-  String _message = "";
-  CallBackAction? _action;
-  bool _isActive = true;
-
-  @override
-  void initState() {
-    super.initState();
-    this._message = this.widget.message;
-    this._action = this.widget.action;
-  }
 
   Widget _buildText(String text, double height) {
     return Text(
@@ -54,26 +38,22 @@ class _DefaultSnackBarContentState extends State<DefaultSnackBarContent> {
     );
   }
 
-  Widget _buildCallbackActionWidget(double height) {
-    if (this._action == null) {
+  Widget _buildCallbackActionWidget(
+    BuildContext context,
+    double height,
+  ) {
+    if (this.action == null) {
       return Container();
-    }
-
-    if (!this._isActive) {
-      return _buildText(
-        "Ok",
-        height,
-      );
     }
 
     return GestureDetector(
       onTap: () {
-        this._action!.callback();
-        this._isActive = false;
-        setState(() {});
+        this.action!.callback();
+
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
       },
       child: _buildText(
-        this._action!.label,
+        this.action!.label,
         height,
       ),
     );
@@ -90,10 +70,11 @@ class _DefaultSnackBarContentState extends State<DefaultSnackBarContent> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             this._buildText(
-              _message,
+              message,
               height,
             ),
             this._buildCallbackActionWidget(
+              context,
               height,
             ),
           ],

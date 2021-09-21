@@ -111,7 +111,6 @@ class _TransactionHistoryInfoListState
                 ),
                 onDismissed: (direction) async {
                   transactions.removeAt(index);
-                  setState(() {});
                   await this._removeTransaction(transaction);
                 },
                 child: TransactionInfoListTile(
