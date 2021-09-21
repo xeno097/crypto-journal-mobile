@@ -4,6 +4,7 @@ import 'package:crypto_journal_mobile/app/transaction/data/data_sources/transact
 import 'package:crypto_journal_mobile/app/transaction/data/graphql/mutations.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/graphql/queries.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/create_transaction_input.dart';
+import 'package:crypto_journal_mobile/app/transaction/data/inputs/delete_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/inputs/get_transaction_input.dart';
 import 'package:crypto_journal_mobile/app/transaction/data/models/transaction_model.dart';
 import 'package:crypto_journal_mobile/shared/data/graphql/graphql_client.dart';
@@ -22,6 +23,10 @@ void main() {
       json.decode(fixtureReader("transactions/transaction_fixture.json"));
 
   final transactionModel = TransactionModel.fromJson(transactionJson);
+
+  final deleteTransactionInput = DeleteTransactionInput(
+    id: transactionModel.id,
+  );
 
   final createTransactionInput = CreateTransactionInput(
     coinSymbol: "ETH",
@@ -150,6 +155,53 @@ void main() {
         dataKey: CREATE_TRANSACTION_DATA_KEY,
         variables: {
           "input": createTransactionInput.toJson(),
+        },
+      ));
+      expect(res, transactionModel);
+    });
+  });
+
+  group("TransactionRemoteDataSource.deleteTransaction", () {
+    setSuccessMocks() {
+      when(graphqlAuthClient.mutate(
+        dataKey: anyNamed('dataKey'),
+        mutation: anyNamed('mutation'),
+        variables: anyNamed('variables'),
+      )).thenAnswer((_) => Future.value(transactionJson));
+    }
+
+    test('should call the mutate method of the IGraphqlClient class', () async {
+      // arrange
+      setSuccessMocks();
+
+      // act
+      await transactionRemoteDataSource
+          .deleteTransaction(deleteTransactionInput);
+
+      // assert
+      verify(graphqlAuthClient.mutate(
+        mutation: DELETE_TRANSACTION_MUTATION,
+        dataKey: DELETE_TRANSACTION_DATA_KEY,
+        variables: {
+          "input": deleteTransactionInput.id,
+        },
+      ));
+    });
+
+    test('should return the deleted TransactionModel', () async {
+      // arrange
+      setSuccessMocks();
+
+      // act
+      final res = await transactionRemoteDataSource
+          .deleteTransaction(deleteTransactionInput);
+
+      // assert
+      verify(graphqlAuthClient.mutate(
+        mutation: DELETE_TRANSACTION_MUTATION,
+        dataKey: DELETE_TRANSACTION_DATA_KEY,
+        variables: {
+          "input": deleteTransactionInput.id,
         },
       ));
       expect(res, transactionModel);

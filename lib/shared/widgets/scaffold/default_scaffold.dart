@@ -1,8 +1,7 @@
 import 'package:crypto_journal_mobile/shared/providers/event_state.dart';
 import 'package:crypto_journal_mobile/shared/providers/event_state_notifier.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
-import 'package:crypto_journal_mobile/shared/widgets/snackbars/error_snackbar.dart';
-import 'package:crypto_journal_mobile/shared/widgets/snackbars/success_snackbar.dart';
+import 'package:crypto_journal_mobile/shared/widgets/snackbars/build_event_snackbar.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,13 +28,19 @@ class DefaultScaffold extends StatelessWidget {
       ) {
         if (state is SuccessEventState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            buildSuccessSnackBar(message: state.message),
+            buildEventSnackBar(
+              message: state.message,
+              callBackAction: state.action,
+            ),
           );
         }
 
         if (state is ErrorEventState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            buildErrorSnackBar(message: state.error.message),
+            buildEventSnackBar(
+              color: googleButtonBackGroundColor,
+              message: state.error.message,
+            ),
           );
         }
       },

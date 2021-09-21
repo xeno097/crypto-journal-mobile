@@ -1,6 +1,10 @@
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history/widgets/transaction_info_list_tile.dart';
+import 'package:crypto_journal_mobile/app/transaction/presentation/providers/delete_transaction_provider.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state_notifier.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
+import 'package:crypto_journal_mobile/shared/widgets/containers/default_dismissable_widget_background.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
@@ -37,6 +41,16 @@ class _TransactionHistoryInfoListState
           )
           .fetchMore();
     }
+  }
+
+  Future<void> _removeTransaction(
+    TransactionDto transaction,
+  ) async {
+    await context.read(
+      deleteTransactionProvider(DeleteTransactionDto(
+        id: transaction.id,
+      )).future,
+    );
   }
 
   @override
@@ -86,9 +100,22 @@ class _TransactionHistoryInfoListState
             final transaction = transactions[index];
 
             return DefaultListElementPadding(
-              key: Key(transaction.id),
-              child: TransactionInfoListTile(
-                transactionDto: transaction,
+              child: Dismissible(
+                key: Key(transaction.id),
+                background: DefaultDismissableWidgetBackground(
+                  label: "Delete",
+                ),
+                secondaryBackground: DefaultDismissableWidgetBackground(
+                  direction: DismissToDeleteDirection.EndToStart,
+                  label: "Delete",
+                ),
+                onDismissed: (direction) async {
+                  transactions.removeAt(index);
+                  await this._removeTransaction(transaction);
+                },
+                child: TransactionInfoListTile(
+                  transactionDto: transaction,
+                ),
               ),
             );
           },

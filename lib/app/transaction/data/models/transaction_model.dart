@@ -10,6 +10,7 @@ class TransactionModel extends TransactionDto {
     required String date,
     required double fee,
     required String id,
+    required double coinPrice,
     required OperationModel operation,
     required CryptoCurrencyModel cryptoCurrency,
   }) : super(
@@ -19,20 +20,22 @@ class TransactionModel extends TransactionDto {
           date: date,
           fee: fee,
           id: id,
+          coinPrice: coinPrice,
           operation: operation,
           cryptoCurrencyDto: cryptoCurrency,
         );
 
   factory TransactionModel.fromJson(Map<String, dynamic> jsonMap) {
     return TransactionModel(
-        coinSymbol: jsonMap["coinSymbol"],
-        coins: num.parse(jsonMap["coins"].toString()).toDouble(),
-        cost: num.parse(jsonMap["cost"].toString()).toDouble(),
-        date: jsonMap["date"],
-        fee: num.parse(jsonMap["fee"].toString()).toDouble(),
-        id: jsonMap["id"],
-        operation: OperationModel.fromJson(jsonMap["operation"]),
-        cryptoCurrency:
-            CryptoCurrencyModel.fromJson(jsonMap["cryptoCurrency"]));
+      coinSymbol: jsonMap["coinSymbol"],
+      coins: num.parse(jsonMap["coins"].toString()).toDouble(),
+      cost: num.parse(jsonMap["cost"].toString()).toDouble(),
+      date: jsonMap["date"],
+      fee: num.parse(jsonMap["fee"].toString()).toDouble(),
+      id: jsonMap["id"],
+      coinPrice: num.parse(jsonMap["coinPrice"].toString()).toDouble(),
+      operation: OperationModel.fromJson(jsonMap["operation"]),
+      cryptoCurrency: CryptoCurrencyModel.fromJson(jsonMap["cryptoCurrency"]),
+    );
   }
 }
