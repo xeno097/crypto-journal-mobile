@@ -7,7 +7,7 @@ import 'package:crypto_journal_mobile/shared/providers/functions/handle_provider
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userAuthStateNotifierProvider =
-    StateNotifierProvider<UserAuthStateNotifier, UserAuthState>(
+    StateNotifierProvider.autoDispose<UserAuthStateNotifier, UserAuthState>(
   (
     ProviderReference ref,
   ) =>
