@@ -5,15 +5,12 @@ import 'package:crypto_journal_mobile/app/transaction/presentation/providers/tra
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/shared/classes/call_back_action.dart';
-import 'package:crypto_journal_mobile/shared/theme/colors.dart';
-import 'package:crypto_journal_mobile/shared/theme/constants.dart';
-import 'package:crypto_journal_mobile/shared/widgets/containers/base_layout_container.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_dismissable_widget_background.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
-import 'package:crypto_journal_mobile/shared/widgets/snackbars/build_event_snackbar.dart';
+import 'package:crypto_journal_mobile/shared/widgets/snackbars/default_snackbar_builder.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -73,6 +70,7 @@ class _TransactionHistoryInfoListState
   Future<void> _removeTransaction(
     TransactionDto transaction,
   ) async {
+    print("RAN");
     await context.read(
       deleteTransactionProvider(DeleteTransactionDto(
         id: transaction.id,
