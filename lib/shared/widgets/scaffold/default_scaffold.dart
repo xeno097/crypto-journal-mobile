@@ -28,16 +28,15 @@ class DefaultScaffold extends StatelessWidget {
       ) {
         if (state is SuccessEventState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            buildEventSnackBar(
+            DefaultSnackBarBuilder.buildSnackBar(
               message: state.message,
-              callBackAction: state.action,
             ),
           );
         }
 
         if (state is ErrorEventState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            buildEventSnackBar(
+            DefaultSnackBarBuilder.buildSnackBar(
               color: googleButtonBackGroundColor,
               message: state.error.message,
             ),
