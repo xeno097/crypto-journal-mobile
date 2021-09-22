@@ -1,14 +1,14 @@
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history/widgets/transaction_info_list_tile.dart';
-import 'package:crypto_journal_mobile/app/transaction/presentation/providers/delete_transaction_provider.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state_notifier.dart';
-import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
+import 'package:crypto_journal_mobile/shared/classes/snackbar_builder_action.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_dismissable_widget_background.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
 import 'package:crypto_journal_mobile/shared/widgets/loading/default_circular_progress_indicator.dart';
 import 'package:crypto_journal_mobile/shared/widgets/placeholder/error_placeholder.dart';
+import 'package:crypto_journal_mobile/shared/widgets/snackbars/default_snackbar_builder.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,14 +43,36 @@ class _TransactionHistoryInfoListState
     }
   }
 
+  Future<bool> _confirmRemoveTransaction(
+    DismissDirection direction,
+  ) async {
+    bool res = false;
+
+    await ScaffoldMessenger.of(context)
+        .showSnackBar(
+          DefaultSnackBarBuilder.buildSnackBar(
+            message: "Delete the item?",
+            action: SnackBuilderAction(
+              label: "Yes",
+              action: () {
+                res = true;
+              },
+            ),
+          ),
+        )
+        .closed;
+
+    return res;
+  }
+
   Future<void> _removeTransaction(
     TransactionDto transaction,
   ) async {
-    await context.read(
-      deleteTransactionProvider(DeleteTransactionDto(
-        id: transaction.id,
-      )).future,
-    );
+    await context
+        .read(
+          transactionHistoryStateNotifierProvider.notifier,
+        )
+        .deleteTransaction(transaction.id);
   }
 
   @override
@@ -109,10 +131,8 @@ class _TransactionHistoryInfoListState
                   direction: DismissToDeleteDirection.EndToStart,
                   label: "Delete",
                 ),
-                onDismissed: (direction) async {
-                  transactions.removeAt(index);
-                  await this._removeTransaction(transaction);
-                },
+                confirmDismiss: this._confirmRemoveTransaction,
+                onDismissed: (_) => this._removeTransaction(transaction),
                 child: TransactionInfoListTile(
                   transactionDto: transaction,
                 ),

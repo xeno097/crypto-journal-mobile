@@ -1,4 +1,5 @@
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state.dart';
+import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/get_transactions_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/services/transaction_service.dart';
@@ -40,10 +41,7 @@ class TransactionHistoryStateNotifier
   }
 
   void _setLoadedState(List<TransactionDto> transactions) {
-    this._transactions = [
-      ...this._transactions,
-      ...transactions,
-    ];
+    this._transactions = transactions;
 
     final loadedState = LoadedTransactionHistoryState(
       transactions: this._transactions,
@@ -79,7 +77,29 @@ class TransactionHistoryStateNotifier
 
     res.fold(
       (err) => this._setErrorState(err),
-      (transactions) => this._setLoadedState(transactions),
+      (transactions) => this._setLoadedState([
+        ...this._transactions,
+        ...transactions,
+      ]),
+    );
+  }
+
+  Future<void> deleteTransaction(String id) async {
+    final res = await this._transactionService.deleteTransaction(
+          DeleteTransactionDto(
+            id: id,
+          ),
+        );
+
+    this._transactions.removeWhere((element) => element.id == id);
+
+    res.fold(
+      (err) => handleProviderErrorResult(
+        _providerReference,
+        err,
+        callback: () => {},
+      ),
+      (_) => this._setLoadedState(this._transactions),
     );
   }
 }
