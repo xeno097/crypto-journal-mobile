@@ -16,13 +16,14 @@ abstract class DefaultSnackBarBuilder {
     return SnackBarAction(
       label: action.label,
       onPressed: action.action,
+      textColor: textColorSecondary,
     );
   }
 
   static SnackBar buildSnackBar({
     SnackBuilderAction? action,
     required String message,
-    Color color = textColorStonks,
+    Color color = backGroundColorPrimary,
   }) {
     return SnackBar(
       backgroundColor: color,

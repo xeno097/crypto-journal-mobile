@@ -29,6 +29,7 @@ class DefaultScaffold extends StatelessWidget {
         if (state is SuccessEventState) {
           ScaffoldMessenger.of(context).showSnackBar(
             DefaultSnackBarBuilder.buildSnackBar(
+              color: textColorStonks,
               message: state.message,
             ),
           );

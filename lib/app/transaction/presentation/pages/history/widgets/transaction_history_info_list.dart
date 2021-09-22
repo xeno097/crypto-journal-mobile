@@ -70,11 +70,12 @@ class _TransactionHistoryInfoListState
   Future<void> _removeTransaction(
     TransactionDto transaction,
   ) async {
-    print("RAN");
     await context.read(
-      deleteTransactionProvider(DeleteTransactionDto(
-        id: transaction.id,
-      )).future,
+      deleteTransactionProvider(
+        DeleteTransactionDto(
+          id: transaction.id,
+        ),
+      ).future,
     );
   }
 
