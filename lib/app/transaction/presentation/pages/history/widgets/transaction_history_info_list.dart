@@ -1,8 +1,6 @@
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/history/widgets/transaction_info_list_tile.dart';
-import 'package:crypto_journal_mobile/app/transaction/presentation/providers/delete_transaction_provider.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state_notifier.dart';
-import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
 import 'package:crypto_journal_mobile/shared/classes/snackbar_builder_action.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_dismissable_widget_background.dart';
@@ -70,13 +68,11 @@ class _TransactionHistoryInfoListState
   Future<void> _removeTransaction(
     TransactionDto transaction,
   ) async {
-    await context.read(
-      deleteTransactionProvider(
-        DeleteTransactionDto(
-          id: transaction.id,
-        ),
-      ).future,
-    );
+    await context
+        .read(
+          transactionHistoryStateNotifierProvider.notifier,
+        )
+        .deleteTransaction(transaction.id);
   }
 
   @override
@@ -136,11 +132,7 @@ class _TransactionHistoryInfoListState
                   label: "Delete",
                 ),
                 confirmDismiss: this._confirmRemoveTransaction,
-                onDismissed: (direction) async {
-                  transactions.removeAt(index);
-                  setState(() {});
-                  await this._removeTransaction(transaction);
-                },
+                onDismissed: (_) => this._removeTransaction(transaction),
                 child: TransactionInfoListTile(
                   transactionDto: transaction,
                 ),

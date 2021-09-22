@@ -35,6 +35,9 @@ class HomePage extends StatelessWidget {
                 child: TabBar(
                   indicatorColor: Colors.transparent,
                   unselectedLabelColor: textColorSecondary,
+                  onTap: (index) {
+                    ScaffoldMessenger.of(context).clearSnackBars();
+                  },
                   tabs: [
                     Icon(Icons.home),
                     Icon(Icons.sync),
