@@ -4,7 +4,7 @@ import 'package:crypto_journal_mobile/app/transaction/presentation/providers/tra
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/transaction_history_state_notifier.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/delete_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/transaction_dto.dart';
-import 'package:crypto_journal_mobile/shared/classes/call_back_action.dart';
+import 'package:crypto_journal_mobile/shared/classes/snackbar_builder_action.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_dismissable_widget_background.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_list_element_padding.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/last_list_element.dart';
@@ -54,9 +54,9 @@ class _TransactionHistoryInfoListState
         .showSnackBar(
           DefaultSnackBarBuilder.buildSnackBar(
             message: "Delete the item?",
-            action: CallBackAction(
+            action: SnackBuilderAction(
               label: "Yes",
-              callback: () {
+              action: () {
                 res = true;
               },
             ),

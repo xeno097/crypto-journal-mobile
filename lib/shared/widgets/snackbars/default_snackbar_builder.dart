@@ -1,4 +1,4 @@
-import 'package:crypto_journal_mobile/shared/classes/call_back_action.dart';
+import 'package:crypto_journal_mobile/shared/classes/snackbar_builder_action.dart';
 import 'package:crypto_journal_mobile/shared/theme/colors.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/theme/text_styles.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 abstract class DefaultSnackBarBuilder {
   static SnackBarAction? _getAction(
-    CallBackAction? action,
+    SnackBuilderAction? action,
   ) {
     if (action == null) {
       return null;
@@ -15,12 +15,12 @@ abstract class DefaultSnackBarBuilder {
 
     return SnackBarAction(
       label: action.label,
-      onPressed: action.callback,
+      onPressed: action.action,
     );
   }
 
   static SnackBar buildSnackBar({
-    CallBackAction? action,
+    SnackBuilderAction? action,
     required String message,
     Color color = textColorStonks,
   }) {
