@@ -20,7 +20,7 @@ final transactionHistoryStateNotifierProvider = StateNotifierProvider
 class TransactionHistoryStateNotifier
     extends StateNotifier<TransactionHistoryState> {
   late final ProviderReference _providerReference;
-  late final TransactionService _transactionService;
+  late final ITransactionService _transactionService;
   List<TransactionDto> _transactions = [];
 
   TransactionHistoryStateNotifier({
@@ -52,8 +52,8 @@ class TransactionHistoryStateNotifier
 
   void _setErrorState(BaseError err) {
     handleProviderErrorResult(
-      _providerReference,
-      err,
+      providerReference: this._providerReference,
+      error: err,
       callback: () => {},
     );
 
@@ -95,8 +95,8 @@ class TransactionHistoryStateNotifier
 
     res.fold(
       (err) => handleProviderErrorResult(
-        _providerReference,
-        err,
+        providerReference: this._providerReference,
+        error: err,
         callback: () => {},
       ),
       (_) => this._setLoadedState(this._transactions),

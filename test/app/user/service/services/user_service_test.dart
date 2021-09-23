@@ -25,6 +25,13 @@ void main() {
     );
   });
 
+  group("UserService", () {
+    test('should be an instance of IUserService', () {
+      // assert
+      expect(userService, isA<IUserService>());
+    });
+  });
+
   group("UserService.getLoggedUser", () {
     test('should call the getUser method of the IUserRepository class',
         () async {

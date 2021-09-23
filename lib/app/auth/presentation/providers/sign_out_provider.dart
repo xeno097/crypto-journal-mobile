@@ -16,8 +16,8 @@ final signOutProvider = FutureProvider.autoDispose<SignOutResult>((
 
   return res.fold(
     (err) => handleProviderErrorResult<SignOutResult>(
-      ref,
-      err,
+      providerReference: ref,
+      error: err,
       callback: () => SignOutResult.SignOutError,
     ),
     (res) => SignOutResult.SignedOut,
