@@ -50,7 +50,7 @@ class CreateTransactionForm extends StatelessWidget {
           subTitle: "Price Detail",
         ),
         DefaultTextBoxInput(
-          hintText: "Coin Amount",
+          hintText: "Coin Amount*",
           textInputType: TextInputType.number,
           onChanged: this.setCoinAmount,
         ),
@@ -59,7 +59,7 @@ class CreateTransactionForm extends StatelessWidget {
             vertical: defaultListElementPadding,
           ),
           child: DefaultTextBoxInput(
-            hintText: "Coin Price",
+            hintText: "Coin Price*",
             textInputType: TextInputType.number,
             onChanged: this.setCoinPrice,
           ),
