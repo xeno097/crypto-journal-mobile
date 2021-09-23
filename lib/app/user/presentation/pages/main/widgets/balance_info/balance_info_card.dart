@@ -1,4 +1,5 @@
-import 'package:crypto_journal_mobile/app/balance/presentation/providers/get_balance_provider.dart';
+import 'package:crypto_journal_mobile/app/balance/presentation/providers/get_balance_state.dart';
+import 'package:crypto_journal_mobile/app/balance/presentation/providers/get_balance_state_notifier.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/main/widgets/balance_info/balance_info.dart';
 import 'package:crypto_journal_mobile/shared/theme/constants.dart';
 import 'package:crypto_journal_mobile/shared/widgets/containers/default_container.dart';
@@ -19,16 +20,21 @@ class BalanceInfoCard extends StatelessWidget {
       child: DefaultContainer(
         paddingType: PaddingType.All,
         child: Consumer(
-          builder: (BuildContext context, watch, child) {
-            final request = watch(getBalanceProvider);
+          builder: (context, watch, child) {
+            final state = watch(getBalanceStateNotifierProvider);
 
-            return request.when(
-              data: (balance) => BalanceInfo(
-                balanceDto: balance,
-              ),
-              loading: () => DefaultCircularProgressIndicator(),
-              error: (err, _) => ErrorPlaceholder(),
-            );
+            if (state is InitialGetBalanceState ||
+                state is LoadingGetBalanceState) {
+              return DefaultCircularProgressIndicator();
+            }
+
+            if (state is LoadedGetBalanceState) {
+              return BalanceInfo(
+                balanceDto: state.balance,
+              );
+            }
+
+            return ErrorPlaceholder();
           },
         ),
       ),
