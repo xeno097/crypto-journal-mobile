@@ -19,7 +19,7 @@ final searchCryptoCurrencyStateNotifierProvider = StateNotifierProvider
 class SearchCryptoCurrencyStateNotifier
     extends StateNotifier<SearchCryptoCurrencyState> {
   late final ProviderReference _providerReference;
-  late final CryptoCurrencyService _cryptoCurrencyService;
+  late final ICryptoCurrencyService _cryptoCurrencyService;
 
   SearchCryptoCurrencyStateNotifier({
     required ProviderReference providerReference,
@@ -47,8 +47,8 @@ class SearchCryptoCurrencyStateNotifier
 
   void _setErrorState(BaseError err) {
     handleProviderErrorResult(
-      _providerReference,
-      err,
+      providerReference: this._providerReference,
+      error: err,
       callback: () => {},
     );
 

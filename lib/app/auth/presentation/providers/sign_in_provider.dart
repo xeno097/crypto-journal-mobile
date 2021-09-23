@@ -19,8 +19,8 @@ final signInProvider =
 
   return signInResult.fold(
     (err) => handleProviderErrorResult<SignInResult>(
-      ref,
-      err,
+      providerReference: ref,
+      error: err,
       callback: () => SignInResult.SignInError,
     ),
     (authPayloadDto) => SignInResult.SignedIn,

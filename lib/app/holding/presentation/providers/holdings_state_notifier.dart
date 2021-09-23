@@ -56,8 +56,8 @@ class HoldingsStateNotifier extends StateNotifier<HoldingsState> {
 
   void _setErrorState(BaseError err) {
     handleProviderErrorResult(
-      _providerReference,
-      err,
+      providerReference: this._providerReference,
+      error: err,
       callback: () => {},
     );
 

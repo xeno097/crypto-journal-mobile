@@ -28,8 +28,8 @@ final createTransactionProvider = FutureProvider.autoDispose
 
   if (!check) {
     return handleProviderErrorResult<CreateTransactionResult>(
-      ref,
-      InvalidUserInputError(),
+      providerReference: ref,
+      error: InvalidUserInputError(),
       callback: () => CreateTransactionResult.TransactionNotCreated,
     );
   }
@@ -38,8 +38,8 @@ final createTransactionProvider = FutureProvider.autoDispose
 
   return res.fold(
     (err) => handleProviderErrorResult<CreateTransactionResult>(
-      ref,
-      err,
+      providerReference: ref,
+      error: err,
       callback: () => CreateTransactionResult.TransactionNotCreated,
     ),
     (createdTransaction) => handleProviderSuccessResult(

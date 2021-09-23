@@ -54,8 +54,8 @@ class GetBalanceStateNotifier extends StateNotifier<GetBalanceState> {
 
   void _setErrorState(BaseError err) {
     handleProviderErrorResult(
-      _providerReference,
-      err,
+      providerReference: this._providerReference,
+      error: err,
       callback: () => {},
     );
 
