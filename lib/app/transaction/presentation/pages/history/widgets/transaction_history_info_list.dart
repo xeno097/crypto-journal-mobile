@@ -26,6 +26,7 @@ class _TransactionHistoryInfoListState
     extends State<TransactionHistoryInfoList> {
   double _oldMaxScrollHeight = 0;
   final _controller = ScrollController();
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? _scaffoldControler;
 
   void _fetchMore() {
     final maxScrollHeight = _controller.position.maxScrollExtent;
@@ -48,19 +49,19 @@ class _TransactionHistoryInfoListState
   ) async {
     bool res = false;
 
-    await ScaffoldMessenger.of(context)
-        .showSnackBar(
-          DefaultSnackBarBuilder.buildSnackBar(
-            message: "Delete the item?",
-            action: SnackBuilderAction(
-              label: "Yes",
-              action: () {
-                res = true;
-              },
-            ),
-          ),
-        )
-        .closed;
+    this._scaffoldControler = ScaffoldMessenger.of(context).showSnackBar(
+      DefaultSnackBarBuilder.buildSnackBar(
+        message: "Delete the item?",
+        action: SnackBuilderAction(
+          label: "Yes",
+          action: () {
+            res = true;
+          },
+        ),
+      ),
+    );
+
+    await this._scaffoldControler?.closed;
 
     return res;
   }
@@ -78,7 +79,17 @@ class _TransactionHistoryInfoListState
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() => this._fetchMore());
+    _controller.addListener(
+      () => this._fetchMore(),
+    );
+  }
+
+  @override
+  void deactivate() {
+    if (this._scaffoldControler != null) {
+      this._scaffoldControler?.close();
+    }
+    super.deactivate();
   }
 
   @override
