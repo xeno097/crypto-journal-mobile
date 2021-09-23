@@ -18,7 +18,7 @@ final userAuthStateNotifierProvider =
 
 class UserAuthStateNotifier extends StateNotifier<UserAuthState> {
   late final ProviderReference _providerReference;
-  late final UserService _userService;
+  late final IUserService _userService;
 
   UserAuthStateNotifier({
     required ProviderReference providerReference,
