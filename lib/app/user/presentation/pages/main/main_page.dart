@@ -18,13 +18,13 @@ class MainPage extends StatelessWidget {
             title: "Home",
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  BalanceInfoCard(),
-                  HoldingInfoList(),
-                ],
-              ),
+            child: Column(
+              children: [
+                BalanceInfoCard(),
+                Expanded(
+                  child: HoldingInfoList(),
+                ),
+              ],
             ),
           ),
         ],

@@ -1,7 +1,8 @@
-import 'package:crypto_journal_mobile/app/operation/presentation/providers/get_operations_provider.dart';
+import 'package:crypto_journal_mobile/app/operation/presentation/providers/operations_state.dart';
+import 'package:crypto_journal_mobile/app/operation/presentation/providers/operations_state_notifier.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_form/create_transaction_form.dart';
-import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/header/create_transaction_page_header.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/create_transaction_form/create_transaction_price_info_header.dart';
+import 'package:crypto_journal_mobile/app/transaction/presentation/pages/create_transaction/widgets/header/create_transaction_page_header.dart';
 import 'package:crypto_journal_mobile/app/transaction/presentation/providers/create_transaction_provider.dart';
 import 'package:crypto_journal_mobile/app/transaction/service/dtos/create_transaction_dto.dart';
 import 'package:crypto_journal_mobile/app/user/presentation/pages/home/home_page.dart';
@@ -113,42 +114,45 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
             Expanded(
               child: Consumer(
                 builder: (context, watch, child) {
-                  final request = watch(getOperationsProvider);
+                  final state = watch(operationsStateNotifierProvider);
 
-                  return request.when(
-                    data: (value) {
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            CreateTransactionPriceInfoHeader(
-                              total: this._total,
-                              fees: this._fees,
-                            ),
-                            CreateTransactionForm(
-                              operationOptions: value,
-                              setFees: this._setFees,
-                              setOperation: this._setOperation,
-                              setCoinPrice: this._setCoinPrice,
-                              setCoinAmount: this._setCoinAmount,
-                              setDate: this._setDate,
-                              setCryptoCurrency: this._setCryptoCurrency,
-                            ),
-                            SizedBox(
-                              height: defaultPagePadding,
-                            ),
-                            DefaultTextButton(
-                              text: "Done",
-                              width: ButtonWidth.Half,
-                              color: backGroundColorSecondary,
-                              onTap: this._createTransaction,
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                    loading: () => DefaultCircularProgressIndicator(),
-                    error: (err, _) => ErrorPlaceholder(),
-                  );
+                  if (state is InitialOperationsState ||
+                      state is LoadingOperationsState) {
+                    return DefaultCircularProgressIndicator();
+                  }
+
+                  if (state is LoadedOperationsState) {
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          CreateTransactionPriceInfoHeader(
+                            total: this._total,
+                            fees: this._fees,
+                          ),
+                          CreateTransactionForm(
+                            operationOptions: state.operations,
+                            setFees: this._setFees,
+                            setOperation: this._setOperation,
+                            setCoinPrice: this._setCoinPrice,
+                            setCoinAmount: this._setCoinAmount,
+                            setDate: this._setDate,
+                            setCryptoCurrency: this._setCryptoCurrency,
+                          ),
+                          SizedBox(
+                            height: defaultPagePadding,
+                          ),
+                          DefaultTextButton(
+                            text: "Done",
+                            width: ButtonWidth.Half,
+                            color: backGroundColorSecondary,
+                            onTap: this._createTransaction,
+                          )
+                        ],
+                      ),
+                    );
+                  }
+
+                  return ErrorPlaceholder();
                 },
               ),
             ),

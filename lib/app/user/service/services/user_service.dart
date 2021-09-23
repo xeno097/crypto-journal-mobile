@@ -16,7 +16,14 @@ final userServiceProvider = FutureProvider<UserService>((
   return userService;
 });
 
-class UserService {
+abstract class IUserService {
+  Future<Either<BaseError, UserDto>> getLoggedUser();
+  Future<Either<BaseError, UserDto>> updateLoggedUser(
+    UpdateUserDto updateUserDto,
+  );
+}
+
+class UserService implements IUserService {
   final IUserRepository _userRepository;
 
   UserService({
@@ -28,7 +35,8 @@ class UserService {
   }
 
   Future<Either<BaseError, UserDto>> updateLoggedUser(
-      UpdateUserDto updateUserDto) async {
+    UpdateUserDto updateUserDto,
+  ) async {
     return await this._userRepository.updateUser(updateUserDto);
   }
 }
