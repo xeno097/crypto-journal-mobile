@@ -1,12 +1,6 @@
 # Crypto Journal Mobile
 
-<p align="center">
-<img alt="flutter badge" src="https://img.shields.io/badge/Flutter-3D9CEF?style=for-the-badge&logo=flutter&logoColor=white&link=https://flutter.dev/">
-
-<img alt="graphql badge" src="https://img.shields.io/badge/Graphql-E00797?style=for-the-badge&logo=graphql&logoColor=white&link=https://graphql.org/">
-
-<img alt="firebase badge" src="https://img.shields.io/badge/Firebase-F9CA2A?style=for-the-badge&logo=firebase&logoColor=white&link=https://firebase.google.com/">
-</p>
+[![Flutter](https://img.shields.io/badge/Flutter-3D9CEF?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/) [![Graphql](https://img.shields.io/badge/Graphql-E00797?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org/) [![Firebase](https://img.shields.io/badge/Firebase-F9CA2A?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
 
 Crypto Journal is the app for crypto investors that want to keep track of their operations in a simple and accessible way.
 
