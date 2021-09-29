@@ -8,49 +8,62 @@ Crypto Journal is the app for crypto investors that want to keep track of their 
 
 Crypto journal is powered by [Flutter](https://flutter.dev/), uses [Riverpod](https://riverpod.dev/) as state manager and relies on [Firebase](https://firebase.google.com/) to handle user sign in. Backend communication is handled by [Graphql](https://graphql.org/).
 
+## Architecture
+
 ## Features
 
 ### Login
 
 The app allows its users to sign-in/sign-up with either `Facebook` or `Google`.
 
-![alt text](./.github/readme/login.jpg)
+<img
+src="./.github/readme/login.jpg" height="500">
 
 ### Overview
 
 The home screen shows a general overview of the coins held by a user and its current value in [fiat money](https://en.wikipedia.org/wiki/Fiat_money)
 
-![alt text](./.github/readme/overview.jpg)
+<img
+src="./.github/readme/overview.jpg" height="500">
+
+<!-- ![alt text](./.github/readme/overview.jpg) -->
 
 ### Transaction History
 
 Allows a user to track his operations sorted by date. This screen has pagination support.
 
-![alt text](./.github/readme/transaction_history.jpg)
+<img
+src="./.github/readme/transaction_history.jpg" height="500">
 
 ### Create a Transaction
 
 A user can create transactions to keep track of his operations and keep his holding information updated.
 
-![alt text](./.github/readme/create_transaction_1.jpg)
+<img
+src="./.github/readme/create_transaction_1.jpg" height="500">
 
-![alt text](./.github/readme/create_transaction_2.jpg)
+<img
+src="./.github/readme/create_transaction_2.jpg" height="500">
 
-![alt text](./.github/readme/create_transaction_3.jpg)
+<img
+src="./.github/readme/create_transaction_3.jpg" height="500">
 
 ### Transaction Delete
 
 A user can delete a transaction by swiping on one of the tabs and needs to confirm if he really wants to delete the item.
 
-![alt text](./.github/readme/transaction_delete_1.jpg)
+<img
+src="./.github/readme/transaction_delete_1.jpg" height="500">
 
-![alt text](./.github/readme/transaction_delete_2.jpg)
+<img
+src="./.github/readme/transaction_delete_2.jpg" height="500">
 
 ### User Data
 
 A simple screen that shows which user is currently logged in and allows to sign-out.
 
-![alt text](./.github/readme/settings.jpg)
+<img
+src="./.github/readme/settings.jpg" height="500">
 
 ## License
 
