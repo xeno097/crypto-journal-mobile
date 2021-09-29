@@ -10,6 +10,12 @@ Crypto journal is powered by [Flutter](https://flutter.dev/), uses [Riverpod](ht
 
 ## Architecture
 
+This project implements a variation of the clean architecture proposed by Uncle Bob (Robert C. Martin), explained [here](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and by the excellent course made by [Reso Coder](https://github.com/ResoCoder) and avaliable on [youtube](https://www.youtube.com/playlist?list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech)
+
+<img
+alt="Clean Architecture Diagram"
+src="https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg" height="400">
+
 ## Features
 
 ### Login
@@ -17,6 +23,7 @@ Crypto journal is powered by [Flutter](https://flutter.dev/), uses [Riverpod](ht
 The app allows its users to sign-in/sign-up with either `Facebook` or `Google`.
 
 <img
+alt="Login Screen"
 src="./.github/readme/login.jpg" height="500">
 
 ### Overview
@@ -24,6 +31,7 @@ src="./.github/readme/login.jpg" height="500">
 The home screen shows a general overview of the coins held by a user and its current value in [fiat money](https://en.wikipedia.org/wiki/Fiat_money)
 
 <img
+alt="Overview Screen"
 src="./.github/readme/overview.jpg" height="500">
 
 <!-- ![alt text](./.github/readme/overview.jpg) -->
@@ -33,6 +41,7 @@ src="./.github/readme/overview.jpg" height="500">
 Allows a user to track his operations sorted by date. This screen has pagination support.
 
 <img
+alt="Transaction History Screen"
 src="./.github/readme/transaction_history.jpg" height="500">
 
 ### Create a Transaction
@@ -40,12 +49,15 @@ src="./.github/readme/transaction_history.jpg" height="500">
 A user can create transactions to keep track of his operations and keep his holding information updated.
 
 <img
+alt="Create Transaction Screen 1"
 src="./.github/readme/create_transaction_1.jpg" height="500">
 
 <img
+alt="Create Transaction Screen 2"
 src="./.github/readme/create_transaction_2.jpg" height="500">
 
 <img
+alt="Create Transaction Screen 2"
 src="./.github/readme/create_transaction_3.jpg" height="500">
 
 ### Transaction Delete
@@ -53,9 +65,11 @@ src="./.github/readme/create_transaction_3.jpg" height="500">
 A user can delete a transaction by swiping on one of the tabs and needs to confirm if he really wants to delete the item.
 
 <img
+alt="Delete Transaction Screen 1"
 src="./.github/readme/transaction_delete_1.jpg" height="500">
 
 <img
+alt="Delete Transaction Screen 2"
 src="./.github/readme/transaction_delete_2.jpg" height="500">
 
 ### User Data
@@ -63,6 +77,7 @@ src="./.github/readme/transaction_delete_2.jpg" height="500">
 A simple screen that shows which user is currently logged in and allows to sign-out.
 
 <img
+alt="Settings Screen"
 src="./.github/readme/settings.jpg" height="500">
 
 ## License
